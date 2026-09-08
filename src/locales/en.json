@@ -299,6 +299,95 @@
 
   "whatsappBooking": "WhatsApp Booking",
 
-  "footerBottom": "© 2026 DenGrey Tours and Safaris. All Rights Reserved."
+  "footerBottom": "© 2026 DenGrey Tours and Safaris. All Rights Reserved.",
 
+
+
+
+ 
+  
+  "safariPackages": {
+    "label": "Featured Safaris",
+    "title": "Discover Your Next",
+    "titleHighlight": "African Adventure",
+    "description": "Carefully crafted safari experiences combining incredible wildlife, authentic culture, beautiful landscapes and unforgettable moments.",
+
+    "citizens": "Citizens",
+    "nonResidents": "Non Residents",
+    "perPerson": "Per person",
+    "accommodation": "Accommodation",
+    "itinerary": "Itinerary",
+    "included": "Included",
+    "excluded": "Excluded",
+
+    "book": "Book This Safari",
+    "whatsappMessage": "Hello, I would like to book the safari:",
+    "whatsappNote": "WhatsApp us to confirm availability and secure your booking.",
+
+    "bottomLabel": "Your Adventure Awaits",
+    "bottomTitle": "Ready to explore Kenya?",
+    "bottomDescription": "Speak directly with our safari team and let us help you plan your perfect Kenyan adventure.",
+    "bottomWhatsappMessage": "Hello, I would like to plan a safari ?.",
+    "chatWhatsapp": "Chat on WhatsApp",
+
+    "wildebeest": {
+      "title": "Wildebeest Crossing Safari",
+      "location": "Masai Mara National Reserve",
+      "duration": "2 Nights / 3 Days",
+      "departure": "Departure from Kisumu",
+      "accommodation": "Budget camp on full board",
+
+      "activities": [
+        "Day 1: Drive from Kisumu to Masai Mara through scenic tea plantations, arrive for lunch and enjoy an evening game drive.",
+        "Day 2: Full-day game drive from 6:00 AM to 4:30 PM with picnic lunch inside the park.",
+        "Day 3: Early morning sunrise walk, Maasai culture experience, then drive back to Kisumu."
+      ],
+
+      "included": [
+        "Transportation in a 4×4 Safari Land Cruiser",
+        "2 nights accommodation on full board",
+        "Maasai culture experience",
+        "2 park entry fees to Masai Mara National Reserve",
+        "Bottled water throughout the safari"
+      ],
+
+      "excluded": [
+        "Tips",
+        "Drinks",
+        "Extra personal expenses"
+      ]
+    },
+
+    "nakuru": {
+      "title": "Lake Nakuru Overnight Safari",
+      "location": "Lake Nakuru National Park",
+      "duration": "1 Night / 2 Days",
+      "departure": "Departure from Kisumu",
+      "accommodation": "Buraha Zenoni on full board",
+
+      "activities": [
+        "Day 1: Departure from Kisumu and journey to Lake Nakuru National Park.",
+        "Game viewing and exploration of the park.",
+        "Overnight stay at Buraha Zenoni on full board.",
+        "Day 2: Morning activities, photography and return journey to Kisumu."
+      ],
+
+      "included": [
+        "Round-trip transportation",
+        "Overnight accommodation on full board",
+        "Lake Nakuru National Park entry fee",
+        "Unlimited bottled water",
+        "Photography"
+      ],
+
+      "excluded": [
+        "Tips",
+        "Drinks",
+        "Other extra expenses"
+      ]
+    }
+  }
 }
+  
+
+

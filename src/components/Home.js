@@ -25,6 +25,10 @@ import tanzania from "../assets/tanzania.jpg";
 import Wilderbeast from "../assets/Wilderbeast.jpg";
 import kenya from "../assets/kenya.jpg";
 import image17 from "../assets/image17.jpg";
+
+import poster1 from "../assets/poster1.jpg";
+import poster2 from "../assets/poster2.jpg";
+
 function Home() {
   useLanguageSync();
   const images = [meru, kenya,amboseli,Wilderbeast];
@@ -45,7 +49,76 @@ const [loading, setLoading] = useState(false);
 const [loadingReviews, setLoadingReviews] = useState(false);
 const [success, setSuccess] = useState(false);
 
+const safariPackages = [
+  {
+    titleKey: "safariPackages.wildebeest.title",
+    locationKey: "safariPackages.wildebeest.location",
+    durationKey: "safariPackages.wildebeest.duration",
+    departureKey: "safariPackages.wildebeest.departure",
 
+    prices: {
+      citizens: "KSh. 30,860",
+      nonResidents: "USD 693",
+    },
+
+    accommodationKey: "safariPackages.wildebeest.accommodation",
+
+    activitiesKeys: [
+      "safariPackages.wildebeest.activities.0",
+      "safariPackages.wildebeest.activities.1",
+      "safariPackages.wildebeest.activities.2"
+    ],
+
+    includedKeys: [
+      "safariPackages.wildebeest.included.0",
+      "safariPackages.wildebeest.included.1",
+      "safariPackages.wildebeest.included.2",
+      "safariPackages.wildebeest.included.3",
+      "safariPackages.wildebeest.included.4"
+    ],
+
+    excludedKeys: [
+      "safariPackages.wildebeest.excluded.0",
+      "safariPackages.wildebeest.excluded.1",
+      "safariPackages.wildebeest.excluded.2"
+    ]
+  },
+
+  {
+    titleKey: "safariPackages.nakuru.title",
+    locationKey: "safariPackages.nakuru.location",
+    durationKey: "safariPackages.nakuru.duration",
+    departureKey: "safariPackages.nakuru.departure",
+
+    prices: {
+      citizens: "KSh. 19,700",
+      nonResidents: "USD 273",
+    },
+
+    accommodationKey: "safariPackages.nakuru.accommodation",
+
+    activitiesKeys: [
+      "safariPackages.nakuru.activities.0",
+      "safariPackages.nakuru.activities.1",
+      "safariPackages.nakuru.activities.2",
+      "safariPackages.nakuru.activities.3"
+    ],
+
+    includedKeys: [
+      "safariPackages.nakuru.included.0",
+      "safariPackages.nakuru.included.1",
+      "safariPackages.nakuru.included.2",
+      "safariPackages.nakuru.included.3",
+      "safariPackages.nakuru.included.4"
+    ],
+
+    excludedKeys: [
+      "safariPackages.nakuru.excluded.0",
+      "safariPackages.nakuru.excluded.1",
+      "safariPackages.nakuru.excluded.2"
+    ]
+  }
+];
   // ================= SLIDER =================
   useEffect(()=>{
 
@@ -195,7 +268,7 @@ i===index
         <div className="hidden md:block absolute -bottom-10 -right-10 w-[230px] h-[280px] overflow-hidden rounded-[30px] border-[8px] border-white shadow-2xl">
 
           <img
-            src={image2}
+            src={poster1}
             alt={t("aboutTitle")}
             className="w-full h-full object-cover hover:scale-110 transition duration-[2000ms]"
           />
@@ -322,7 +395,507 @@ i===index
 
 </section>
 
+{/* ============================================================
+    PREMIUM SAFARI PACKAGES — MULTI-LANGUAGE
+    Supports: EN / DE / ES / FR
+============================================================ */}
 
+
+
+{/* ============================================================
+    PREMIUM SAFARI PACKAGES
+============================================================ */}
+{/* ============================================================
+    PREMIUM SAFARI PACKAGES — MULTI-LANGUAGE
+============================================================ */}
+
+<section className="relative overflow-hidden bg-[#f8f5ee] px-4 py-16 sm:px-6 sm:py-20 lg:px-8 lg:py-28">
+
+  {/* ============================================================
+      DECORATIVE BACKGROUND
+  ============================================================ */}
+  <div className="pointer-events-none absolute -left-32 top-20 h-72 w-72 rounded-full bg-[#dba33a]/10 blur-3xl" />
+
+  <div className="pointer-events-none absolute -right-32 bottom-20 h-72 w-72 rounded-full bg-[#082d19]/10 blur-3xl" />
+
+
+  <div className="relative mx-auto max-w-7xl">
+
+    {/* ============================================================
+        SECTION HEADER
+    ============================================================ */}
+    <div className="mx-auto mb-12 max-w-3xl text-center sm:mb-16">
+
+      <div className="mb-4 flex items-center justify-center gap-3">
+
+        <span className="h-px w-8 bg-[#b98220]" />
+
+        <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-[#b98220] sm:text-xs">
+          {t("safariPackages.label")}
+        </span>
+
+        <span className="h-px w-8 bg-[#b98220]" />
+
+      </div>
+
+
+      <h2 className="font-serif text-3xl font-semibold leading-tight text-[#082d19] sm:text-4xl md:text-5xl lg:text-6xl">
+
+        {t("safariPackages.title")}
+
+        <span className="block text-[#b98220]">
+          {t("safariPackages.titleHighlight")}
+        </span>
+
+      </h2>
+
+
+      <p className="mx-auto mt-4 max-w-2xl text-sm leading-6 text-gray-600 sm:mt-5 sm:text-base sm:leading-7">
+        {t("safariPackages.description")}
+      </p>
+
+    </div>
+
+
+    {/* ============================================================
+        SAFARI CARDS
+    ============================================================ */}
+    <div className="grid grid-cols-1 gap-8 xl:grid-cols-2">
+
+      {safariPackages.map((safari, index) => {
+
+        /*
+          Support BOTH structures:
+
+          Old:
+          safari.title
+          safari.location
+          safari.activities
+          safari.included
+          safari.excluded
+
+          New:
+          safari.titleKey
+          safari.locationKey
+          safari.activitiesKeys
+          safari.includedKeys
+          safari.excludedKeys
+        */
+
+        const safariTitle = safari.titleKey
+          ? t(safari.titleKey)
+          : safari.title;
+
+        const safariLocation = safari.locationKey
+          ? t(safari.locationKey)
+          : safari.location;
+
+        const safariDuration = safari.durationKey
+          ? t(safari.durationKey)
+          : safari.duration;
+
+        const safariDeparture = safari.departureKey
+          ? t(safari.departureKey)
+          : safari.departure;
+
+        const safariAccommodation = safari.accommodationKey
+          ? t(safari.accommodationKey)
+          : safari.accommodation;
+
+
+        const activities = safari.activitiesKeys
+          ? safari.activitiesKeys.map((key) => t(key))
+          : safari.activities || [];
+
+
+        const includedItems = safari.includedKeys
+          ? safari.includedKeys.map((key) => t(key))
+          : safari.included || [];
+
+
+        const excludedItems = safari.excludedKeys
+          ? safari.excludedKeys.map((key) => t(key))
+          : safari.excluded || [];
+
+
+        return (
+
+          <article
+            key={index}
+            className="group flex min-w-0 flex-col overflow-hidden rounded-[1.5rem] border border-[#e3dbce] bg-white shadow-[0_15px_50px_rgba(8,45,25,0.07)] transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_25px_70px_rgba(8,45,25,0.12)] sm:rounded-[2rem]"
+          >
+
+            {/* ==================================================
+                LARGE SAFARI IMAGE
+            ================================================== */}
+            <div className="relative h-80 w-full overflow-hidden sm:h-[420px] lg:h-[500px]">
+
+              <img
+                src={index === 0 ? poster1 : poster2}
+                alt={safariTitle}
+                className="h-full w-full object-cover object-center transition duration-700 group-hover:scale-105"
+              />
+
+
+              {/* IMAGE OVERLAY */}
+              <div className="absolute inset-0 bg-gradient-to-t from-[#03160c]/95 via-[#03160c]/20 to-transparent" />
+
+
+              {/* DURATION */}
+              <div className="absolute left-5 top-5 sm:left-7 sm:top-7">
+
+                <span className="rounded-full border border-white/25 bg-black/30 px-4 py-2 text-[10px] font-bold uppercase tracking-[0.18em] text-white backdrop-blur-md sm:px-5 sm:text-xs">
+                  {safariDuration}
+                </span>
+
+              </div>
+
+
+              {/* IMAGE CONTENT */}
+              <div className="absolute bottom-0 left-0 right-0 p-6 sm:p-8 lg:p-10">
+
+                <p className="mb-2 text-[10px] font-bold uppercase tracking-[0.25em] text-[#f3c45d] sm:text-xs">
+                  {safariLocation}
+                </p>
+
+
+                <h3 className="max-w-2xl font-serif text-3xl font-semibold leading-tight text-white sm:text-4xl lg:text-5xl">
+                  {safariTitle}
+                </h3>
+
+
+                <div className="mt-3 flex items-center gap-2 text-xs text-white/75 sm:text-sm">
+
+                  <span className="text-[#f3c45d]">
+                    📍
+                  </span>
+
+                  <span>
+                    {safariDeparture}
+                  </span>
+
+                </div>
+
+              </div>
+
+            </div>
+
+
+            {/* ==================================================
+                CARD BODY
+            ================================================== */}
+            <div className="flex flex-1 flex-col p-5 sm:p-7 lg:p-8">
+
+
+              {/* ==================================================
+                  PRICES
+              ================================================== */}
+              <div className="grid grid-cols-2 overflow-hidden rounded-2xl border border-[#e6ded1]">
+
+
+                {/* CITIZENS */}
+                <div className="bg-[#faf8f3] p-4 sm:p-5">
+
+                  <p className="text-[9px] font-bold uppercase tracking-[0.15em] text-gray-500 sm:text-[10px]">
+                    {t("safariPackages.citizens")}
+                  </p>
+
+
+                  <p className="mt-2 break-words font-serif text-xl font-bold text-[#082d19] sm:text-2xl">
+                    {safari.prices?.citizens || "-"}
+                  </p>
+
+
+                  <p className="mt-1 text-[10px] text-gray-500 sm:text-xs">
+                    {t("safariPackages.perPerson")}
+                  </p>
+
+                </div>
+
+
+                {/* NON RESIDENTS */}
+                <div className="bg-[#082d19] p-4 sm:p-5">
+
+                  <p className="text-[9px] font-bold uppercase tracking-[0.15em] text-white/60 sm:text-[10px]">
+                    {t("safariPackages.nonResidents")}
+                  </p>
+
+
+                  <p className="mt-2 break-words font-serif text-xl font-bold text-[#f3c45d] sm:text-2xl">
+                    {safari.prices?.nonResidents || "-"}
+                  </p>
+
+
+                  <p className="mt-1 text-[10px] text-white/50 sm:text-xs">
+                    {t("safariPackages.perPerson")}
+                  </p>
+
+                </div>
+
+              </div>
+
+
+              {/* ==================================================
+                  ACCOMMODATION
+              ================================================== */}
+              <div className="mt-5 flex items-start gap-3 rounded-2xl bg-[#f4f1e9] p-4 sm:mt-6 sm:p-5">
+
+                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#082d19] text-lg">
+                  🛖
+                </div>
+
+
+                <div className="min-w-0">
+
+                  <p className="text-[9px] font-bold uppercase tracking-[0.2em] text-[#b98220] sm:text-[10px]">
+                    {t("safariPackages.accommodation")}
+                  </p>
+
+
+                  <p className="mt-1 text-xs font-medium leading-5 text-[#082d19] sm:text-sm">
+                    {safariAccommodation}
+                  </p>
+
+                </div>
+
+              </div>
+
+
+              {/* ==================================================
+                  ITINERARY
+              ================================================== */}
+              <div className="mt-7 sm:mt-8">
+
+                <div className="flex items-center gap-3">
+
+                  <h4 className="whitespace-nowrap font-serif text-xl font-semibold text-[#082d19] sm:text-2xl">
+                    {t("safariPackages.itinerary")}
+                  </h4>
+
+                  <div className="h-px flex-1 bg-[#e5ddd0]" />
+
+                </div>
+
+
+                <div className="mt-4 space-y-3 sm:mt-5 sm:space-y-4">
+
+                  {activities.map((activity, i) => (
+
+                    <div
+                      key={i}
+                      className="flex gap-3 rounded-xl border border-[#eee7db] bg-[#fcfaf6] p-3 sm:gap-4 sm:p-4"
+                    >
+
+                      {/* NUMBER */}
+                      <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-[#082d19] text-[9px] font-bold text-[#f3c45d] sm:h-8 sm:w-8 sm:text-[10px]">
+                        {i + 1}
+                      </div>
+
+
+                      {/* ACTIVITY */}
+                      <p className="min-w-0 text-xs leading-5 text-gray-600 sm:text-sm sm:leading-6">
+                        {activity}
+                      </p>
+
+                    </div>
+
+                  ))}
+
+                </div>
+
+              </div>
+
+
+              {/* ==================================================
+                  INCLUDED / EXCLUDED
+              ================================================== */}
+              <div className="mt-7 grid gap-6 border-t border-[#e8dfd2] pt-7 sm:mt-8 sm:pt-8 md:grid-cols-2">
+
+
+                {/* ==================================================
+                    INCLUDED
+                ================================================== */}
+                <div>
+
+                  <div className="mb-4 flex items-center gap-2">
+
+                    <span className="flex h-7 w-7 items-center justify-center rounded-full bg-[#eaf3eb] text-xs font-bold text-[#2f7d4a]">
+                      ✓
+                    </span>
+
+
+                    <h4 className="font-serif text-lg font-semibold text-[#082d19]">
+                      {t("safariPackages.included")}
+                    </h4>
+
+                  </div>
+
+
+                  <div className="space-y-2.5">
+
+                    {includedItems.map((item, i) => (
+
+                      <div
+                        key={i}
+                        className="flex items-start gap-2 text-xs leading-5 text-gray-600 sm:text-sm"
+                      >
+
+                        <span className="mt-0.5 text-[#2f7d4a]">
+                          ✓
+                        </span>
+
+
+                        <span className="min-w-0">
+                          {item}
+                        </span>
+
+                      </div>
+
+                    ))}
+
+                  </div>
+
+                </div>
+
+
+                {/* ==================================================
+                    EXCLUDED
+                ================================================== */}
+                <div>
+
+                  <div className="mb-4 flex items-center gap-2">
+
+                    <span className="flex h-7 w-7 items-center justify-center rounded-full bg-red-50 text-xs font-bold text-red-400">
+                      ×
+                    </span>
+
+
+                    <h4 className="font-serif text-lg font-semibold text-[#082d19]">
+                      {t("safariPackages.excluded")}
+                    </h4>
+
+                  </div>
+
+
+                  <div className="space-y-2.5">
+
+                    {excludedItems.map((item, i) => (
+
+                      <div
+                        key={i}
+                        className="flex items-start gap-2 text-xs leading-5 text-gray-500 sm:text-sm"
+                      >
+
+                        <span className="mt-0.5 text-red-400">
+                          ×
+                        </span>
+
+
+                        <span className="min-w-0">
+                          {item}
+                        </span>
+
+                      </div>
+
+                    ))}
+
+                  </div>
+
+                </div>
+
+              </div>
+
+
+              {/* ==================================================
+                  BOOKING CTA
+              ================================================== */}
+              <div className="mt-7 border-t border-[#e8dfd2] pt-6 sm:mt-8 sm:pt-7">
+
+                <a
+                  href={`https://wa.me/254112277671?text=${encodeURIComponent(
+                    `${t("safariPackages.whatsappMessage")} ${safariTitle}.`
+                  )}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex w-full items-center justify-center gap-3 rounded-full bg-[#082d19] px-5 py-3.5 text-xs font-bold text-white shadow-lg transition-all duration-300 hover:bg-[#0d4825] hover:shadow-xl sm:px-6 sm:py-4 sm:text-sm"
+                >
+
+                  <span className="flex h-7 w-7 items-center justify-center rounded-full bg-white/10 text-sm">
+                    💬
+                  </span>
+
+
+                  <span>
+                    {t("safariPackages.book")}
+                  </span>
+
+
+                  <span className="ml-auto text-lg text-[#f3c45d]">
+                    →
+                  </span>
+
+                </a>
+
+
+                <p className="mt-3 text-center text-[10px] leading-4 text-gray-400 sm:text-xs">
+                  {t("safariPackages.whatsappNote")}
+                </p>
+
+              </div>
+
+            </div>
+
+          </article>
+
+        );
+
+      })}
+
+    </div>
+
+
+    {/* ============================================================
+        BOTTOM CTA
+    ============================================================ */}
+    <div className="mt-10 overflow-hidden rounded-[1.5rem] bg-[#082d19] px-5 py-9 text-center sm:mt-14 sm:rounded-[2rem] sm:px-10 sm:py-12">
+
+      <p className="text-[10px] font-bold uppercase tracking-[0.25em] text-[#dba33a] sm:text-xs sm:tracking-[0.3em]">
+        {t("safariPackages.bottomLabel")}
+      </p>
+
+
+      <h3 className="mt-3 font-serif text-2xl font-semibold text-white sm:text-3xl md:text-4xl">
+        {t("safariPackages.bottomTitle")}
+      </h3>
+
+
+      <p className="mx-auto mt-3 max-w-xl text-xs leading-5 text-white/60 sm:text-sm sm:leading-6">
+        {t("safariPackages.bottomDescription")}
+      </p>
+
+
+      <a
+        href={`https://wa.me/254112277671?text=${encodeURIComponent(
+          t("safariPackages.bottomWhatsappMessage")
+        )}`}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="mt-6 inline-flex items-center gap-3 rounded-full bg-[#dba33a] px-6 py-3 text-xs font-bold text-[#082d19] transition hover:bg-[#f0bd50] sm:px-7 sm:py-3.5 sm:text-sm"
+      >
+
+        {t("safariPackages.chatWhatsapp")}
+
+        <span>
+          →
+        </span>
+
+      </a>
+
+    </div>
+
+  </div>
+
+</section>
 
 {/* ================= PREMIUM SERVICES ================= */}
 <section className="relative py-32 overflow-hidden bg-gradient-to-b from-[#F8F6F1] via-[#FCFBF8] to-[#EFE9DE]">
@@ -977,280 +1550,498 @@ i===index
 
 
 
-{/* ===================== REVIEWSS ===================== */}
-<section className="relative py-28 bg-gradient-to-b from-[#F8F6F1] via-white to-[#F2EEE5] overflow-hidden">
+
+{/* ===================== GOOGLE REVIEWS ===================== */}
+<section className="relative overflow-hidden bg-gradient-to-b from-[#F8F6F1] via-white to-[#F2EEE5] py-20 lg:py-24">
 
   {/* Background Effects */}
-   {/* Background Effects */}
-      <div className="absolute -top-40 -left-40 w-[500px] h-[500px] bg-yellow-400/10 rounded-full blur-[140px]" />
-      <div className="absolute -bottom-40 -right-40 w-[500px] h-[500px] bg-green-600/10 rounded-full blur-[140px]" />
+  <div className="pointer-events-none absolute -left-40 -top-40 h-[420px] w-[420px] rounded-full bg-yellow-400/10 blur-[130px]" />
+  <div className="pointer-events-none absolute -bottom-40 -right-40 h-[420px] w-[420px] rounded-full bg-green-600/10 blur-[130px]" />
 
-      <div className="relative max-w-7xl mx-auto px-6 lg:px-10">
+  <div className="relative mx-auto max-w-7xl px-5 sm:px-6 lg:px-10">
 
-        {/* Header */}
-        <div className="text-center max-w-3xl mx-auto">
+    {/* ===================== HEADER ===================== */}
+    <div className="mx-auto max-w-3xl text-center">
 
-          <span className="inline-flex items-center bg-green-100 text-green-700 px-5 py-2 rounded-full uppercase tracking-[3px] text-xs font-bold">
-            {t("testimonialsBadge")}
-          </span>
+      <span className="inline-flex items-center rounded-full bg-green-100 px-5 py-2 text-xs font-bold uppercase tracking-[3px] text-green-700">
+        {t("testimonialsBadge")}
+      </span>
 
-          <h2 className="mt-6 text-5xl font-black text-gray-900">
-            {t("testimonialsTitle1")}
-            <span className="block text-[#C8A94C]">
-              {t("testimonialsTitle2")}
-            </span>
-          </h2>
+      <h2 className="mt-5 text-4xl font-black leading-tight text-gray-900 sm:text-5xl">
+        {t("testimonialsTitle1")}
+        <span className="block text-[#C8A94C]">
+          {t("testimonialsTitle2")}
+        </span>
+      </h2>
 
-          <p className="mt-6 text-gray-600 text-lg leading-8">
-            {t("testimonialsDescription")}
+      <p className="mx-auto mt-5 max-w-2xl text-base leading-7 text-gray-600 sm:text-lg">
+        {t("testimonialsDescription")}
+      </p>
+
+    </div>
+
+
+    {/* ===================== GOOGLE RATING ===================== */}
+    <div className="mt-12 flex justify-center">
+
+      <div className="flex w-full max-w-2xl flex-col items-center justify-center gap-6 rounded-[1.7rem] border border-gray-100 bg-white px-7 py-7 shadow-lg sm:flex-row sm:px-10">
+
+        {/* Rating */}
+        <div className="text-center sm:min-w-[160px]">
+
+          <div className="text-5xl font-black text-green-700">
+            5.0
+          </div>
+
+          <div className="mt-1 text-2xl tracking-wide text-yellow-400">
+            ★★★★★
+          </div>
+
+          <p className="mt-1 text-xs font-medium text-gray-500">
+            {t("googleBased")}
           </p>
 
         </div>
 
-        {/* Google Rating */}
-        <div className="mt-16 flex justify-center">
+        {/* Divider */}
+        <div className="hidden h-16 w-px bg-gray-200 sm:block" />
 
-          <div className="bg-white rounded-3xl shadow-xl border border-gray-100 px-10 py-8 flex flex-col md:flex-row items-center gap-8">
+        {/* Trust Message */}
+        <div className="text-center sm:text-left">
 
-            <div className="text-center">
+          <h3 className="text-xl font-bold text-gray-900">
+            {t("trustedTitle")}
+          </h3>
 
-              <h3 className="text-6xl font-black text-green-700">
-                5.0
-              </h3>
-
-              <div className="text-yellow-400 text-3xl mt-2">
-                ★★★★★
-              </div>
-
-              <p className="text-gray-600 mt-2">
-                {t("googleBased")}
-              </p>
-
-            </div>
-
-            <div className="hidden md:block h-20 w-px bg-gray-200"></div>
-
-            <div>
-
-              <h3 className="text-2xl font-bold text-gray-900">
-                {t("trustedTitle")}
-              </h3>
-
-              <p className="mt-3 text-gray-600 leading-7 max-w-lg">
-                {t("trustedDescription")}
-              </p>
-
-            </div>
-
-          </div>
-
-        </div>
-
-        {/* Reviews */}
-        <div className="grid md:grid-cols-3 gap-8 mt-20">
-
-          {/* Review 1 */}
-          <div className="group bg-white rounded-3xl border border-gray-100 p-8 shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2">
-
-            <div className="flex items-center justify-between">
-
-              <div className="text-yellow-400 text-2xl">
-                ★★★★★
-              </div>
-
-              <span className="text-xs bg-green-100 text-green-700 px-3 py-1 rounded-full font-semibold">
-                {t("verifiedReview")}
-              </span>
-
-            </div>
-
-            <p className="mt-6 text-gray-600 leading-8 italic">
-              "We've travelled the world and the safari with Denis is by far the
-              most memorable, beautiful and magical experience we've ever had.
-              His passion, kindness and knowledge made every moment unforgettable."
-            </p>
-
-            <div className="mt-8 flex items-center gap-4">
-
-              <div className="w-14 h-14 rounded-full bg-green-700 text-white flex items-center justify-center font-bold text-lg">
-                A
-              </div>
-
-              <div>
-
-                <h4 className="font-bold text-gray-900">
-                  Andrea Milán
-                </h4>
-
-                <p className="text-sm text-gray-500">
-                  {t("verifiedReview")}
-                </p>
-
-              </div>
+          <p className="mt-2 max-w-md text-sm leading-6 text-gray-600">
+            {t("trustedDescription")}
+          </p>
 
         </div>
 
       </div>
 
-      {/* Review 2 */}
-      {/* Review 2 */}
-          <div className="group bg-white rounded-3xl border border-gray-100 p-8 shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2">
+    </div>
 
-            <div className="flex items-center justify-between">
 
-              <div className="text-yellow-400 text-2xl">
-                ★★★★★
-              </div>
+    {/* ===================== HORIZONTAL REVIEWS ===================== */}
+    <div className="relative mt-14">
 
-              <span className="text-xs bg-green-100 text-green-700 px-3 py-1 rounded-full font-semibold">
-                {t("verifiedReview")}
-              </span>
+      {/* Scroll Hint */}
+      <div className="mb-4 flex items-center justify-between px-1">
 
+        <p className="text-xs font-semibold uppercase tracking-[2px] text-gray-400">
+          Google Reviews
+        </p>
+
+        <p className="text-xs font-medium text-gray-400">
+          ← {t("viewAllReviews")} →
+        </p>
+
+      </div>
+
+
+      {/* Scroll Container */}
+      <div
+        className="
+          flex
+          gap-5
+          overflow-x-auto
+          pb-6
+          snap-x
+          snap-mandatory
+          scrollbar-thin
+          scrollbar-track-transparent
+          scrollbar-thumb-green-700/30
+        "
+      >
+
+        {/* ================= REVIEW 1 ================= */}
+        <div className="group flex w-[85vw] shrink-0 snap-start flex-col rounded-[1.7rem] border border-gray-100 bg-white p-6 shadow-lg transition-all duration-300 hover:-translate-y-1 hover:shadow-xl sm:w-[420px]">
+
+          <div className="flex items-center justify-between">
+
+            <div className="text-lg tracking-wide text-yellow-400">
+              ★★★★★
             </div>
 
-            <p className="mt-6 text-gray-600 leading-8 italic">
-              "Our 2-night, 3-day Maasai Mara safari was perfectly organised.
-              Denis was an outstanding guide and made the trip unforgettable.
-              I highly recommend Dengray Adventures."
-            </p>
-
-            <div className="mt-8 flex items-center gap-4">
-
-              <div className="w-14 h-14 rounded-full bg-green-700 text-white flex items-center justify-center font-bold text-lg">
-                O
-              </div>
-
-              <div>
-
-                <h4 className="font-bold text-gray-900">
-                  Antoine Obunde
-                </h4>
-
-                <p className="text-sm text-gray-500">
-                  {t("verifiedReview")}
-                </p>
-
-              </div>
-
-            </div>
+            <span className="rounded-full bg-green-100 px-3 py-1 text-[10px] font-bold text-green-700">
+              {t("verifiedReview")}
+            </span>
 
           </div>
 
-          {/* Review 3 */}
-          <div className="group bg-white rounded-3xl border border-gray-100 p-8 shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2">
+          <p className="mt-5 flex-1 text-sm leading-7 text-gray-600">
+            "We've just embarked from a 2 nights 3 days Masai Mara Safari.
+            Guess what, I highly recommend and appreciate DENGRAY ADVENTURES
+            for organizing this amazing and unforgettable safari for my family.
+            Denis our Safari guide and still the organizer did an amazing job,
+            from organizing, driving and communicating, he's really professional
+            the way he operates. We were able to spot the Big 5 so close."
+          </p>
 
-            <div className="flex items-center justify-between">
+          <div className="mt-6 flex items-center gap-3 border-t border-gray-100 pt-5">
 
-              <div className="text-yellow-400 text-2xl">
-                ★★★★★
-              </div>
-
-              <span className="text-xs bg-green-100 text-green-700 px-3 py-1 rounded-full font-semibold">
-                {t("verifiedReview")}
-              </span>
-
+            <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-green-700 text-sm font-bold text-white">
+              D
             </div>
 
-            <p className="mt-6 text-gray-600 leading-8 italic">
-              "The safari was beautifully organised. The guide was friendly,
-              knowledgeable and reliable. We are happy to come back again.
-              Thank you for the amazing experience."
-            </p>
+            <div>
+              <h4 className="text-sm font-bold text-gray-900">
+                Dancan Omondi
+              </h4>
 
-            <div className="mt-8 flex items-center gap-4">
-
-              <div className="w-14 h-14 rounded-full bg-green-700 text-white flex items-center justify-center font-bold text-lg">
-                S
-              </div>
-
-              <div>
-
-                <h4 className="font-bold text-gray-900">
-                  Steinert Liesel
-                </h4>
-
-                <p className="text-sm text-gray-500">
-                  {t("verifiedReview")}
-                </p>
-
-              </div>
-
+              <p className="mt-1 text-xs text-gray-500">
+                1 review · 5 photos
+              </p>
             </div>
 
           </div>
 
         </div>
 
-        {/* Trust Statistics */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-20">
 
-          <div className="bg-white rounded-3xl p-8 shadow-lg text-center">
-            <h3 className="text-5xl font-black text-green-700">
-              5.0
-            </h3>
-            <p className="mt-2 text-gray-600">
-              {t("googleRating")}
-            </p>
+        {/* ================= REVIEW 2 ================= */}
+        <div className="group flex w-[85vw] shrink-0 snap-start flex-col rounded-[1.7rem] border border-gray-100 bg-white p-6 shadow-lg transition-all duration-300 hover:-translate-y-1 hover:shadow-xl sm:w-[420px]">
+
+          <div className="flex items-center justify-between">
+
+            <div className="text-lg tracking-wide text-yellow-400">
+              ★★★★★
+            </div>
+
+            <span className="rounded-full bg-green-100 px-3 py-1 text-[10px] font-bold text-green-700">
+              {t("verifiedReview")}
+            </span>
+
           </div>
 
-          <div className="bg-white rounded-3xl p-8 shadow-lg text-center">
-            <h3 className="text-5xl font-black text-green-700">
-              6+
-            </h3>
-            <p className="mt-2 text-gray-600">
-              {t("verifiedReviews")}
-            </p>
+          <p className="mt-5 flex-1 text-sm leading-7 text-gray-600">
+            "We've travelled the world and the Safari with Denis is by far
+            the most marking, beautiful, magical experience that we've ever
+            lived. Not only Denis loves what he does and shares his knowledge
+            with passion and kindness, but he also truly takes care of the
+            details and provides a genuine experience."
+          </p>
+
+          <div className="mt-6 flex items-center gap-3 border-t border-gray-100 pt-5">
+
+            <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-green-700 text-sm font-bold text-white">
+              A
+            </div>
+
+            <div>
+              <h4 className="text-sm font-bold text-gray-900">
+                Andrea Milán
+              </h4>
+
+              <p className="mt-1 text-xs text-gray-500">
+                3 reviews · 5 photos
+              </p>
+            </div>
+
           </div>
 
-          <div className="bg-white rounded-3xl p-8 shadow-lg text-center">
-            <h3 className="text-5xl font-black text-green-700">
-              100%
-            </h3>
-            <p className="mt-2 text-gray-600">
-              {t("satisfiedGuests")}
-            </p>
+        </div>
+
+
+        {/* ================= REVIEW 3 ================= */}
+        <div className="group flex w-[85vw] shrink-0 snap-start flex-col rounded-[1.7rem] border border-gray-100 bg-white p-6 shadow-lg transition-all duration-300 hover:-translate-y-1 hover:shadow-xl sm:w-[420px]">
+
+          <div className="flex items-center justify-between">
+
+            <div className="text-lg tracking-wide text-yellow-400">
+              ★★★★★
+            </div>
+
+            <span className="rounded-full bg-green-100 px-3 py-1 text-[10px] font-bold text-green-700">
+              {t("verifiedReview")}
+            </span>
+
           </div>
 
-          <div className="bg-white rounded-3xl p-8 shadow-lg text-center">
-            <h3 className="text-5xl font-black text-green-700">
-              24/7
-            </h3>
-            <p className="mt-2 text-gray-600">
-              {t("travelSupport")}
-            </p>
+          <p className="mt-5 flex-1 text-sm leading-7 text-gray-600">
+            "Denis was a fantastic guide for safari in Masai Mara.
+            He was knowledgeable, kind, and focused. I highly recommend him
+            as a guide! The guide in training, Sylvester, was awesome, too.
+            They are a dynamic duo."
+          </p>
+
+          <div className="mt-6 flex items-center gap-3 border-t border-gray-100 pt-5">
+
+            <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-green-700 text-sm font-bold text-white">
+              H
+            </div>
+
+            <div>
+              <h4 className="text-sm font-bold text-gray-900">
+                Harper Schupbach
+              </h4>
+
+              <p className="mt-1 text-xs text-gray-500">
+                2 reviews · 3 photos
+              </p>
+            </div>
+
           </div>
+
+        </div>
+
+
+        {/* ================= REVIEW 4 ================= */}
+        <div className="group flex w-[85vw] shrink-0 snap-start flex-col rounded-[1.7rem] border border-gray-100 bg-white p-6 shadow-lg transition-all duration-300 hover:-translate-y-1 hover:shadow-xl sm:w-[420px]">
+
+          <div className="flex items-center justify-between">
+
+            <div className="text-lg tracking-wide text-yellow-400">
+              ★★★★★
+            </div>
+
+            <span className="rounded-full bg-green-100 px-3 py-1 text-[10px] font-bold text-green-700">
+              {t("verifiedReview")}
+            </span>
+
+          </div>
+
+          <p className="mt-5 flex-1 text-sm leading-7 text-gray-600">
+            "We just embarked from a 2 nights 3 days Masai Mara safari
+            with DENGRAY ADVENTURES. My family had a very amazing and
+            unforgettable experience. I highly recommend Denis who was
+            our Safari guide."
+          </p>
+
+          <div className="mt-6 flex items-center gap-3 border-t border-gray-100 pt-5">
+
+            <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-green-700 text-sm font-bold text-white">
+              A
+            </div>
+
+            <div>
+              <h4 className="text-sm font-bold text-gray-900">
+                Antoine Obunde
+              </h4>
+
+              <p className="mt-1 text-xs text-gray-500">
+                1 review
+              </p>
+            </div>
+
+          </div>
+
+        </div>
+
+
+        {/* ================= REVIEW 5 ================= */}
+        <div className="group flex w-[85vw] shrink-0 snap-start flex-col rounded-[1.7rem] border border-gray-100 bg-white p-6 shadow-lg transition-all duration-300 hover:-translate-y-1 hover:shadow-xl sm:w-[420px]">
+
+          <div className="flex items-center justify-between">
+
+            <div className="text-lg tracking-wide text-yellow-400">
+              ★★★★★
+            </div>
+
+            <span className="rounded-full bg-green-100 px-3 py-1 text-[10px] font-bold text-green-700">
+              {t("verifiedReview")}
+            </span>
+
+          </div>
+
+          <p className="mt-5 flex-1 text-sm leading-7 text-gray-600">
+            "The safari was really very interesting and beautifully organised!
+            The guide was friendly and reliable! We are happy to come back."
+          </p>
+
+          <div className="mt-6 flex items-center gap-3 border-t border-gray-100 pt-5">
+
+            <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-green-700 text-sm font-bold text-white">
+              S
+            </div>
+
+            <div>
+              <h4 className="text-sm font-bold text-gray-900">
+                Steinert Liesel
+              </h4>
+
+              <p className="mt-1 text-xs text-gray-500">
+                3 reviews
+              </p>
+            </div>
+
+          </div>
+
+        </div>
+
+
+        {/* ================= REVIEW 6 ================= */}
+        <div className="group flex w-[85vw] shrink-0 snap-start flex-col rounded-[1.7rem] border border-gray-100 bg-white p-6 shadow-lg transition-all duration-300 hover:-translate-y-1 hover:shadow-xl sm:w-[420px]">
+
+          <div className="flex items-center justify-between">
+
+            <div className="text-lg tracking-wide text-yellow-400">
+              ★★★★★
+            </div>
+
+            <span className="rounded-full bg-green-100 px-3 py-1 text-[10px] font-bold text-green-700">
+              {t("verifiedReview")}
+            </span>
+
+          </div>
+
+          <p className="mt-5 flex-1 text-sm leading-7 text-gray-600">
+            "Very jovial tour guide, helped us in explaining everything,
+            helped at taking us good pictures and videos. He was very
+            friendly, I recommend him to anyone who is after quality service."
+          </p>
+
+          <div className="mt-6 flex items-center gap-3 border-t border-gray-100 pt-5">
+
+            <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-green-700 text-sm font-bold text-white">
+              B
+            </div>
+
+            <div>
+              <h4 className="text-sm font-bold text-gray-900">
+                Beverlyne Adriano
+              </h4>
+
+              <p className="mt-1 text-xs text-gray-500">
+                2 reviews
+              </p>
+            </div>
+
+          </div>
+
+        </div>
+
+
+        {/* ================= REVIEW 7 ================= */}
+        <div className="group flex w-[85vw] shrink-0 snap-start flex-col rounded-[1.7rem] border border-gray-100 bg-white p-6 shadow-lg transition-all duration-300 hover:-translate-y-1 hover:shadow-xl sm:w-[420px]">
+
+          <div className="flex items-center justify-between">
+
+            <div className="text-lg tracking-wide text-yellow-400">
+              ★★★★★
+            </div>
+
+            <span className="rounded-full bg-green-100 px-3 py-1 text-[10px] font-bold text-green-700">
+              {t("verifiedReview")}
+            </span>
+
+          </div>
+
+          <p className="mt-5 flex-1 text-sm leading-7 text-gray-600">
+            "Amazing experience! The ranger was very friendly and went
+            out of his way to accommodate our special requests. We had
+            fantastic accommodation in Nakuru and a 7-hour stay in the
+            national park – highly recommended! An unforgettable experience."
+          </p>
+
+          <div className="mt-6 flex items-center gap-3 border-t border-gray-100 pt-5">
+
+            <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-green-700 text-sm font-bold text-white">
+              H
+            </div>
+
+            <div>
+              <h4 className="text-sm font-bold text-gray-900">
+                hermine_mtnr
+              </h4>
+
+              <p className="mt-1 text-xs text-gray-500">
+                3 reviews · 6 photos
+              </p>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
 
     </div>
 
-    {/* Buttons */}
- {/* Action Buttons */}
-        <div className="mt-16 flex flex-wrap justify-center gap-6">
 
-          {/* Write Google Review */}
-          <a
-            href="https://search.google.com/local/writereview?placeid=ChIJoS2CGQqlKhgR63ePw3o5Wu0"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-3 px-8 py-4 bg-green-700 text-white font-semibold rounded-2xl shadow-lg hover:bg-green-800 hover:-translate-y-1 transition-all duration-300"
-          >
-            ⭐ {t("writeReview")}
-          </a>
+    {/* ===================== TRUST STATISTICS ===================== */}
+    <div className="mt-12 grid grid-cols-2 gap-4 md:grid-cols-4">
 
-          {/* View Google Reviews */}
-          <a
-            href="https://search.google.com/local/reviews?placeid=ChIJoS2CGQqlKhgR63ePw3o5Wu0"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-3 px-8 py-4 border-2 border-green-700 text-green-700 font-semibold rounded-2xl hover:bg-green-700 hover:text-white hover:-translate-y-1 transition-all duration-300"
-          >
-            💬 {t("viewAllReviews")}
-          </a>
+      <div className="rounded-[1.5rem] border border-gray-100 bg-white p-5 text-center shadow-md">
+        <h3 className="text-3xl font-black text-green-700 sm:text-4xl">
+          5.0
+        </h3>
 
+        <div className="mt-1 text-base text-yellow-400">
+          ★★★★★
         </div>
+
+        <p className="mt-1 text-xs text-gray-600">
+          {t("googleRating")}
+        </p>
+      </div>
+
+
+      <div className="rounded-[1.5rem] border border-gray-100 bg-white p-5 text-center shadow-md">
+        <h3 className="text-3xl font-black text-green-700 sm:text-4xl">
+          7
+        </h3>
+
+        <p className="mt-2 text-xs text-gray-600">
+          {t("verifiedReviews")}
+        </p>
+      </div>
+
+
+      <div className="rounded-[1.5rem] border border-gray-100 bg-white p-5 text-center shadow-md">
+        <h3 className="text-3xl font-black text-green-700 sm:text-4xl">
+          100%
+        </h3>
+
+        <p className="mt-2 text-xs text-gray-600">
+          {t("satisfiedGuests")}
+        </p>
+      </div>
+
+
+      <div className="rounded-[1.5rem] border border-gray-100 bg-white p-5 text-center shadow-md">
+        <h3 className="text-3xl font-black text-green-700 sm:text-4xl">
+          24/7
+        </h3>
+
+        <p className="mt-2 text-xs text-gray-600">
+          {t("travelSupport")}
+        </p>
+      </div>
+
+    </div>
+
+
+    {/* ===================== ACTION BUTTONS ===================== */}
+    <div className="mt-12 flex flex-wrap justify-center gap-4">
+
+      <a
+        href="https://search.google.com/local/writereview?placeid=ChIJoS2CGQqlKhgR63ePw3o5Wu0"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="inline-flex items-center gap-2 rounded-2xl bg-green-700 px-7 py-3.5 text-sm font-semibold text-white shadow-lg transition-all duration-300 hover:-translate-y-1 hover:bg-green-800"
+      >
+        ⭐ {t("writeReview")}
+      </a>
+
+      <a
+        href="https://search.google.com/local/reviews?placeid=ChIJoS2CGQqlKhgR63ePw3o5Wu0"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="inline-flex items-center gap-2 rounded-2xl border-2 border-green-700 px-7 py-3.5 text-sm font-semibold text-green-700 transition-all duration-300 hover:-translate-y-1 hover:bg-green-700 hover:text-white"
+      >
+        💬 {t("viewAllReviews")}
+      </a>
+
+    </div>
 
   </div>
 
 </section>
+
+
 
 {/* FOOTER */}
 <footer className="relative overflow-hidden bg-black text-white py-16">

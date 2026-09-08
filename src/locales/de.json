@@ -289,13 +289,95 @@
   
   "viewAllReviews": "Alle Bewertungen ansehen",
 
-
-
   "location": "📍 Nairobi, Kenia",
   "phone": "📞 +254112277671",
   "email": "✉ dengrayadventures@gmail.com",
 
   "whatsappBooking": "WhatsApp Buchung",
 
-  "footerBottom": "© 2026 DenGrey Tours und Safaris. Alle Rechte vorbehalten."
+  "footerBottom": "© 2026 DenGrey Tours und Safaris. Alle Rechte vorbehalten.",
+
+
+  
+  "safariPackages": {
+    "label": "Ausgewählte Safaris",
+    "title": "Entdecken Sie Ihr nächstes",
+    "titleHighlight": "Afrikanisches Abenteuer",
+    "description": "Sorgfältig zusammengestellte Safari-Erlebnisse mit faszinierender Tierwelt, authentischer Kultur, beeindruckenden Landschaften und unvergesslichen Momenten.",
+
+    "citizens": "Einheimische",
+    "nonResidents": "Nichtansässige",
+    "perPerson": "Pro Person",
+    "accommodation": "Unterkunft",
+    "itinerary": "Reiseplan",
+    "included": "Inklusive",
+    "excluded": "Nicht inklusive",
+
+    "book": "Diese Safari buchen",
+    "whatsappMessage": "Hallo, ich möchte gerne die Safari buchen:",
+    "whatsappNote": "Kontaktieren Sie uns über WhatsApp, um die Verfügbarkeit zu bestätigen und Ihre Buchung zu sichern.",
+
+    "bottomLabel": "Ihr Abenteuer wartet",
+    "bottomTitle": "Bereit, Kenia zu entdecken?",
+    "bottomDescription": "Sprechen Sie direkt mit unserem Safari-Team und lassen Sie sich bei der Planung Ihres perfekten Kenia-Abenteuers helfen.",
+    "bottomWhatsappMessage": "Hello, I would like to plan a safari ?.",
+    "chatWhatsapp": "Über WhatsApp chatten",
+
+    "wildebeest": {
+      "title": "Wildebeest Crossing Safari",
+      "location": "Masai Mara Nationalreservat",
+      "duration": "2 Nächte / 3 Tage",
+      "departure": "Abfahrt von Kisumu",
+      "accommodation": "Budget-Camp mit Vollpension",
+
+      "activities": [
+        "Tag 1: Fahrt von Kisumu zur Masai Mara durch malerische Teeplantagen. Ankunft zum Mittagessen und anschließend eine Pirschfahrt am Abend.",
+        "Tag 2: Ganztägige Pirschfahrt von 6:00 bis 16:30 Uhr mit Picknick-Mittagessen im Park.",
+        "Tag 3: Früher Spaziergang bei Sonnenaufgang, kulturelles Erlebnis mit den Maasai und anschließend Rückfahrt nach Kisumu."
+      ],
+
+      "included": [
+        "Transport in einem 4×4 Safari Land Cruiser",
+        "2 Übernachtungen mit Vollpension",
+        "Maasai-Kulturerlebnis",
+        "2 Eintrittsgebühren für das Masai Mara Nationalreservat",
+        "Trinkwasser während der gesamten Safari"
+      ],
+
+      "excluded": [
+        "Trinkgelder",
+        "Getränke",
+        "Zusätzliche persönliche Ausgaben"
+      ]
+    },
+
+    "nakuru": {
+      "title": "Lake Nakuru Übernachtungs-Safari",
+      "location": "Lake-Nakuru-Nationalpark",
+      "duration": "1 Nacht / 2 Tage",
+      "departure": "Abfahrt von Kisumu",
+      "accommodation": "Buraha Zenoni mit Vollpension",
+
+      "activities": [
+        "Tag 1: Abfahrt von Kisumu und Fahrt zum Lake-Nakuru-Nationalpark.",
+        "Tierbeobachtung und Erkundung des Parks.",
+        "Übernachtung im Buraha Zenoni mit Vollpension.",
+        "Tag 2: Aktivitäten am Morgen, Fotografie und Rückfahrt nach Kisumu."
+      ],
+
+      "included": [
+        "Hin- und Rücktransport",
+        "Übernachtung mit Vollpension",
+        "Eintrittsgebühr für den Lake-Nakuru-Nationalpark",
+        "Unbegrenzt Trinkwasser in Flaschen",
+        "Fotografie"
+      ],
+
+      "excluded": [
+        "Trinkgelder",
+        "Getränke",
+        "Sonstige zusätzliche Ausgaben"
+      ]
+    }
+  }
 }
