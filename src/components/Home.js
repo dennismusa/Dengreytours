@@ -1,9 +1,11 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-unused-vars */
 import React from "react";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import useLanguageSync from "../hooks/useLanguageSync";
 import { useTranslation } from "react-i18next";
+import { FaArrowRight, FaWhatsapp } from "react-icons/fa";
 
 //import cruiser1 from "../assets/cruiser1.jpg";
 import cruiser2 from "../assets/cruiser2.jpg";
@@ -21,17 +23,19 @@ import meru from "../assets/meru.jpg";
 import hellsgate from "../assets/hellsgate.jpg";
 import gorilla from "../assets/gorilla.jpg";
 import serengeti from "../assets/serengeti.jpg";
+import serengeti2 from "../assets/serengeti2.jpg";
 import tanzania from "../assets/tanzania.jpg";
 import Wilderbeast from "../assets/Wilderbeast.jpg";
 import kenya from "../assets/kenya.jpg";
 import image17 from "../assets/image17.jpg";
+
 
 import poster1 from "../assets/poster1.jpg";
 import poster2 from "../assets/poster2.jpg";
 
 function Home() {
   useLanguageSync();
-  const images = [meru, kenya,amboseli,Wilderbeast];
+  const images = [meru, serengeti2,amboseli,Wilderbeast];
   const [index, setIndex] = useState(0);
 const aboutImages = [cruiser2,image17,image16,nakuru,west,amboseli];
 const [aboutIndex,setAboutIndex]=useState(0);
@@ -45,9 +49,20 @@ const [smallAboutIndex,setSmallAboutIndex]=useState(1);
   const [message, setMessage] = useState("");
   const [rating, setRating] = useState(5);
   
+const [typedText, setTypedText] = useState("");
+const [isDeleting, setIsDeleting] = useState(false);
+const [typingIndex, setTypingIndex] = useState(0);  
 const [loading, setLoading] = useState(false);
 const [loadingReviews, setLoadingReviews] = useState(false);
 const [success, setSuccess] = useState(false);
+
+
+const typingTexts = [
+  "Explore Kenya With Luxury Safari Vehicles",
+  "Discover Kenya With DenGrey Safaris",
+  "Experience Africa In Comfort",
+  "Your Adventure. Our Expertise."
+];
 
 const safariPackages = [
   {
@@ -138,6 +153,37 @@ setSmallAboutIndex(prev=>(prev + 1) % aboutImages.length);
     return () => clearInterval(slider);
   }, [aboutImages.length, images.length]);
 
+
+
+  // ================= TYPING EFFECT =================
+useEffect(() => {
+  const currentText = typingTexts[typingIndex];
+
+  const speed = isDeleting ? 45 : 80;
+
+  const timer = setTimeout(() => {
+    if (!isDeleting) {
+      setTypedText(currentText.substring(0, typedText.length + 1));
+
+      if (typedText.length === currentText.length) {
+        setTimeout(() => {
+          setIsDeleting(true);
+        }, 1800);
+      }
+    } else {
+      setTypedText(currentText.substring(0, typedText.length - 1));
+
+      if (typedText.length === 0) {
+        setIsDeleting(false);
+        setTypingIndex(
+          (prev) => (prev + 1) % typingTexts.length
+        );
+      }
+    }
+  }, speed);
+
+  return () => clearTimeout(timer);
+}, [typedText, isDeleting, typingIndex]);
   // ================= SUBMIT REVIEW (IMPORTANT PART 2) =================
  
 // instantly update UI
@@ -147,95 +193,237 @@ setSmallAboutIndex(prev=>(prev + 1) % aboutImages.length);
     <div className="bg-white text-gray-800 overflow-x-hidden">
 
 
-      
-<section id="home" className="relative min-h-[65vh] lg:min-h-[75vh] flex items-center overflow-hidden">
-{/* IMAGE SLIDER */}
-<div className="absolute inset-0">
-{images.map((img,i)=>(
-<div
-key={i}
-className="absolute inset-0 transition-all duration-[3500ms] ease-in-out"
-style={{
-backgroundImage:`url(${img})`,
-backgroundSize:"cover",
-backgroundPosition:"center",
-opacity:i===index?1:0,
-transform:i===index?"scale(1)":"scale(1.06)"
-}}
-/>
+```jsx
+<section
+  id="home"
+  className="relative min-h-[65vh] lg:min-h-[75vh] overflow-hidden flex items-center"
+>
+  {/* =====================================================
+      BACKGROUND IMAGE SLIDER — CLEAR & SHARP
+  ====================================================== */}
+  <div className="absolute inset-0">
+    {images.map((img, i) => (
+      <div
+        key={i}
+        className="absolute inset-0 bg-cover bg-center transition-opacity duration-[1500ms] ease-in-out"
+        style={{
+          backgroundImage: `url(${img})`,
+          opacity: i === index ? 1 : 0,
+        }}
+      />
+    ))}
+  </div>
 
-))}
+  {/* =====================================================
+      SUBTLE OVERLAYS
+  ====================================================== */}
 
-</div>
-{/* DARK LAYERS */}
+  {/* Light overall overlay */}
+  <div className="absolute inset-0 bg-black/20" />
 
-<div className="absolute inset-0 bg-black/50"/>
+  {/* Darker area behind text only */}
+  <div className="absolute inset-0 bg-gradient-to-r from-[#022c22]/75 via-[#022c22]/35 to-transparent" />
 
-<div className="absolute inset-0 bg-gradient-to-r from-[#022c22]/95 via-black/60 to-transparent"/>
+  {/* Bottom readability gradient */}
+  <div className="absolute inset-0 bg-gradient-to-t from-black/45 via-transparent to-transparent" />
 
-<div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent"/>
-{/* ANIMATED LIGHT */}
+  {/* =====================================================
+      HERO CONTENT
+  ====================================================== */}
 
-<div className="absolute -top-32 -left-32 w-[450px] h-[450px] bg-emerald-500/20 rounded-full blur-[120px] animate-pulse"/>
+  <div className="relative z-20 w-full max-w-7xl mx-auto px-5 md:px-8 py-20">
+    <div className="max-w-2xl text-white">
 
-<div className="absolute bottom-[-150px] right-[-100px] w-[500px] h-[500px] bg-yellow-400/10 rounded-full blur-[130px]"/>
-{/* CONTENT */}
+      {/* ================= BADGE ================= */}
 
-<div className="relative z-20 max-w-7xl mx-auto px-5 md:px-8 w-full">
+      <div
+        className="
+          inline-flex
+          items-center
+          gap-3
+          px-5
+          py-2
+          mb-6
+          rounded-full
+          bg-white/10
+          backdrop-blur-md
+          border
+          border-white/20
+        "
+      >
+        <span className="relative flex h-2.5 w-2.5">
+          <span className="absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75 animate-ping" />
+          <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-emerald-400" />
+        </span>
 
+        <span className="text-[10px] md:text-xs uppercase tracking-[4px] text-white font-semibold">
+          DenGrey Tours & Safaris
+        </span>
+      </div>
 
-<div className="max-w-2xl text-white">
-{/* BADGE */}
+      {/* ================= TYPING TITLE ================= */}
 
-<div className="inline-flex items-center gap-3 px-5 py-2 rounded-full bg-white/10 backdrop-blur-xl border border-emerald-300/30 mb-5 animate-bounce">
-<div className="w-2 h-2 rounded-full bg-emerald-400 animate-ping"/>
-<span className="text-[10px] md:text-xs uppercase tracking-[4px] text-emerald-200">
-
-DenGrey Tours & Safaris
-</span></div>
-<h1 className="text-3xl sm:text-4xl md:text-5xl font-black leading-tight max-w-xl drop-shadow-xl">
-
-{t("heroTitle")}
-
+      <h1
+  className="
+    text-3xl
+    sm:text-4xl
+    md:text-5xl
+    lg:text-6xl
+    font-black
+    leading-[1.08]
+    max-w-2xl
+    min-h-[130px]
+    drop-shadow-2xl
+  "
+>
+  {typedText}
+  <span className="ml-1 text-yellow-400 animate-pulse">
+    |
+  </span>
 </h1>
-<p className="mt-4 text-gray-200 text-sm sm:text-base leading-7 max-w-lg">
 
-{t("heroDesc")}
+      {/* ================= DESCRIPTION ================= */}
 
-</p>{/* ACTION BUTTONS */}
-<div className="mt-6 flex flex-col sm:flex-row gap-3">
+      <p
+        className="
+          mt-5
+          text-gray-100
+          text-sm
+          sm:text-base
+          md:text-lg
+          leading-7
+          md:leading-8
+          max-w-xl
+          drop-shadow-lg
+        "
+      >
+        {t("heroDesc")}
+      </p>
 
-</div>
-{/* TRUST TAGS */}
-<div className="mt-8 flex flex-wrap gap-3">
-</div></div></div>
-{/* SLIDER DOTS */}
+      {/* =================================================
+          ACTION BUTTONS
+      ================================================== */}
 
-<div className="absolute right-6 top-1/2 -translate-y-1/2 hidden lg:flex flex-col gap-3">
+      
 
-{images.map((_,i)=>(
+      {/* =================================================
+          TRUST TAGS
+      ================================================== */}
 
-<button
+      <div className="mt-8 flex flex-wrap gap-3">
 
-key={i}
+        <div
+          className="
+            flex
+            items-center
+            gap-2
+            px-4
+            py-2
+            rounded-full
+            bg-black/20
+            border
+            border-white/20
+            text-sm
+            text-white
+          "
+        >
+          <span className="text-yellow-400">✓</span>
+          Custom Safari Packages
+        </div>
 
-onClick={()=>setIndex(i)}
+        <div
+          className="
+            flex
+            items-center
+            gap-2
+            px-4
+            py-2
+            rounded-full
+            bg-black/20
+            border
+            border-white/20
+            text-sm
+            text-white
+          "
+        >
+          <span className="text-yellow-400">✓</span>
+          Professional Guides
+        </div>
 
-className={`rounded-full transition-all duration-700 ${
-i===index
-?
-"h-12 w-2 bg-yellow-400 shadow-lg shadow-yellow-400/50"
-:
-"h-2 w-2 bg-white/40 hover:bg-white"
-}`}
+        <div
+          className="
+            flex
+            items-center
+            gap-2
+            px-4
+            py-2
+            rounded-full
+            bg-black/20
+            border
+            border-white/20
+            text-sm
+            text-white
+          "
+        >
+          <span className="text-yellow-400">✓</span>
+          Kenya & East Africa
+        </div>
 
-/>
+      </div>
 
-))}
-</div>
-{/* BOTTOM GLASS PANEL */}
+    </div>
+  </div>
+
+  {/* =====================================================
+      SLIDER NAVIGATION
+  ====================================================== */}
+
+  <div
+    className="
+      absolute
+      right-5
+      md:right-8
+      top-1/2
+      -translate-y-1/2
+      hidden
+      lg:flex
+      flex-col
+      items-center
+      gap-3
+      z-30
+    "
+  >
+    {images.map((_, i) => (
+      <button
+        key={i}
+        type="button"
+        onClick={() => setIndex(i)}
+        aria-label={`Go to slide ${i + 1}`}
+        className={`
+          rounded-full
+          transition-all
+          duration-500
+          ${
+            i === index
+              ? "h-12 w-2 bg-yellow-400 shadow-lg shadow-yellow-400/50"
+              : "h-2 w-2 bg-white/60 hover:bg-white"
+          }
+        `}
+      />
+    ))}
+  </div>
+
+  {/* =====================================================
+      BOTTOM SCROLL INDICATOR
+  ====================================================== */}
+
+  
 
 </section>
+
+
+
+
 
 
       {/* ABOUT / EXPERIENCE SECTION */}
