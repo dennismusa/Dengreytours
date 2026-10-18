@@ -10,15 +10,15 @@
   "heroTitle": "Explore Kenya With Luxury Safari Vehicles",
   "heroDesc": "Discover Kenya and East Africa with premium safari experiences, comfortable vehicles, and expert local guides. Enjoy safe, reliable, and unforgettable journeys through iconic wildlife destinations.",
 
-  "aboutTitle": "About DenGrey Tours & Safaris",
+  "aboutTitle": "About DenGray Tours & Safaris",
   "aboutText": "We create unforgettable safari experiences across Kenya and East Africa with professional guides, luxury vehicles, and carefully designed travel adventures.",
    
-  "aboutLabel": "ABOUT DENGREY TOURS",
+  "aboutLabel": "ABOUT DENGRAY TOURS",
 
   "aboutHeading1": "Journey Beyond",
   "aboutHeading2": "Ordinary Travel",
 
-  "aboutDescription": "DenGrey Tours & Safaris creates unforgettable wildlife experiences across Kenya and East Africa with premium vehicles, expert guides, and carefully designed safari packages.",
+  "aboutDescription": "DenGray Tours & Safaris creates unforgettable wildlife experiences across Kenya and East Africa with premium vehicles, expert guides, and carefully designed safari packages.",
 
   "aboutDescription2": "Explore Maasai Mara, Tsavo, Serengeti, and Zanzibar while enjoying comfort, safety, and authentic adventures.",
 
@@ -184,7 +184,7 @@
   "hiking": "Hiking",
   
 
-  "footerBrand": "DenGrey Tours & Safaris",
+  "footerBrand": "DenGray Tours & Safaris",
   "footerDeveloper": "Website designed & developed by Dennis Musa",
   "footerDescription": "Professional safari vehicle hire services in Kenya. Safe, comfortable, and unforgettable safari experiences.",
 
@@ -199,7 +199,7 @@
 "testimonialsBadge": "Client Testimonials",
   "testimonialsTitle1": "What Our Guests",
   "testimonialsTitle2": "Say About Us",
-  "testimonialsDescription": "Every safari is more than a trip—it's a lifetime memory. Read what our happy guests say after exploring Kenya with DenGrey Tours & Safaris.",
+  "testimonialsDescription": "Every safari is more than a trip—it's a lifetime memory. Read what our happy guests say after exploring Kenya with DenGray Tours & Safaris.",
 
   "googleBased": "Based on 6 Google Reviews",
 
@@ -299,7 +299,7 @@
 
   "whatsappBooking": "WhatsApp Booking",
 
-  "footerBottom": "© 2026 DenGrey Tours and Safaris. All Rights Reserved.",
+  "footerBottom": "© 2026 DenGray Tours and Safaris. All Rights Reserved.",
 
 
 
@@ -358,6 +358,32 @@
       ]
     },
 
+
+"booking": {
+  "title": "Your Next Safari Awaits",
+  "location": "Kenya Safari Adventures",
+  "duration": "OPEN FOR BOOKINGS",
+  "departure": "Departures Available on Request",
+  "accommodation": "Customised accommodation options available on request",
+
+  "activities": [
+    "Explore Kenya's breathtaking national parks and wildlife reserves",
+    "Enjoy unforgettable game drives with experienced safari guides",
+    "Choose your preferred destination and travel dates"
+  ],
+
+  "included": [
+    "Personalised safari planning",
+    "Flexible travel dates",
+    "Booking assistance"
+  ],
+
+  "excluded": [
+    "Safari package costs",
+    "Personal expenses and optional activities"
+  ]
+},
+    
     "nakuru": {
       "title": "Lake Nakuru Overnight Safari",
       "location": "Lake Nakuru National Park",

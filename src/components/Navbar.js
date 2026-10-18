@@ -89,7 +89,7 @@ function Navbar() {
               <img src={safarilinklogo} className="w-11 h-11 rounded-full border border-yellow-400 object-cover" />
 
               <div>
-                <h2 className="text-yellow-300 font-bold">DenGrey </h2>
+                <h2 className="text-yellow-300 font-bold">DenGray </h2>
                 <p className="text-yellow-400 text-xs">Safari Adventures</p>
               </div>
             </Link>
@@ -216,7 +216,7 @@ function Navbar() {
             <img src={safarilinklogo} className="w-12 h-12 rounded-full border border-yellow-400" />
 
             <div>
-              <h2 className="text-white font-bold">DenGrey </h2>
+              <h2 className="text-white font-bold">DenGray </h2>
               <p className="text-yellow-400 text-xs">Safari Adventures</p>
             </div>
           </div>

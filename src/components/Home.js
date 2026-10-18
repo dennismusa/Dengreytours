@@ -32,6 +32,7 @@ import image17 from "../assets/image17.jpg";
 
 import poster1 from "../assets/poster1.jpg";
 import poster2 from "../assets/poster2.jpg";
+import poster3 from "../assets/poster3.jpg";
 
 function Home() {
   useLanguageSync();
@@ -59,13 +60,14 @@ const [success, setSuccess] = useState(false);
 
 const typingTexts = [
   "Explore Kenya With Luxury Safari Vehicles",
-  "Discover Kenya With DenGrey Safaris",
+  "Discover Kenya With DenGray Safaris",
   "Experience Africa In Comfort",
   "Your Adventure. Our Expertise."
 ];
 
 const safariPackages = [
   {
+    id: "wildebeest",
     titleKey: "safariPackages.wildebeest.title",
     locationKey: "safariPackages.wildebeest.location",
     durationKey: "safariPackages.wildebeest.duration",
@@ -81,7 +83,7 @@ const safariPackages = [
     activitiesKeys: [
       "safariPackages.wildebeest.activities.0",
       "safariPackages.wildebeest.activities.1",
-      "safariPackages.wildebeest.activities.2"
+      "safariPackages.wildebeest.activities.2",
     ],
 
     includedKeys: [
@@ -89,17 +91,18 @@ const safariPackages = [
       "safariPackages.wildebeest.included.1",
       "safariPackages.wildebeest.included.2",
       "safariPackages.wildebeest.included.3",
-      "safariPackages.wildebeest.included.4"
+      "safariPackages.wildebeest.included.4",
     ],
 
     excludedKeys: [
       "safariPackages.wildebeest.excluded.0",
       "safariPackages.wildebeest.excluded.1",
-      "safariPackages.wildebeest.excluded.2"
-    ]
+      "safariPackages.wildebeest.excluded.2",
+    ],
   },
 
   {
+    id: "nakuru",
     titleKey: "safariPackages.nakuru.title",
     locationKey: "safariPackages.nakuru.location",
     durationKey: "safariPackages.nakuru.duration",
@@ -116,7 +119,7 @@ const safariPackages = [
       "safariPackages.nakuru.activities.0",
       "safariPackages.nakuru.activities.1",
       "safariPackages.nakuru.activities.2",
-      "safariPackages.nakuru.activities.3"
+      "safariPackages.nakuru.activities.3",
     ],
 
     includedKeys: [
@@ -124,16 +127,49 @@ const safariPackages = [
       "safariPackages.nakuru.included.1",
       "safariPackages.nakuru.included.2",
       "safariPackages.nakuru.included.3",
-      "safariPackages.nakuru.included.4"
+      "safariPackages.nakuru.included.4",
     ],
 
     excludedKeys: [
       "safariPackages.nakuru.excluded.0",
       "safariPackages.nakuru.excluded.1",
-      "safariPackages.nakuru.excluded.2"
-    ]
-  }
+      "safariPackages.nakuru.excluded.2",
+    ],
+  },
+
+  {
+    id: "booking-adventure",
+    titleKey: "safariPackages.booking.title",
+    locationKey: "safariPackages.booking.location",
+    durationKey: "safariPackages.booking.duration",
+    departureKey: "safariPackages.booking.departure",
+
+    prices: {
+      citizens: "Contact Us",
+      nonResidents: "Contact Us",
+    },
+
+    accommodationKey: "safariPackages.booking.accommodation",
+
+    activitiesKeys: [
+      "safariPackages.booking.activities.0",
+      "safariPackages.booking.activities.1",
+      "safariPackages.booking.activities.2",
+    ],
+
+    includedKeys: [
+      "safariPackages.booking.included.0",
+      "safariPackages.booking.included.1",
+      "safariPackages.booking.included.2",
+    ],
+
+    excludedKeys: [
+      "safariPackages.booking.excluded.0",
+      "safariPackages.booking.excluded.1",
+    ],
+  },
 ];
+
   // ================= SLIDER =================
   useEffect(()=>{
 
@@ -193,7 +229,7 @@ useEffect(() => {
     <div className="bg-white text-gray-800 overflow-x-hidden">
 
 
-```jsx
+
 <section
   id="home"
   className="relative min-h-[65vh] lg:min-h-[75vh] overflow-hidden flex items-center"
@@ -257,7 +293,7 @@ useEffect(() => {
         </span>
 
         <span className="text-[10px] md:text-xs uppercase tracking-[4px] text-white font-semibold">
-          DenGrey Tours & Safaris
+          DenGray Tours & Safaris
         </span>
       </div>
 
@@ -596,79 +632,46 @@ useEffect(() => {
 {/* ============================================================
     PREMIUM SAFARI PACKAGES — MULTI-LANGUAGE
 ============================================================ */}
+{/* ============================================================
+    PREMIUM SAFARI PACKAGES
+============================================================ */}
 
-<section className="relative overflow-hidden bg-[#f8f5ee] px-4 py-16 sm:px-6 sm:py-20 lg:px-8 lg:py-28">
+<section className="relative overflow-hidden bg-[#f8f5ee] px-3 py-10 sm:px-5 sm:py-14 lg:px-8 lg:py-20">
 
-  {/* ============================================================
-      DECORATIVE BACKGROUND
-  ============================================================ */}
-  <div className="pointer-events-none absolute -left-32 top-20 h-72 w-72 rounded-full bg-[#dba33a]/10 blur-3xl" />
+  {/* DECORATIVE BACKGROUND */}
+  <div className="pointer-events-none absolute -left-24 top-16 h-56 w-56 rounded-full bg-[#dba33a]/10 blur-3xl" />
+  <div className="pointer-events-none absolute -right-24 bottom-16 h-56 w-56 rounded-full bg-[#082d19]/10 blur-3xl" />
 
-  <div className="pointer-events-none absolute -right-32 bottom-20 h-72 w-72 rounded-full bg-[#082d19]/10 blur-3xl" />
+  <div className="relative mx-auto max-w-6xl">
 
+    {/* SECTION HEADER */}
+    <div className="mx-auto mb-8 max-w-3xl text-center sm:mb-12">
 
-  <div className="relative mx-auto max-w-7xl">
-
-    {/* ============================================================
-        SECTION HEADER
-    ============================================================ */}
-    <div className="mx-auto mb-12 max-w-3xl text-center sm:mb-16">
-
-      <div className="mb-4 flex items-center justify-center gap-3">
-
-        <span className="h-px w-8 bg-[#b98220]" />
-
-        <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-[#b98220] sm:text-xs">
+      <div className="mb-3 flex items-center justify-center gap-2">
+        <span className="h-px w-6 bg-[#b98220]" />
+        <span className="text-[9px] font-bold uppercase tracking-[0.22em] text-[#b98220] sm:text-[10px]">
           {t("safariPackages.label")}
         </span>
-
-        <span className="h-px w-8 bg-[#b98220]" />
-
+        <span className="h-px w-6 bg-[#b98220]" />
       </div>
 
-
-      <h2 className="font-serif text-3xl font-semibold leading-tight text-[#082d19] sm:text-4xl md:text-5xl lg:text-6xl">
-
+      <h2 className="font-serif text-2xl font-semibold leading-tight text-[#082d19] sm:text-4xl lg:text-5xl">
         {t("safariPackages.title")}
-
         <span className="block text-[#b98220]">
           {t("safariPackages.titleHighlight")}
         </span>
-
       </h2>
 
-
-      <p className="mx-auto mt-4 max-w-2xl text-sm leading-6 text-gray-600 sm:mt-5 sm:text-base sm:leading-7">
+      <p className="mx-auto mt-3 max-w-xl text-xs leading-5 text-gray-600 sm:mt-4 sm:text-sm sm:leading-6">
         {t("safariPackages.description")}
       </p>
 
     </div>
 
-
-    {/* ============================================================
-        SAFARI CARDS
-    ============================================================ */}
-    <div className="grid grid-cols-1 gap-8 xl:grid-cols-2">
+    {/* SAFARI CARDS */}
+    <div className="grid grid-cols-1 items-stretch gap-5 sm:gap-6 xl:grid-cols-2">
 
       {safariPackages.map((safari, index) => {
-
-        /*
-          Support BOTH structures:
-
-          Old:
-          safari.title
-          safari.location
-          safari.activities
-          safari.included
-          safari.excluded
-
-          New:
-          safari.titleKey
-          safari.locationKey
-          safari.activitiesKeys
-          safari.includedKeys
-          safari.excludedKeys
-        */
 
         const safariTitle = safari.titleKey
           ? t(safari.titleKey)
@@ -690,314 +693,196 @@ useEffect(() => {
           ? t(safari.accommodationKey)
           : safari.accommodation;
 
-
         const activities = safari.activitiesKeys
           ? safari.activitiesKeys.map((key) => t(key))
           : safari.activities || [];
-
 
         const includedItems = safari.includedKeys
           ? safari.includedKeys.map((key) => t(key))
           : safari.included || [];
 
-
         const excludedItems = safari.excludedKeys
           ? safari.excludedKeys.map((key) => t(key))
           : safari.excluded || [];
 
+        const safariPosters = [poster1, poster2, poster3];
+        const safariPoster = safariPosters[index] || poster1;
 
         return (
-
           <article
-            key={index}
-            className="group flex min-w-0 flex-col overflow-hidden rounded-[1.5rem] border border-[#e3dbce] bg-white shadow-[0_15px_50px_rgba(8,45,25,0.07)] transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_25px_70px_rgba(8,45,25,0.12)] sm:rounded-[2rem]"
+            key={safari.id || index}
+            className="group flex min-w-0 flex-col overflow-hidden rounded-2xl border border-[#e3dbce] bg-white shadow-[0_8px_28px_rgba(8,45,25,0.07)] transition-all duration-300 hover:shadow-lg sm:rounded-3xl"
           >
 
-            {/* ==================================================
-                LARGE SAFARI IMAGE
-            ================================================== */}
-            <div className="relative h-80 w-full overflow-hidden sm:h-[420px] lg:h-[500px]">
+            {/* COMPACT SAFARI IMAGE */}
+            <div className="relative h-52 w-full overflow-hidden sm:h-72 lg:h-80">
 
               <img
-                src={index === 0 ? poster1 : poster2}
+                src={safariPoster}
                 alt={safariTitle}
-                className="h-full w-full object-cover object-center transition duration-700 group-hover:scale-105"
+                loading={index === 0 ? "eager" : "lazy"}
+                className="h-full w-full object-cover object-center transition-transform duration-700 group-hover:scale-105"
               />
 
-
-              {/* IMAGE OVERLAY */}
-              <div className="absolute inset-0 bg-gradient-to-t from-[#03160c]/95 via-[#03160c]/20 to-transparent" />
-
+              <div className="absolute inset-0 bg-gradient-to-t from-[#03160c]/90 via-[#03160c]/15 to-transparent" />
 
               {/* DURATION */}
-              <div className="absolute left-5 top-5 sm:left-7 sm:top-7">
-
-                <span className="rounded-full border border-white/25 bg-black/30 px-4 py-2 text-[10px] font-bold uppercase tracking-[0.18em] text-white backdrop-blur-md sm:px-5 sm:text-xs">
+              <div className="absolute left-3 top-3 sm:left-5 sm:top-5">
+                <span className="rounded-full border border-white/25 bg-black/35 px-3 py-1.5 text-[9px] font-bold uppercase tracking-wider text-white backdrop-blur-md sm:text-[10px]">
                   {safariDuration}
                 </span>
-
               </div>
 
-
               {/* IMAGE CONTENT */}
-              <div className="absolute bottom-0 left-0 right-0 p-6 sm:p-8 lg:p-10">
+              <div className="absolute bottom-0 left-0 right-0 p-4 sm:p-6">
 
-                <p className="mb-2 text-[10px] font-bold uppercase tracking-[0.25em] text-[#f3c45d] sm:text-xs">
+                <p className="mb-1 text-[9px] font-bold uppercase tracking-[0.2em] text-[#f3c45d] sm:text-[10px]">
                   {safariLocation}
                 </p>
 
-
-                <h3 className="max-w-2xl font-serif text-3xl font-semibold leading-tight text-white sm:text-4xl lg:text-5xl">
+                <h3 className="font-serif text-2xl font-semibold leading-tight text-white sm:text-3xl lg:text-4xl">
                   {safariTitle}
                 </h3>
 
-
-                <div className="mt-3 flex items-center gap-2 text-xs text-white/75 sm:text-sm">
-
-                  <span className="text-[#f3c45d]">
-                    📍
-                  </span>
-
-                  <span>
-                    {safariDeparture}
-                  </span>
-
+                <div className="mt-2 flex items-center gap-2 text-[10px] text-white/80 sm:text-xs">
+                  <span className="text-[#f3c45d]">📍</span>
+                  <span>{safariDeparture}</span>
                 </div>
 
               </div>
-
             </div>
 
+            {/* CARD BODY */}
+            <div className="flex flex-1 flex-col p-3.5 sm:p-5 lg:p-6">
 
-            {/* ==================================================
-                CARD BODY
-            ================================================== */}
-            <div className="flex flex-1 flex-col p-5 sm:p-7 lg:p-8">
+              {/* PRICES */}
+              <div className="grid grid-cols-2 overflow-hidden rounded-xl border border-[#e6ded1]">
 
-
-              {/* ==================================================
-                  PRICES
-              ================================================== */}
-              <div className="grid grid-cols-2 overflow-hidden rounded-2xl border border-[#e6ded1]">
-
-
-                {/* CITIZENS */}
-                <div className="bg-[#faf8f3] p-4 sm:p-5">
-
-                  <p className="text-[9px] font-bold uppercase tracking-[0.15em] text-gray-500 sm:text-[10px]">
+                <div className="bg-[#faf8f3] p-3 sm:p-4">
+                  <p className="text-[8px] font-bold uppercase tracking-wider text-gray-500 sm:text-[9px]">
                     {t("safariPackages.citizens")}
                   </p>
 
-
-                  <p className="mt-2 break-words font-serif text-xl font-bold text-[#082d19] sm:text-2xl">
+                  <p className="mt-1.5 break-words font-serif text-base font-bold leading-tight text-[#082d19] sm:text-xl">
                     {safari.prices?.citizens || "-"}
                   </p>
 
-
-                  <p className="mt-1 text-[10px] text-gray-500 sm:text-xs">
+                  <p className="mt-1 text-[9px] text-gray-500 sm:text-[10px]">
                     {t("safariPackages.perPerson")}
                   </p>
-
                 </div>
 
-
-                {/* NON RESIDENTS */}
-                <div className="bg-[#082d19] p-4 sm:p-5">
-
-                  <p className="text-[9px] font-bold uppercase tracking-[0.15em] text-white/60 sm:text-[10px]">
+                <div className="bg-[#082d19] p-3 sm:p-4">
+                  <p className="text-[8px] font-bold uppercase tracking-wider text-white/60 sm:text-[9px]">
                     {t("safariPackages.nonResidents")}
                   </p>
 
-
-                  <p className="mt-2 break-words font-serif text-xl font-bold text-[#f3c45d] sm:text-2xl">
+                  <p className="mt-1.5 break-words font-serif text-base font-bold leading-tight text-[#f3c45d] sm:text-xl">
                     {safari.prices?.nonResidents || "-"}
                   </p>
 
-
-                  <p className="mt-1 text-[10px] text-white/50 sm:text-xs">
+                  <p className="mt-1 text-[9px] text-white/50 sm:text-[10px]">
                     {t("safariPackages.perPerson")}
                   </p>
-
                 </div>
 
               </div>
 
+              {/* ACCOMMODATION */}
+              <div className="mt-3 flex items-start gap-2.5 rounded-xl bg-[#f4f1e9] p-3 sm:mt-4 sm:p-4">
 
-              {/* ==================================================
-                  ACCOMMODATION
-              ================================================== */}
-              <div className="mt-5 flex items-start gap-3 rounded-2xl bg-[#f4f1e9] p-4 sm:mt-6 sm:p-5">
-
-                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#082d19] text-lg">
+                <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-[#082d19] text-sm">
                   🛖
                 </div>
 
-
                 <div className="min-w-0">
-
-                  <p className="text-[9px] font-bold uppercase tracking-[0.2em] text-[#b98220] sm:text-[10px]">
+                  <p className="text-[8px] font-bold uppercase tracking-widest text-[#b98220] sm:text-[9px]">
                     {t("safariPackages.accommodation")}
                   </p>
 
-
-                  <p className="mt-1 text-xs font-medium leading-5 text-[#082d19] sm:text-sm">
+                  <p className="mt-1 text-[11px] font-medium leading-4 text-[#082d19] sm:text-xs sm:leading-5">
                     {safariAccommodation}
                   </p>
-
                 </div>
 
               </div>
 
-
-              {/* ==================================================
-                  ITINERARY
-              ================================================== */}
-              <div className="mt-7 sm:mt-8">
+              {/* ITINERARY */}
+              <div className="mt-5 sm:mt-6">
 
                 <div className="flex items-center gap-3">
-
-                  <h4 className="whitespace-nowrap font-serif text-xl font-semibold text-[#082d19] sm:text-2xl">
+                  <h4 className="font-serif text-lg font-semibold text-[#082d19] sm:text-xl">
                     {t("safariPackages.itinerary")}
                   </h4>
-
                   <div className="h-px flex-1 bg-[#e5ddd0]" />
-
                 </div>
 
-
-                <div className="mt-4 space-y-3 sm:mt-5 sm:space-y-4">
-
+                <div className="mt-3 space-y-2.5">
                   {activities.map((activity, i) => (
-
                     <div
                       key={i}
-                      className="flex gap-3 rounded-xl border border-[#eee7db] bg-[#fcfaf6] p-3 sm:gap-4 sm:p-4"
+                      className="flex items-start gap-2.5 rounded-lg border border-[#eee7db] bg-[#fcfaf6] p-2.5 sm:p-3"
                     >
-
-                      {/* NUMBER */}
-                      <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-[#082d19] text-[9px] font-bold text-[#f3c45d] sm:h-8 sm:w-8 sm:text-[10px]">
+                      <div className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#082d19] text-[9px] font-bold text-[#f3c45d]">
                         {i + 1}
                       </div>
 
-
-                      {/* ACTIVITY */}
-                      <p className="min-w-0 text-xs leading-5 text-gray-600 sm:text-sm sm:leading-6">
+                      <p className="min-w-0 text-[11px] leading-4.5 text-gray-600 sm:text-xs sm:leading-5">
                         {activity}
                       </p>
-
                     </div>
-
                   ))}
-
                 </div>
 
               </div>
 
+              {/* INCLUDED / EXCLUDED */}
+              <div className="mt-5 grid gap-5 border-t border-[#e8dfd2] pt-5 sm:mt-6 sm:grid-cols-2 sm:pt-6">
 
-              {/* ==================================================
-                  INCLUDED / EXCLUDED
-              ================================================== */}
-              <div className="mt-7 grid gap-6 border-t border-[#e8dfd2] pt-7 sm:mt-8 sm:pt-8 md:grid-cols-2">
-
-
-                {/* ==================================================
-                    INCLUDED
-                ================================================== */}
                 <div>
-
-                  <div className="mb-4 flex items-center gap-2">
-
-                    <span className="flex h-7 w-7 items-center justify-center rounded-full bg-[#eaf3eb] text-xs font-bold text-[#2f7d4a]">
+                  <div className="mb-3 flex items-center gap-2">
+                    <span className="flex h-6 w-6 items-center justify-center rounded-full bg-[#eaf3eb] text-[10px] font-bold text-[#2f7d4a]">
                       ✓
                     </span>
-
-
-                    <h4 className="font-serif text-lg font-semibold text-[#082d19]">
+                    <h4 className="font-serif text-base font-semibold text-[#082d19]">
                       {t("safariPackages.included")}
                     </h4>
-
                   </div>
 
-
-                  <div className="space-y-2.5">
-
+                  <div className="space-y-2">
                     {includedItems.map((item, i) => (
-
-                      <div
-                        key={i}
-                        className="flex items-start gap-2 text-xs leading-5 text-gray-600 sm:text-sm"
-                      >
-
-                        <span className="mt-0.5 text-[#2f7d4a]">
-                          ✓
-                        </span>
-
-
-                        <span className="min-w-0">
-                          {item}
-                        </span>
-
+                      <div key={i} className="flex items-start gap-2 text-[11px] leading-4.5 text-gray-600 sm:text-xs sm:leading-5">
+                        <span className="text-[#2f7d4a]">✓</span>
+                        <span className="min-w-0">{item}</span>
                       </div>
-
                     ))}
-
                   </div>
-
                 </div>
 
-
-                {/* ==================================================
-                    EXCLUDED
-                ================================================== */}
                 <div>
-
-                  <div className="mb-4 flex items-center gap-2">
-
-                    <span className="flex h-7 w-7 items-center justify-center rounded-full bg-red-50 text-xs font-bold text-red-400">
+                  <div className="mb-3 flex items-center gap-2">
+                    <span className="flex h-6 w-6 items-center justify-center rounded-full bg-red-50 text-[10px] font-bold text-red-400">
                       ×
                     </span>
-
-
-                    <h4 className="font-serif text-lg font-semibold text-[#082d19]">
+                    <h4 className="font-serif text-base font-semibold text-[#082d19]">
                       {t("safariPackages.excluded")}
                     </h4>
-
                   </div>
 
-
-                  <div className="space-y-2.5">
-
+                  <div className="space-y-2">
                     {excludedItems.map((item, i) => (
-
-                      <div
-                        key={i}
-                        className="flex items-start gap-2 text-xs leading-5 text-gray-500 sm:text-sm"
-                      >
-
-                        <span className="mt-0.5 text-red-400">
-                          ×
-                        </span>
-
-
-                        <span className="min-w-0">
-                          {item}
-                        </span>
-
+                      <div key={i} className="flex items-start gap-2 text-[11px] leading-4.5 text-gray-500 sm:text-xs sm:leading-5">
+                        <span className="text-red-400">×</span>
+                        <span className="min-w-0">{item}</span>
                       </div>
-
                     ))}
-
                   </div>
-
                 </div>
 
               </div>
 
-
-              {/* ==================================================
-                  BOOKING CTA
-              ================================================== */}
-              <div className="mt-7 border-t border-[#e8dfd2] pt-6 sm:mt-8 sm:pt-7">
+              {/* BOOKING CTA */}
+              <div className="mt-5 border-t border-[#e8dfd2] pt-4 sm:mt-6 sm:pt-5">
 
                 <a
                   href={`https://wa.me/254112277671?text=${encodeURIComponent(
@@ -1005,62 +890,44 @@ useEffect(() => {
                   )}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex w-full items-center justify-center gap-3 rounded-full bg-[#082d19] px-5 py-3.5 text-xs font-bold text-white shadow-lg transition-all duration-300 hover:bg-[#0d4825] hover:shadow-xl sm:px-6 sm:py-4 sm:text-sm"
+                  className="flex w-full items-center justify-center gap-2 rounded-full bg-[#082d19] px-4 py-3 text-[11px] font-bold text-white transition-colors duration-300 hover:bg-[#0d4825] sm:py-3.5 sm:text-xs"
                 >
-
-                  <span className="flex h-7 w-7 items-center justify-center rounded-full bg-white/10 text-sm">
+                  <span className="flex h-6 w-6 items-center justify-center rounded-full bg-white/10">
                     💬
                   </span>
 
+                  <span>{t("safariPackages.book")}</span>
 
-                  <span>
-                    {t("safariPackages.book")}
-                  </span>
-
-
-                  <span className="ml-auto text-lg text-[#f3c45d]">
-                    →
-                  </span>
-
+                  <span className="ml-auto text-base text-[#f3c45d]">→</span>
                 </a>
 
-
-                <p className="mt-3 text-center text-[10px] leading-4 text-gray-400 sm:text-xs">
+                <p className="mt-2 text-center text-[9px] leading-4 text-gray-400 sm:text-[10px]">
                   {t("safariPackages.whatsappNote")}
                 </p>
 
               </div>
 
             </div>
-
           </article>
-
         );
-
       })}
 
     </div>
 
+    {/* BOTTOM CTA */}
+    <div className="mt-8 overflow-hidden rounded-2xl bg-[#082d19] px-4 py-7 text-center sm:mt-10 sm:rounded-3xl sm:px-8 sm:py-10">
 
-    {/* ============================================================
-        BOTTOM CTA
-    ============================================================ */}
-    <div className="mt-10 overflow-hidden rounded-[1.5rem] bg-[#082d19] px-5 py-9 text-center sm:mt-14 sm:rounded-[2rem] sm:px-10 sm:py-12">
-
-      <p className="text-[10px] font-bold uppercase tracking-[0.25em] text-[#dba33a] sm:text-xs sm:tracking-[0.3em]">
+      <p className="text-[9px] font-bold uppercase tracking-[0.22em] text-[#dba33a] sm:text-[10px] sm:tracking-[0.3em]">
         {t("safariPackages.bottomLabel")}
       </p>
 
-
-      <h3 className="mt-3 font-serif text-2xl font-semibold text-white sm:text-3xl md:text-4xl">
+      <h3 className="mt-2 font-serif text-xl font-semibold text-white sm:text-3xl">
         {t("safariPackages.bottomTitle")}
       </h3>
 
-
-      <p className="mx-auto mt-3 max-w-xl text-xs leading-5 text-white/60 sm:text-sm sm:leading-6">
+      <p className="mx-auto mt-2 max-w-xl text-[11px] leading-5 text-white/60 sm:mt-3 sm:text-xs sm:leading-6">
         {t("safariPackages.bottomDescription")}
       </p>
-
 
       <a
         href={`https://wa.me/254112277671?text=${encodeURIComponent(
@@ -1068,22 +935,17 @@ useEffect(() => {
         )}`}
         target="_blank"
         rel="noopener noreferrer"
-        className="mt-6 inline-flex items-center gap-3 rounded-full bg-[#dba33a] px-6 py-3 text-xs font-bold text-[#082d19] transition hover:bg-[#f0bd50] sm:px-7 sm:py-3.5 sm:text-sm"
+        className="mt-5 inline-flex items-center gap-2 rounded-full bg-[#dba33a] px-5 py-3 text-[11px] font-bold text-[#082d19] transition hover:bg-[#f0bd50] sm:px-6 sm:text-xs"
       >
-
         {t("safariPackages.chatWhatsapp")}
-
-        <span>
-          →
-        </span>
-
+        <span>→</span>
       </a>
 
     </div>
 
   </div>
-
 </section>
+
 
 {/* ================= PREMIUM SERVICES ================= */}
 <section className="relative py-32 overflow-hidden bg-gradient-to-b from-[#F8F6F1] via-[#FCFBF8] to-[#EFE9DE]">
