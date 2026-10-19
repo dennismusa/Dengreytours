@@ -33,6 +33,9 @@ import image17 from "../assets/image17.jpg";
 import poster1 from "../assets/poster1.jpg";
 import poster2 from "../assets/poster2.jpg";
 import poster3 from "../assets/poster3.jpg";
+import poster4 from "../assets/poster4.jpg";
+import poster5 from "../assets/poster5.jpg";
+import poster6 from "../assets/poster6.jpg";
 
 function Home() {
   useLanguageSync();
@@ -41,6 +44,10 @@ function Home() {
 const aboutImages = [cruiser2,image17,image16,nakuru,west,amboseli];
 const [aboutIndex,setAboutIndex]=useState(0);
 const [smallAboutIndex,setSmallAboutIndex]=useState(1);
+
+
+const [selectedSafari, setSelectedSafari] = useState(null);
+const [activeTab, setActiveTab] = useState("overview");
 
 
   // ================= REVIEWS STATE =================
@@ -65,27 +72,25 @@ const typingTexts = [
   "Your Adventure. Our Expertise."
 ];
 
+
 const safariPackages = [
+  // 1. WILDEBEEST MIGRATION
   {
     id: "wildebeest",
     titleKey: "safariPackages.wildebeest.title",
     locationKey: "safariPackages.wildebeest.location",
     durationKey: "safariPackages.wildebeest.duration",
     departureKey: "safariPackages.wildebeest.departure",
-
     prices: {
       citizens: "KSh. 30,860",
       nonResidents: "USD 693",
     },
-
     accommodationKey: "safariPackages.wildebeest.accommodation",
-
     activitiesKeys: [
       "safariPackages.wildebeest.activities.0",
       "safariPackages.wildebeest.activities.1",
       "safariPackages.wildebeest.activities.2",
     ],
-
     includedKeys: [
       "safariPackages.wildebeest.included.0",
       "safariPackages.wildebeest.included.1",
@@ -93,35 +98,32 @@ const safariPackages = [
       "safariPackages.wildebeest.included.3",
       "safariPackages.wildebeest.included.4",
     ],
-
     excludedKeys: [
       "safariPackages.wildebeest.excluded.0",
       "safariPackages.wildebeest.excluded.1",
       "safariPackages.wildebeest.excluded.2",
     ],
+    image: poster1,
   },
 
+  // 2. LAKE NAKURU
   {
     id: "nakuru",
     titleKey: "safariPackages.nakuru.title",
     locationKey: "safariPackages.nakuru.location",
     durationKey: "safariPackages.nakuru.duration",
     departureKey: "safariPackages.nakuru.departure",
-
     prices: {
       citizens: "KSh. 19,700",
       nonResidents: "USD 273",
     },
-
     accommodationKey: "safariPackages.nakuru.accommodation",
-
     activitiesKeys: [
       "safariPackages.nakuru.activities.0",
       "safariPackages.nakuru.activities.1",
       "safariPackages.nakuru.activities.2",
       "safariPackages.nakuru.activities.3",
     ],
-
     includedKeys: [
       "safariPackages.nakuru.included.0",
       "safariPackages.nakuru.included.1",
@@ -129,46 +131,177 @@ const safariPackages = [
       "safariPackages.nakuru.included.3",
       "safariPackages.nakuru.included.4",
     ],
-
     excludedKeys: [
       "safariPackages.nakuru.excluded.0",
       "safariPackages.nakuru.excluded.1",
       "safariPackages.nakuru.excluded.2",
     ],
+    image: poster2,
   },
 
+  // 3. BOOKING ADVENTURE
   {
     id: "booking-adventure",
     titleKey: "safariPackages.booking.title",
     locationKey: "safariPackages.booking.location",
     durationKey: "safariPackages.booking.duration",
     departureKey: "safariPackages.booking.departure",
-
     prices: {
       citizens: "Contact Us",
       nonResidents: "Contact Us",
     },
-
     accommodationKey: "safariPackages.booking.accommodation",
-
     activitiesKeys: [
       "safariPackages.booking.activities.0",
       "safariPackages.booking.activities.1",
       "safariPackages.booking.activities.2",
     ],
-
     includedKeys: [
       "safariPackages.booking.included.0",
       "safariPackages.booking.included.1",
       "safariPackages.booking.included.2",
     ],
-
     excludedKeys: [
       "safariPackages.booking.excluded.0",
       "safariPackages.booking.excluded.1",
     ],
+    image: poster3,
+  },
+
+  // 4. KAKAMEGA FOREST BIRD WATCHING
+  {
+    id: "kakamega-bird-watching",
+    title: "Bird Watching at Kakamega Forest",
+    location: "Kakamega Forest, Western Kenya",
+    duration: "1 Day Trip",
+    departure: "Every Friday · United Mall, Kisumu · 6:30 AM",
+    prices: {
+      citizens: "KSh. 3,945",
+      nonResidents: "USD 83",
+    },
+    accommodation: "Day trip; overnight accommodation is not included in the supplied package details.",
+    description:
+      "Escape from Kisumu for a refreshing day in Kakamega Forest. Enjoy bird watching, guided nature experiences, hiking, a river walk and cave visits while exploring the forest's natural surroundings.",
+    activities: [
+      "6:30 AM — Depart from United Mall, Kisumu.",
+      "Approximately two-hour drive towards the Rondo Retreat and Kakamega Forest area.",
+      "Bird watching in the forest with a guide.",
+      "Hiking and exploring the forest environment.",
+      "River walk and opportunities to enjoy the natural scenery.",
+      "Cave visits and other forest activities.",
+      "Picnic lunch during the excursion.",
+      "Unlimited photography throughout the trip.",
+    ],
+    included: [
+      "Round-trip transport in a 4x4 safari Land Cruiser.",
+      "Entrance fee to Kakamega Forest.",
+      "Picnic lunch.",
+      "Bottled water.",
+      "Guiding fee.",
+      "Unlimited photography.",
+    ],
+    excluded: [
+      "Tips and gratuities.",
+      "Additional drinks.",
+      "Personal spending and other extras.",
+    ],
+    whatToCarry: [
+      "Refillable water bottle.",
+      "Comfortable sports shoes.",
+      "Binoculars for bird watching.",
+      "Raincoat in case of rain.",
+      "Camera or phone for photography.",
+    ],
+    image: poster4,
+    bookingPhone: "254112277671",
+  },
+
+  // 5. RUMA NATIONAL PARK DAY TRIP
+  {
+    id: "ruma-national-park",
+    title: "Day Trip to Ruma National Park",
+    location: "Ruma National Park, Homa Bay County",
+    duration: "1 Day Trip",
+    departure: "Every Sunday · United Mall, Kisumu · 6:30 AM",
+    prices: {
+      citizens: "KSh. 3,750",
+      nonResidents: "USD 75",
+    },
+    accommodation: "Day trip; no overnight accommodation specified.",
+    description:
+      "Join a full-day wildlife adventure from Kisumu to Ruma National Park. Travel through the scenic route via Katito, Kendu Bay and Homa Bay Town before exploring the park on a game drive to spot remarkable wildlife in its natural habitat.",
+    activities: [
+      "6:30 AM — Pick-up at United Mall, Kisumu.",
+      "Approximately 3.5-hour drive via Katito, Kendu Bay and Homa Bay Town, as specified in the supplied itinerary.",
+      "Park gate check-in; the supplied itinerary lists 9:00 AM, so confirm this time with the organiser.",
+      "Five-hour game drive and wildlife spotting.",
+      "Look out for Rothschild's giraffes, black and white rhinos, buffaloes, roan antelopes and other wildlife.",
+      "Enjoy unlimited photography throughout the experience.",
+    ],
+    included: [
+      "Round-trip transport from Kisumu in a tour Land Cruiser or tour van.",
+      "Entrance fee to Ruma National Park.",
+      "Bottled water.",
+      "Unlimited photography.",
+    ],
+    excluded: [
+      "Tips and gratuities.",
+      "Drinks other than the provided bottled water.",
+      "Personal spending and other extras.",
+    ],
+    whatToCarry: [
+      "Comfortable clothing and shoes.",
+      "Hat and sunscreen.",
+      "Camera or phone for wildlife photography.",
+      "Personal essentials for a full-day trip.",
+    ],
+    image: poster5,
+    bookingPhone: "254112277671",
+  },
+
+  // 6. PARK AND CHILL AT DUNGA HILL CAMP
+  {
+    id: "dunga-hill-camp",
+    title: "Park and Chill at Dunga Hill Camp",
+    location: "Dunga Hill Camp, Kisumu",
+    duration: "4:30 PM – 9:00 PM",
+    departure: "Every Saturday · Kisumu CBD",
+    prices: {
+      citizens: "KSh. 1,500",
+      nonResidents: "KSh. 1,500",
+    },
+    accommodation: "Not applicable; this is an evening leisure experience.",
+    description:
+      "Unwind by Lake Victoria with an evening of live music, sunset views and good company. Park and Chill at Dunga Hill Camp brings together live performances, a sundowner boat ride, photography, bonding and networking in a relaxed lakeside atmosphere.",
+    activities: [
+      "4:30 PM — Start of the evening experience.",
+      "Enjoy live performances from different artists and bands.",
+      "Take a 40-minute boat ride on Lake Victoria and enjoy the sunset.",
+      "Capture memorable moments with unlimited photography.",
+      "Bond and network with fellow travellers and new friends.",
+      "9:00 PM — Scheduled end of the experience.",
+    ],
+    included: [
+      "Round-trip transport by tour van between Kisumu CBD and Dunga Hill Camp.",
+      "Fresh juice and fries.",
+      "40-minute sundowner boat ride on Lake Victoria.",
+      "Unlimited photography.",
+    ],
+    excluded: [
+      "Additional food and drinks beyond those specified.",
+      "Personal purchases and extra spending.",
+      "Other services not listed under the inclusions.",
+    ],
+    whatToCarry: [
+      "Phone or camera for sunset photography.",
+      "Light jacket for the evening breeze.",
+      "Personal spending money for additional purchases.",
+    ],
+    image: poster6,
+    bookingPhone: "254112277671",
   },
 ];
+
 
   // ================= SLIDER =================
   useEffect(()=>{
@@ -637,42 +770,38 @@ useEffect(() => {
 ============================================================ */}
 
 <section className="relative overflow-hidden bg-[#f8f5ee] px-3 py-10 sm:px-5 sm:py-14 lg:px-8 lg:py-20">
-
-  {/* DECORATIVE BACKGROUND */}
+  {/* BACKGROUND DECORATION */}
   <div className="pointer-events-none absolute -left-24 top-16 h-56 w-56 rounded-full bg-[#dba33a]/10 blur-3xl" />
   <div className="pointer-events-none absolute -right-24 bottom-16 h-56 w-56 rounded-full bg-[#082d19]/10 blur-3xl" />
 
-  <div className="relative mx-auto max-w-6xl">
+  <div className="relative mx-auto max-w-7xl">
 
     {/* SECTION HEADER */}
-    <div className="mx-auto mb-8 max-w-3xl text-center sm:mb-12">
-
+    <div className="mx-auto mb-9 max-w-3xl text-center sm:mb-12">
       <div className="mb-3 flex items-center justify-center gap-2">
-        <span className="h-px w-6 bg-[#b98220]" />
-        <span className="text-[9px] font-bold uppercase tracking-[0.22em] text-[#b98220] sm:text-[10px]">
+        <span className="h-px w-7 bg-[#b98220]" />
+        <span className="text-[10px] font-bold uppercase tracking-[0.25em] text-[#b98220]">
           {t("safariPackages.label")}
         </span>
-        <span className="h-px w-6 bg-[#b98220]" />
+        <span className="h-px w-7 bg-[#b98220]" />
       </div>
 
-      <h2 className="font-serif text-2xl font-semibold leading-tight text-[#082d19] sm:text-4xl lg:text-5xl">
+      <h2 className="font-serif text-3xl font-semibold leading-tight text-[#082d19] sm:text-4xl lg:text-5xl">
         {t("safariPackages.title")}
-        <span className="block text-[#b98220]">
+        <span className="mt-1 block text-[#b98220]">
           {t("safariPackages.titleHighlight")}
         </span>
       </h2>
 
-      <p className="mx-auto mt-3 max-w-xl text-xs leading-5 text-gray-600 sm:mt-4 sm:text-sm sm:leading-6">
+      <p className="mx-auto mt-4 max-w-xl text-sm leading-6 text-gray-600">
         {t("safariPackages.description")}
       </p>
-
     </div>
 
-    {/* SAFARI CARDS */}
-    <div className="grid grid-cols-1 items-stretch gap-5 sm:gap-6 xl:grid-cols-2">
+    {/* FULL-IMAGE SAFARI CARDS */}
+    <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 sm:gap-6 xl:grid-cols-3">
 
       {safariPackages.map((safari, index) => {
-
         const safariTitle = safari.titleKey
           ? t(safari.titleKey)
           : safari.title;
@@ -705,227 +834,155 @@ useEffect(() => {
           ? safari.excludedKeys.map((key) => t(key))
           : safari.excluded || [];
 
-        const safariPosters = [poster1, poster2, poster3];
+        const safariPosters = [poster1, poster2, poster3, poster4, poster5, poster6 ];
         const safariPoster = safariPosters[index] || poster1;
+
+        const openDetails = () => {
+          setSelectedSafari({
+            ...safari,
+            displayTitle: safariTitle,
+            displayLocation: safariLocation,
+            displayDuration: safariDuration,
+            displayDeparture: safariDeparture,
+            displayAccommodation: safariAccommodation,
+            displayActivities: activities,
+            displayIncluded: includedItems,
+            displayExcluded: excludedItems,
+            displayPoster: safariPoster,
+            displayDescription:
+              safari.description || safari.overview || "",
+          });
+          setActiveTab("overview");
+        };
+
+        const bookingMessage =
+          `Hello! I am interested in the ${safariTitle} package. ` +
+          "Please share the complete itinerary, prices and availability.";
 
         return (
           <article
             key={safari.id || index}
-            className="group flex min-w-0 flex-col overflow-hidden rounded-2xl border border-[#e3dbce] bg-white shadow-[0_8px_28px_rgba(8,45,25,0.07)] transition-all duration-300 hover:shadow-lg sm:rounded-3xl"
+            className="group relative isolate min-h-[430px] overflow-hidden rounded-2xl bg-[#082d19] shadow-[0_12px_35px_rgba(8,45,25,0.14)] transition-all duration-500 hover:-translate-y-1 hover:shadow-2xl sm:min-h-[480px] sm:rounded-3xl"
           >
+            {/* FULL CARD BACKGROUND IMAGE */}
+            <img
+              src={safariPoster}
+              alt={safariTitle}
+              loading={index === 0 ? "eager" : "lazy"}
+              className="absolute inset-0 -z-20 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+            />
 
-            {/* COMPACT SAFARI IMAGE */}
-            <div className="relative h-52 w-full overflow-hidden sm:h-72 lg:h-80">
+            {/* IMAGE OVERLAYS */}
+            <div className="absolute inset-0 -z-10 bg-gradient-to-b from-black/45 via-black/10 to-[#03160c]/95" />
+            <div className="absolute inset-0 -z-10 bg-gradient-to-t from-[#03160c]/70 via-transparent to-transparent" />
 
-              <img
-                src={safariPoster}
-                alt={safariTitle}
-                loading={index === 0 ? "eager" : "lazy"}
-                className="h-full w-full object-cover object-center transition-transform duration-700 group-hover:scale-105"
-              />
+            {/* TOP BADGES */}
+            <div className="absolute left-4 right-4 top-4 flex items-start justify-between gap-2 sm:left-5 sm:right-5 sm:top-5">
+              <span className="max-w-[65%] rounded-full border border-white/30 bg-black/30 px-3 py-1.5 text-[9px] font-bold uppercase tracking-wider text-white backdrop-blur-md sm:text-[10px]">
+                {safariDuration}
+              </span>
 
-              <div className="absolute inset-0 bg-gradient-to-t from-[#03160c]/90 via-[#03160c]/15 to-transparent" />
-
-              {/* DURATION */}
-              <div className="absolute left-3 top-3 sm:left-5 sm:top-5">
-                <span className="rounded-full border border-white/25 bg-black/35 px-3 py-1.5 text-[9px] font-bold uppercase tracking-wider text-white backdrop-blur-md sm:text-[10px]">
-                  {safariDuration}
-                </span>
-              </div>
-
-              {/* IMAGE CONTENT */}
-              <div className="absolute bottom-0 left-0 right-0 p-4 sm:p-6">
-
-                <p className="mb-1 text-[9px] font-bold uppercase tracking-[0.2em] text-[#f3c45d] sm:text-[10px]">
-                  {safariLocation}
-                </p>
-
-                <h3 className="font-serif text-2xl font-semibold leading-tight text-white sm:text-3xl lg:text-4xl">
-                  {safariTitle}
-                </h3>
-
-                <div className="mt-2 flex items-center gap-2 text-[10px] text-white/80 sm:text-xs">
-                  <span className="text-[#f3c45d]">📍</span>
-                  <span>{safariDeparture}</span>
-                </div>
-
-              </div>
+              <span className="rounded-full border border-[#f3c45d]/50 bg-[#082d19]/75 px-3 py-1.5 text-[9px] font-bold text-[#f3c45d] backdrop-blur-md sm:text-[10px]">
+                Safari Experience
+              </span>
             </div>
 
-            {/* CARD BODY */}
-            <div className="flex flex-1 flex-col p-3.5 sm:p-5 lg:p-6">
+            {/* ALL CARD TEXT OVER THE IMAGE */}
+            <div className="absolute inset-x-0 bottom-0 p-4 sm:p-5 lg:p-6">
 
-              {/* PRICES */}
-              <div className="grid grid-cols-2 overflow-hidden rounded-xl border border-[#e6ded1]">
+              <p className="mb-2 text-[10px] font-bold uppercase tracking-[0.22em] text-[#f3c45d]">
+                {safariLocation}
+              </p>
 
-                <div className="bg-[#faf8f3] p-3 sm:p-4">
-                  <p className="text-[8px] font-bold uppercase tracking-wider text-gray-500 sm:text-[9px]">
+              <h3 className="font-serif text-2xl font-semibold leading-tight text-white sm:text-3xl">
+                {safariTitle}
+              </h3>
+
+              <p className="mt-2 flex items-center gap-2 text-xs text-white/80">
+                <span className="text-[#f3c45d]">📍</span>
+                {safariDeparture}
+              </p>
+
+              {/* PRICE PREVIEW */}
+              <div className="mt-4 grid grid-cols-2 gap-2">
+                <div className="rounded-xl border border-white/20 bg-black/30 p-3 backdrop-blur-md">
+                  <p className="text-[9px] font-semibold uppercase tracking-wider text-white/65">
                     {t("safariPackages.citizens")}
                   </p>
-
-                  <p className="mt-1.5 break-words font-serif text-base font-bold leading-tight text-[#082d19] sm:text-xl">
-                    {safari.prices?.citizens || "-"}
+                  <p className="mt-1 break-words font-serif text-base font-bold text-white sm:text-lg">
+                    {safari.prices?.citizens || "On request"}
                   </p>
-
-                  <p className="mt-1 text-[9px] text-gray-500 sm:text-[10px]">
+                  <p className="mt-1 text-[9px] text-white/60">
                     {t("safariPackages.perPerson")}
                   </p>
                 </div>
 
-                <div className="bg-[#082d19] p-3 sm:p-4">
-                  <p className="text-[8px] font-bold uppercase tracking-wider text-white/60 sm:text-[9px]">
+                <div className="rounded-xl border border-[#f3c45d]/40 bg-[#082d19]/75 p-3 backdrop-blur-md">
+                  <p className="text-[9px] font-semibold uppercase tracking-wider text-white/65">
                     {t("safariPackages.nonResidents")}
                   </p>
-
-                  <p className="mt-1.5 break-words font-serif text-base font-bold leading-tight text-[#f3c45d] sm:text-xl">
-                    {safari.prices?.nonResidents || "-"}
+                  <p className="mt-1 break-words font-serif text-base font-bold text-[#f3c45d] sm:text-lg">
+                    {safari.prices?.nonResidents || "On request"}
                   </p>
-
-                  <p className="mt-1 text-[9px] text-white/50 sm:text-[10px]">
+                  <p className="mt-1 text-[9px] text-white/60">
                     {t("safariPackages.perPerson")}
                   </p>
                 </div>
-
               </div>
 
-              {/* ACCOMMODATION */}
-              <div className="mt-3 flex items-start gap-2.5 rounded-xl bg-[#f4f1e9] p-3 sm:mt-4 sm:p-4">
-
-                <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-[#082d19] text-sm">
-                  🛖
-                </div>
-
+              {/* ACCOMMODATION PREVIEW */}
+              <div className="mt-3 flex items-start gap-2.5">
+                <span className="text-lg">🛖</span>
                 <div className="min-w-0">
-                  <p className="text-[8px] font-bold uppercase tracking-widest text-[#b98220] sm:text-[9px]">
+                  <p className="text-[9px] font-bold uppercase tracking-widest text-[#f3c45d]">
                     {t("safariPackages.accommodation")}
                   </p>
-
-                  <p className="mt-1 text-[11px] font-medium leading-4 text-[#082d19] sm:text-xs sm:leading-5">
-                    {safariAccommodation}
+                  <p className="mt-1 line-clamp-2 text-xs leading-5 text-white/85">
+                    {safariAccommodation || "Ask us about accommodation options"}
                   </p>
                 </div>
-
               </div>
 
-              {/* ITINERARY */}
-              <div className="mt-5 sm:mt-6">
-
-                <div className="flex items-center gap-3">
-                  <h4 className="font-serif text-lg font-semibold text-[#082d19] sm:text-xl">
-                    {t("safariPackages.itinerary")}
-                  </h4>
-                  <div className="h-px flex-1 bg-[#e5ddd0]" />
-                </div>
-
-                <div className="mt-3 space-y-2.5">
-                  {activities.map((activity, i) => (
-                    <div
-                      key={i}
-                      className="flex items-start gap-2.5 rounded-lg border border-[#eee7db] bg-[#fcfaf6] p-2.5 sm:p-3"
-                    >
-                      <div className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#082d19] text-[9px] font-bold text-[#f3c45d]">
-                        {i + 1}
-                      </div>
-
-                      <p className="min-w-0 text-[11px] leading-4.5 text-gray-600 sm:text-xs sm:leading-5">
-                        {activity}
-                      </p>
-                    </div>
-                  ))}
-                </div>
-
-              </div>
-
-              {/* INCLUDED / EXCLUDED */}
-              <div className="mt-5 grid gap-5 border-t border-[#e8dfd2] pt-5 sm:mt-6 sm:grid-cols-2 sm:pt-6">
-
-                <div>
-                  <div className="mb-3 flex items-center gap-2">
-                    <span className="flex h-6 w-6 items-center justify-center rounded-full bg-[#eaf3eb] text-[10px] font-bold text-[#2f7d4a]">
-                      ✓
-                    </span>
-                    <h4 className="font-serif text-base font-semibold text-[#082d19]">
-                      {t("safariPackages.included")}
-                    </h4>
-                  </div>
-
-                  <div className="space-y-2">
-                    {includedItems.map((item, i) => (
-                      <div key={i} className="flex items-start gap-2 text-[11px] leading-4.5 text-gray-600 sm:text-xs sm:leading-5">
-                        <span className="text-[#2f7d4a]">✓</span>
-                        <span className="min-w-0">{item}</span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-
-                <div>
-                  <div className="mb-3 flex items-center gap-2">
-                    <span className="flex h-6 w-6 items-center justify-center rounded-full bg-red-50 text-[10px] font-bold text-red-400">
-                      ×
-                    </span>
-                    <h4 className="font-serif text-base font-semibold text-[#082d19]">
-                      {t("safariPackages.excluded")}
-                    </h4>
-                  </div>
-
-                  <div className="space-y-2">
-                    {excludedItems.map((item, i) => (
-                      <div key={i} className="flex items-start gap-2 text-[11px] leading-4.5 text-gray-500 sm:text-xs sm:leading-5">
-                        <span className="text-red-400">×</span>
-                        <span className="min-w-0">{item}</span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-
-              </div>
-
-              {/* BOOKING CTA */}
-              <div className="mt-5 border-t border-[#e8dfd2] pt-4 sm:mt-6 sm:pt-5">
+              {/* CARD BUTTONS */}
+              <div className="mt-4 grid grid-cols-2 gap-2">
+                <button
+                  type="button"
+                  onClick={openDetails}
+                  className="flex items-center justify-center gap-2 rounded-full border border-white/60 bg-white/10 px-3 py-3 text-[11px] font-bold text-white backdrop-blur-md transition hover:bg-white hover:text-[#082d19] sm:text-xs"
+                >
+                  View Full Package
+                  <span>↗</span>
+                </button>
 
                 <a
                   href={`https://wa.me/254112277671?text=${encodeURIComponent(
-                    `${t("safariPackages.whatsappMessage")} ${safariTitle}.`
+                    bookingMessage
                   )}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex w-full items-center justify-center gap-2 rounded-full bg-[#082d19] px-4 py-3 text-[11px] font-bold text-white transition-colors duration-300 hover:bg-[#0d4825] sm:py-3.5 sm:text-xs"
+                  className="flex items-center justify-center gap-2 rounded-full bg-[#dba33a] px-3 py-3 text-[11px] font-bold text-[#082d19] transition hover:bg-[#f3c45d] sm:text-xs"
                 >
-                  <span className="flex h-6 w-6 items-center justify-center rounded-full bg-white/10">
-                    💬
-                  </span>
-
-                  <span>{t("safariPackages.book")}</span>
-
-                  <span className="ml-auto text-base text-[#f3c45d]">→</span>
+                  Book Now
+                  <span>→</span>
                 </a>
-
-                <p className="mt-2 text-center text-[9px] leading-4 text-gray-400 sm:text-[10px]">
-                  {t("safariPackages.whatsappNote")}
-                </p>
-
               </div>
-
             </div>
           </article>
         );
       })}
-
     </div>
 
     {/* BOTTOM CTA */}
-    <div className="mt-8 overflow-hidden rounded-2xl bg-[#082d19] px-4 py-7 text-center sm:mt-10 sm:rounded-3xl sm:px-8 sm:py-10">
-
-      <p className="text-[9px] font-bold uppercase tracking-[0.22em] text-[#dba33a] sm:text-[10px] sm:tracking-[0.3em]">
+    <div className="mt-10 rounded-2xl bg-[#082d19] px-5 py-9 text-center sm:rounded-3xl sm:px-8 sm:py-12">
+      <p className="text-[10px] font-bold uppercase tracking-[0.25em] text-[#dba33a]">
         {t("safariPackages.bottomLabel")}
       </p>
 
-      <h3 className="mt-2 font-serif text-xl font-semibold text-white sm:text-3xl">
+      <h3 className="mt-3 font-serif text-2xl font-semibold text-white sm:text-3xl">
         {t("safariPackages.bottomTitle")}
       </h3>
 
-      <p className="mx-auto mt-2 max-w-xl text-[11px] leading-5 text-white/60 sm:mt-3 sm:text-xs sm:leading-6">
+      <p className="mx-auto mt-3 max-w-xl text-sm leading-6 text-white/65">
         {t("safariPackages.bottomDescription")}
       </p>
 
@@ -935,16 +992,435 @@ useEffect(() => {
         )}`}
         target="_blank"
         rel="noopener noreferrer"
-        className="mt-5 inline-flex items-center gap-2 rounded-full bg-[#dba33a] px-5 py-3 text-[11px] font-bold text-[#082d19] transition hover:bg-[#f0bd50] sm:px-6 sm:text-xs"
+        className="mt-6 inline-flex items-center gap-2 rounded-full bg-[#dba33a] px-6 py-3 text-xs font-bold text-[#082d19] transition hover:bg-[#f3c45d]"
       >
         {t("safariPackages.chatWhatsapp")}
         <span>→</span>
       </a>
+    </div>
+  </div>
 
+  {/* ======================================================
+      DETAILED SAFARI POPUP
+  ====================================================== */}
+  
+{/* ======================================================
+    PREMIUM SINGLE-PAGE SAFARI BOOKING POPUP
+====================================================== */}
+{selectedSafari && (
+  <div
+    className="fixed inset-0 z-[9999] flex items-center justify-center bg-[#020b06]/80 p-2 backdrop-blur-md sm:p-5 lg:p-8"
+    onClick={() => setSelectedSafari(null)}
+  >
+    <div
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="safari-modal-title"
+      className="relative flex max-h-[96dvh] w-full max-w-6xl flex-col overflow-hidden rounded-2xl border border-white/20 bg-[#fffdf8] shadow-[0_30px_100px_rgba(0,0,0,0.45)] sm:max-h-[92dvh] sm:rounded-[2rem]"
+      onClick={(event) => event.stopPropagation()}
+    >
+      {/* HERO IMAGE */}
+<div className="relative h-[250px] shrink-0 overflow-hidden bg-[#03160c] sm:h-[330px] lg:h-[360px]">
+  <img
+    src={selectedSafari.displayPoster || selectedSafari.image}
+    alt={selectedSafari.displayTitle}
+    className="absolute inset-0 h-full w-full object-contain object-center"
+  />
+
+  <div className="absolute inset-0 bg-gradient-to-r from-[#03160c]/35 via-transparent to-transparent pointer-events-none" />
+  <div className="absolute inset-0 bg-gradient-to-t from-[#03160c]/70 via-transparent to-black/10 pointer-events-none" />
+
+  {/* TOP BAR */}
+  <div className="absolute left-4 right-4 top-4 z-10 flex items-center justify-between sm:left-7 sm:right-7 sm:top-6">
+    <div className="flex items-center gap-2 rounded-full border border-white/20 bg-black/40 px-3 py-2 backdrop-blur-xl sm:px-4">
+      <span className="h-2 w-2 rounded-full bg-[#e7bb60]" />
+      <span className="text-[9px] font-bold uppercase tracking-[0.2em] text-white sm:text-[10px]">
+        Curated Safari Experience
+      </span>
     </div>
 
+    <button
+      type="button"
+      aria-label="Close package details"
+      onClick={() => setSelectedSafari(null)}
+      className="flex h-10 w-10 items-center justify-center rounded-full border border-white/30 bg-black/45 text-2xl text-white backdrop-blur-lg transition hover:rotate-90 hover:bg-[#dba33a] hover:text-[#082d19] sm:h-12 sm:w-12"
+    >
+      ×
+    </button>
   </div>
+
+        {/* HERO TEXT */}
+        <div className="absolute bottom-0 left-0 right-0 p-5 sm:p-8 lg:p-10">
+          <div className="max-w-3xl">
+            <div className="mb-3 flex flex-wrap gap-2">
+              <span className="rounded-full bg-[#dba33a] px-3 py-1.5 text-[9px] font-extrabold uppercase tracking-wider text-[#082d19]">
+                Featured Journey
+              </span>
+              <span className="rounded-full border border-white/30 bg-white/10 px-3 py-1.5 text-[9px] font-semibold text-white backdrop-blur-md">
+                {selectedSafari.displayDuration || "Duration on request"}
+              </span>
+            </div>
+
+            <p className="mb-2 text-[10px] font-bold uppercase tracking-[0.25em] text-[#f3c45d] sm:text-xs">
+              {selectedSafari.displayLocation}
+            </p>
+
+            <h2
+              id="safari-modal-title"
+              className="font-serif text-3xl font-semibold leading-tight tracking-tight text-white sm:text-5xl lg:text-6xl"
+            >
+              {selectedSafari.displayTitle}
+            </h2>
+
+            <p className="mt-3 flex items-start gap-2 text-xs leading-5 text-white/85 sm:text-sm">
+              <span className="text-[#f3c45d]">✦</span>
+              <span>
+                {selectedSafari.displayDeparture ||
+                  "Contact us to arrange your departure"}
+              </span>
+            </p>
+          </div>
+        </div>
+
+        {/* FLOATING PRICE */}
+        <div className="absolute bottom-6 right-7 hidden min-w-[190px] rounded-2xl border border-white/20 bg-[#082d19]/85 p-4 shadow-2xl backdrop-blur-xl lg:block">
+          <p className="text-[9px] font-bold uppercase tracking-[0.2em] text-white/60">
+            Package Price
+          </p>
+          <p className="mt-1 font-serif text-2xl font-bold text-[#f3c45d]">
+            {selectedSafari.prices?.citizens || "On request"}
+          </p>
+          <p className="mt-1 text-[10px] text-white/65">
+            {t("safariPackages.citizens")} · {t("safariPackages.perPerson")}
+          </p>
+        </div>
+      </div>
+
+      {/* QUICK INFORMATION BAR */}
+      <div className="shrink-0 border-b border-[#e9e2d6] bg-white">
+        <div className="grid grid-cols-3 divide-x divide-[#e9e2d6]">
+          <div className="px-2 py-4 text-center sm:px-5 sm:py-5">
+            <span className="text-lg">📍</span>
+            <p className="mt-1 text-[9px] font-bold uppercase tracking-wider text-[#a77b2c]">
+              Destination
+            </p>
+            <p className="mt-1 text-xs font-semibold text-[#082d19] sm:text-sm">
+              {selectedSafari.displayLocation || "On request"}
+            </p>
+          </div>
+
+          <div className="px-2 py-4 text-center sm:px-5 sm:py-5">
+            <span className="text-lg">◷</span>
+            <p className="mt-1 text-[9px] font-bold uppercase tracking-wider text-[#a77b2c]">
+              Duration
+            </p>
+            <p className="mt-1 text-xs font-semibold text-[#082d19] sm:text-sm">
+              {selectedSafari.displayDuration || "On request"}
+            </p>
+          </div>
+
+          <div className="px-2 py-4 text-center sm:px-5 sm:py-5">
+            <span className="text-lg">✧</span>
+            <p className="mt-1 text-[9px] font-bold uppercase tracking-wider text-[#a77b2c]">
+              Experience
+            </p>
+            <p className="mt-1 text-xs font-semibold text-[#082d19] sm:text-sm">
+              Tailored adventure
+            </p>
+          </div>
+        </div>
+      </div>
+
+      {/* SINGLE CONTINUOUS SCROLLABLE CONTENT */}
+      <div className="min-h-0 flex-1 overflow-y-auto overscroll-contain bg-[#fffdf8] px-4 py-6 sm:px-8 sm:py-8 lg:px-10">
+
+        {/* DESCRIPTION + PRICING */}
+        <div className="grid gap-7 lg:grid-cols-[1fr_300px]">
+
+          <section>
+            <div className="flex items-center gap-3">
+              <span className="h-px w-8 bg-[#b98b38]" />
+              <p className="text-[10px] font-extrabold uppercase tracking-[0.25em] text-[#a77b2c]">
+                Discover the Experience
+              </p>
+            </div>
+
+            <h3 className="mt-3 font-serif text-2xl font-semibold text-[#082d19] sm:text-3xl">
+              Discover something extraordinary.
+            </h3>
+
+            <p className="mt-4 whitespace-pre-line text-sm leading-7 text-gray-600">
+              {selectedSafari.displayDescription ||
+                `Experience ${selectedSafari.displayTitle} with a journey filled with memorable moments, remarkable scenery and authentic travel experiences. Contact our team for a personalised itinerary.`}
+            </p>
+
+            <div className="mt-5 rounded-2xl border border-[#e9e1d5] bg-white p-4 sm:p-5">
+              <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#a77b2c]">
+                Departure & Logistics
+              </p>
+              <p className="mt-2 text-sm leading-6 text-gray-700">
+                {selectedSafari.displayDeparture ||
+                  "Contact our team to arrange your departure."}
+              </p>
+            </div>
+          </section>
+
+          {/* PRICING CARD */}
+          <aside className="overflow-hidden rounded-2xl border border-[#e7dfd1] bg-white shadow-sm">
+            <div className="bg-[#082d19] p-5 sm:p-6">
+              <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-white/60">
+                Your Safari Investment
+              </p>
+              <p className="mt-2 break-words font-serif text-2xl font-bold text-[#f3c45d]">
+                {selectedSafari.prices?.citizens || "On request"}
+              </p>
+              <p className="mt-1 text-xs text-white/60">
+                {t("safariPackages.citizens")} · {t("safariPackages.perPerson")}
+              </p>
+            </div>
+
+            <div className="space-y-4 p-5">
+              <div>
+                <p className="text-[10px] font-bold uppercase tracking-wider text-gray-400">
+                  Non-resident price
+                </p>
+                <p className="mt-1 break-words font-serif text-xl font-semibold text-[#082d19]">
+                  {selectedSafari.prices?.nonResidents || "On request"}
+                </p>
+                <p className="mt-1 text-xs text-gray-500">
+                  {t("safariPackages.nonResidents")}
+                </p>
+              </div>
+
+              <div className="h-px bg-[#eee7dc]" />
+
+              <div>
+                <p className="text-[10px] font-bold uppercase tracking-wider text-gray-400">
+                  Accommodation
+                </p>
+                <p className="mt-2 text-sm leading-6 text-gray-600">
+                  {selectedSafari.displayAccommodation ||
+                    "Accommodation available on request."}
+                </p>
+              </div>
+
+              <p className="rounded-xl bg-[#f7f3e9] p-3 text-[11px] leading-5 text-gray-600">
+                Confirm availability, final arrangements and applicable charges
+                with our team before booking.
+              </p>
+            </div>
+          </aside>
+        </div>
+
+        {/* ACTIVITIES */}
+        <section className="mt-9 border-t border-[#e9e1d5] pt-7">
+          <div className="mb-5">
+            <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#a77b2c]">
+              Make It Memorable
+            </p>
+            <h3 className="mt-2 font-serif text-2xl font-semibold text-[#082d19] sm:text-3xl">
+              Activities & Trip Itinerary
+            </h3>
+            <p className="mt-2 text-sm leading-6 text-gray-500">
+              Explore the experiences planned for your journey.
+            </p>
+          </div>
+
+          {selectedSafari.displayActivities?.length > 0 ? (
+            <div className="grid gap-3 sm:grid-cols-2">
+              {selectedSafari.displayActivities.map((activity, i) => (
+                <div
+                  key={i}
+                  className="group flex gap-3 rounded-2xl border border-[#eae2d4] bg-white p-4 transition duration-300 hover:border-[#c6a15d] hover:shadow-md"
+                >
+                  <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#082d19] font-serif text-sm font-bold text-[#f3c45d] transition group-hover:bg-[#dba33a] group-hover:text-[#082d19]">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  <p className="text-sm leading-6 text-gray-600">
+                    {activity}
+                  </p>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <p className="rounded-xl bg-white p-4 text-sm text-gray-500">
+              Contact our team for the full itinerary and available activities.
+            </p>
+          )}
+        </section>
+
+        {/* ACCOMMODATION */}
+        <section className="mt-9 rounded-2xl bg-[#082d19] p-5 sm:p-7">
+          <div className="flex items-start gap-4">
+            <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-white/10 text-2xl">
+              🛖
+            </span>
+            <div>
+              <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#f3c45d]">
+                Rest & Recharge
+              </p>
+              <h3 className="mt-2 font-serif text-xl font-semibold text-white sm:text-2xl">
+                Accommodation Arrangements
+              </h3>
+              <p className="mt-3 whitespace-pre-line text-sm leading-7 text-white/75">
+                {selectedSafari.displayAccommodation ||
+                  "Contact us for accommodation options and availability."}
+              </p>
+            </div>
+          </div>
+        </section>
+
+        {/* INCLUSIONS AND EXCLUSIONS — SAME PAGE */}
+        <section className="mt-9 border-t border-[#e9e1d5] pt-7">
+          <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#a77b2c]">
+            Everything You Need to Know
+          </p>
+          <h3 className="mt-2 font-serif text-2xl font-semibold text-[#082d19] sm:text-3xl">
+            Package Inclusions & Exclusions
+          </h3>
+          <p className="mt-2 text-sm leading-6 text-gray-500">
+            Review what is covered and what you may need to budget for separately.
+          </p>
+
+          <div className="mt-6 grid gap-5 lg:grid-cols-2">
+
+            {/* INCLUDED */}
+            <div className="rounded-2xl border border-green-200 bg-[#f5faf3] p-5 sm:p-6">
+              <div className="flex items-center gap-3">
+                <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#dcebd8] text-lg font-bold text-[#23633b]">
+                  ✓
+                </span>
+                <div>
+                  <h4 className="font-serif text-xl font-semibold text-[#082d19]">
+                    What's Included
+                  </h4>
+                  <p className="mt-1 text-xs text-gray-500">
+                    Covered in this package
+                  </p>
+                </div>
+              </div>
+
+              <div className="mt-5 space-y-3">
+                {selectedSafari.displayIncluded?.length > 0 ? (
+                  selectedSafari.displayIncluded.map((item, i) => (
+                    <div key={i} className="flex items-start gap-3">
+                      <span className="mt-0.5 font-bold text-green-700">✓</span>
+                      <p className="text-sm leading-6 text-gray-700">{item}</p>
+                    </div>
+                  ))
+                ) : (
+                  <p className="text-sm leading-6 text-gray-600">
+                    Please confirm the package inclusions with our team.
+                  </p>
+                )}
+              </div>
+            </div>
+
+            {/* EXCLUDED */}
+            <div className="rounded-2xl border border-orange-200 bg-[#fff9f3] p-5 sm:p-6">
+              <div className="flex items-center gap-3">
+                <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#f8e7d7] text-lg font-bold text-[#a75d27]">
+                  ×
+                </span>
+                <div>
+                  <h4 className="font-serif text-xl font-semibold text-[#082d19]">
+                    What's Excluded
+                  </h4>
+                  <p className="mt-1 text-xs text-gray-500">
+                    Additional costs to consider
+                  </p>
+                </div>
+              </div>
+
+              <div className="mt-5 space-y-3">
+                {selectedSafari.displayExcluded?.length > 0 ? (
+                  selectedSafari.displayExcluded.map((item, i) => (
+                    <div key={i} className="flex items-start gap-3">
+                      <span className="mt-0.5 font-bold text-orange-700">×</span>
+                      <p className="text-sm leading-6 text-gray-700">{item}</p>
+                    </div>
+                  ))
+                ) : (
+                  <p className="text-sm leading-6 text-gray-600">
+                    Contact us to confirm exclusions and any optional extras.
+                  </p>
+                )}
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* CUSTOM TRIP CTA */}
+        <section className="mt-8 rounded-2xl border border-[#e7dfd1] bg-white p-5 sm:p-6">
+          <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#a77b2c]">
+            Your Adventure, Your Way
+          </p>
+          <h3 className="mt-2 font-serif text-xl font-semibold text-[#082d19]">
+            Need a personalised safari?
+          </h3>
+          <p className="mt-2 text-sm leading-6 text-gray-600">
+            Tell us your preferred travel dates, group size, accommodation
+            preferences and activities. Our team can help you plan your trip.
+          </p>
+        </section>
+      </div>
+
+      {/* STICKY BOOKING FOOTER */}
+      <div className="shrink-0 border-t border-[#e8e0d4] bg-white/95 px-3 py-3 backdrop-blur-xl sm:px-7 sm:py-4">
+        <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+          <div className="hidden min-w-0 sm:block">
+            <p className="truncate font-serif text-base font-semibold text-[#082d19]">
+              {selectedSafari.displayTitle}
+            </p>
+            <p className="mt-1 text-xs text-gray-500">
+              From{" "}
+              <span className="font-bold text-[#a77b2c]">
+                {selectedSafari.prices?.citizens || "Price on request"}
+              </span>
+              {" "}· Contact us to confirm availability
+            </p>
+          </div>
+
+          <div className="grid grid-cols-2 gap-2 sm:flex sm:shrink-0 sm:gap-3">
+            <a
+              href={`https://wa.me/254112277671?text=${encodeURIComponent(
+                `Hello! I am interested in booking ${selectedSafari.displayTitle}. Please share availability, payment details and the booking process.`
+              )}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center justify-center gap-2 rounded-full bg-[#082d19] px-4 py-3 text-xs font-bold text-white transition hover:bg-[#124b2d] sm:px-6 sm:text-sm"
+            >
+              <span>↗</span> Book This Safari
+            </a>
+
+            <a
+              href={`https://wa.me/254112277671?text=${encodeURIComponent(
+                `Hello! Please send me a detailed quotation for ${selectedSafari.displayTitle}, including pricing, availability, accommodation, itinerary, inclusions and exclusions.`
+              )}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center justify-center gap-2 rounded-full bg-[#dba33a] px-4 py-3 text-xs font-bold text-[#082d19] transition hover:bg-[#efc15b] sm:px-6 sm:text-sm"
+            >
+              Request a Quote <span>→</span>
+            </a>
+          </div>
+        </div>
+
+        <button
+          type="button"
+          onClick={() => setSelectedSafari(null)}
+          className="mt-2 w-full py-1 text-[10px] font-medium text-gray-400 transition hover:text-[#082d19] sm:hidden"
+        >
+          Close package details
+        </button>
+      </div>
+    </div>
+  </div>
+)}
+
 </section>
+
+
 
 
 {/* ================= PREMIUM SERVICES ================= */}
