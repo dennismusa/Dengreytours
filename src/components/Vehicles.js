@@ -1,6 +1,31 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable react-hooks/exhaustive-deps */
+
 /* eslint-disable no-undef */
-import React, { useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
+import {
+  ArrowRight,
+  ArrowUpRight,
+  Check,
+  ChevronLeft,
+  ChevronRight,
+  CircleCheck,
+  Clock3,
+  Fuel,
+  Gauge,
+  MapPin,
+  MessageCircle,
+  Search,
+  Settings2,
+  ShieldCheck,
+  Sparkles,
+  Users,
+  X,
+  Camera,
+  CarFront,
+  Star,
+} from "lucide-react";
 
 import image5 from "../assets/image5.jpg";
 import image6 from "../assets/image6.jpg";
@@ -9,22 +34,22 @@ import image0 from "../assets/image0.jpg";
 import cruiser1 from "../assets/cruiser1.jpg";
 import cruiser2 from "../assets/cruiser2.jpg";
 import safarivan from "../assets/safarivan.jpg";
-//import cruiser5 from "../assets/cruiser5.jpg";
 
 function FleetShowcase() {
   const [search, setSearch] = useState("");
   const [filter, setFilter] = useState("all");
   const [selectedVehicle, setSelectedVehicle] = useState(null);
+  const [activeImage, setActiveImage] = useState(0);
 
   const fleet = [
     {
       name: "Toyota Land Cruiser",
       image: cruiser1,
-      gallery: [image5, image5],
+      gallery: [cruiser1, image5, image6],
       seats: "7 Seats",
       type: "4x4 Safari Jeep",
-      price: " 270 ",
-      category: "4x4",
+      price: "270",
+      category: ["4x4", "luxury"],
       rating: 4.9,
       transmission: "Automatic",
       fuel: "Diesel",
@@ -37,15 +62,16 @@ function FleetShowcase() {
         "Cool Box",
         "Professional Guide",
       ],
+      highlight: "Premium Choice",
     },
     {
       name: "Safari Tour Van",
       image: safarivan,
-      gallery: [image6, image7],
+      gallery: [safarivan, image6, image7],
       seats: "9 Seats",
       type: "Tour Van",
-      price: "210 ",
-      category: "group",
+      price: "210",
+      category: ["group"],
       rating: 4.7,
       transmission: "Manual",
       fuel: "Diesel",
@@ -58,16 +84,16 @@ function FleetShowcase() {
         "Roof Hatch",
         "Group Friendly",
       ],
+      highlight: "Great for Groups",
     },
-    
     {
       name: "Extended Safari Van",
       image: cruiser2,
-      gallery: [image5, image5],
+      gallery: [cruiser2, image5, image7],
       seats: "10 Seats",
       type: "Group Tour Vehicle",
-      price: "270  ",
-      category: "group",
+      price: "270",
+      category: ["group"],
       rating: 4.6,
       transmission: "Manual",
       fuel: "Diesel",
@@ -80,609 +106,735 @@ function FleetShowcase() {
         "Safari Roof",
         "Group Packages",
       ],
+      highlight: "Extra Capacity",
     },
   ];
 
-  const filteredFleet = fleet.filter((v) => {
-    const matchesSearch = v.name
-      .toLowerCase()
-      .includes(search.toLowerCase());
+  const categories = [
+    { id: "all", label: "All Vehicles" },
+    { id: "4x4", label: "4x4 Safari" },
+    { id: "luxury", label: "Luxury" },
+    { id: "group", label: "Group Tours" },
+  ];
 
-    const matchesFilter =
-      filter === "all" || v.category === filter;
+  const filteredFleet = useMemo(() => {
+    return fleet.filter((vehicle) => {
+      const searchTerm = search.toLowerCase().trim();
 
-    return matchesSearch && matchesFilter;
-  });
+      const matchesSearch =
+        vehicle.name.toLowerCase().includes(searchTerm) ||
+        vehicle.type.toLowerCase().includes(searchTerm) ||
+        vehicle.location.toLowerCase().includes(searchTerm);
+
+      const matchesFilter =
+        filter === "all" || vehicle.category.includes(filter);
+
+      return matchesSearch && matchesFilter;
+    });
+  }, [search, filter]);
 
   const getWhatsAppLink = (vehicle) => {
-    const message = `Hello, I want to book the ${vehicle.name} (${vehicle.type}) for $${vehicle.price} per day. Please assist me.`;
+    const message = `Hello, I am interested in booking the ${vehicle.name} (${vehicle.type}) at $${vehicle.price} per day. Please share more details about availability and booking.`;
 
-    return `https://wa.me/+254112277671?text=${encodeURIComponent(
-      message
-    )}`;
+    return `https://wa.me/254112277671?text=${encodeURIComponent(message)}`;
   };
 
+  const openVehicle = (vehicle) => {
+    setSelectedVehicle(vehicle);
+    setActiveImage(0);
+  };
+
+  const closeVehicle = () => {
+    setSelectedVehicle(null);
+    setActiveImage(0);
+  };
+
+  const changeImage = (direction) => {
+    if (!selectedVehicle) return;
+
+    const gallery = selectedVehicle.gallery;
+    setActiveImage((current) =>
+      (current + direction + gallery.length) % gallery.length
+    );
+  };
+
+  useEffect(() => {
+    const handleKeyDown = (event) => {
+      if (event.key === "Escape") closeVehicle();
+      if (event.key === "ArrowRight") changeImage(1);
+      if (event.key === "ArrowLeft") changeImage(-1);
+    };
+
+    if (selectedVehicle) {
+      window.addEventListener("keydown", handleKeyDown);
+      document.body.style.overflow = "hidden";
+    }
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+      document.body.style.overflow = "auto";
+    };
+  }, [selectedVehicle]);
+
   return (
-    <div className="bg-white text-gray-900 overflow-hidden">
+    <div className="overflow-hidden bg-[#fbfaf7] text-[#17251d]">
 
-      {/* HERO */}
-      <section className="relative min-h-[75vh] flex items-center justify-center overflow-hidden">
+{/* HERO */}
+<section className="relative flex min-h-[420px] items-center overflow-hidden bg-[#071d13] sm:min-h-[470px] lg:min-h-[520px]">
 
-        {/* background */}
-        <div className="absolute inset-0">
-          <img
-            src={image0}
-            alt="Safari Fleet"
-            className="w-full h-full object-cover"
-          />
+  {/* Background Image */}
+  <div className="absolute inset-0">
+    <img
+      src={image0}
+      alt="Renlen Tours safari fleet"
+      className="h-full w-full object-cover"
+    />
+    <div className="absolute inset-0 bg-gradient-to-r from-[#061b11]/95 via-[#061b11]/75 to-[#061b11]/20" />
+    <div className="absolute inset-0 bg-gradient-to-t from-[#061b11]/70 via-transparent to-black/20" />
+  </div>
 
-          <div className="absolute inset-0 bg-black/70"></div>
-        </div>
+  {/* Decorative Circles */}
+  <div className="absolute -right-32 top-10 h-[400px] w-[400px] rounded-full border border-white/10" />
+  <div className="absolute -right-16 top-24 h-[280px] w-[280px] rounded-full border border-white/10" />
 
-        {/* glow */}
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[700px] h-[700px] bg-yellow-500/10 blur-3xl rounded-full"></div>
+  {/* Hero Content */}
+  <div className="relative z-10 mx-auto w-full max-w-7xl px-6 py-16 sm:px-10 sm:py-20 lg:px-12 lg:py-20">
+    <div className="max-w-4xl">
 
-        <div className="relative z-10 max-w-5xl mx-auto px-6 text-center text-white">
+      <div className="mb-5 inline-flex items-center gap-3 rounded-full border border-[#d4af37]/40 bg-white/5 px-5 py-2.5 backdrop-blur-md">
+        <span className="h-2 w-2 rounded-full bg-[#d4af37]" />
+        <span className="text-xs font-semibold uppercase tracking-[3px] text-[#e8c76a]">
+          Renlen Tours & Safaris
+        </span>
+      </div>
 
-          <p className="uppercase tracking-[6px] text-yellow-400 font-semibold mb-5">
-            Premium Safari Fleet
+      <h1 className="max-w-4xl text-4xl font-bold leading-[1.08] tracking-tight text-white sm:text-5xl md:text-6xl lg:text-7xl">
+        Your Journey.
+        <span className="mt-1 block font-light italic text-[#d4af37]">
+          Our Safari Fleet.
+        </span>
+      </h1>
+
+      <p className="mt-5 max-w-2xl text-sm leading-7 text-white/75 sm:mt-6 sm:text-base sm:leading-8 lg:text-lg">
+        Discover Kenya in comfort and style. Choose from our carefully
+        selected safari vehicles, built for memorable wildlife
+        experiences, scenic road trips and unforgettable adventures.
+      </p>
+
+      {/* Buttons */}
+      
+
+      {/* Fleet Statistics */}
+      <div className="mt-9 grid max-w-xl grid-cols-3 gap-4 border-t border-white/20 pt-5 sm:mt-10 sm:gap-6 sm:pt-6">
+        <div>
+          <p className="text-xl font-bold text-white sm:text-3xl">
+            4x4
           </p>
-
-          <h1 className="text-4xl sm:text-5xl md:text-7xl font-extrabold leading-tight mb-6">
-            Luxury Safari Vehicles For Every Adventure
-          </h1>
-
-          <p className="text-gray-300 text-lg md:text-xl leading-8 max-w-3xl mx-auto mb-10">
-            Explore Kenya’s breathtaking wildlife destinations with our modern,
-            reliable, and fully equipped safari vehicles designed for comfort,
-            safety, and unforgettable journeys.
+          <p className="mt-1 text-[10px] uppercase tracking-wider text-white/55 sm:text-xs">
+            Safari Ready
           </p>
-
-          <div className="flex flex-wrap justify-center gap-4">
-
-            <a
-              href="https://wa.me/+254112277671"
-              target="_blank"
-              rel="noreferrer"
-              className="bg-yellow-500 hover:bg-yellow-400 text-black px-8 py-4 rounded-2xl font-bold transition shadow-xl"
-            >
-              Book Safari Vehicle
-            </a>
-
-            <Link
-              to="/contact"
-              className="border border-white/40 hover:bg-white hover:text-black px-8 py-4 rounded-2xl transition"
-            >
-              Contact Us
-            </Link>
-
-          </div>
-
         </div>
-      </section>
 
-      {/* FILTERS */}
-      <section className="py-14 px-4 sm:px-6 md:px-8 bg-gray-50 border-b">
-
-        <div className="max-w-7xl mx-auto flex flex-col lg:flex-row gap-6 justify-between items-center">
-
-          {/* search */}
-          <div className="w-full lg:w-[350px]">
-            <input
-              type="text"
-              placeholder="Search safari vehicles..."
-              className="w-full px-5 py-4 rounded-2xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-yellow-500 bg-white shadow-sm"
-              onChange={(e) => setSearch(e.target.value)}
-            />
-          </div>
-
-          {/* filters */}
-          <div className="flex flex-wrap gap-3 justify-center">
-
-            {["all", "4x4", "luxury", "group"].map((cat) => (
-              <button
-                key={cat}
-                onClick={() => setFilter(cat)}
-                className={`px-6 py-3 rounded-full font-semibold transition duration-300 ${
-                  filter === cat
-                    ? "bg-yellow-500 text-black shadow-lg"
-                    : "bg-white border border-gray-200 hover:border-yellow-500"
-                }`}
-              >
-                {cat.toUpperCase()}
-              </button>
-            ))}
-
-          </div>
-
+        <div>
+          <p className="text-xl font-bold text-white sm:text-3xl">
+            7–10
+          </p>
+          <p className="mt-1 text-[10px] uppercase tracking-wider text-white/55 sm:text-xs">
+            Passenger Seats
+          </p>
         </div>
-      </section>
 
-      {/* VEHICLE GRID */}
-      <section className="py-24 px-4 sm:px-6 md:px-8">
+        <div>
+          <p className="text-xl font-bold text-white sm:text-3xl">
+            Kenya
+          </p>
+          <p className="mt-1 text-[10px] uppercase tracking-wider text-white/55 sm:text-xs">
+            Safari Routes
+          </p>
+        </div>
+      </div>
 
-        <div className="max-w-7xl mx-auto">
+    </div>
+  </div>
 
-          <div className="text-center mb-16">
+  {/* Bottom Label */}
+  <div className="absolute bottom-6 right-10 hidden items-center gap-3 text-xs uppercase tracking-[3px] text-white/60 lg:flex">
+    <span className="h-px w-12 bg-[#d4af37]" />
+    Explore our collection
+  </div>
+</section>
 
-            <p className="uppercase tracking-[6px] text-yellow-500 font-semibold mb-4">
-              Safari Collection
+
+      {/* INTRODUCTION */}
+      <section className="relative bg-white px-6 py-20 sm:px-10 lg:px-12">
+        <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[1fr_0.8fr] lg:items-end">
+          <div>
+            <p className="mb-5 text-xs font-bold uppercase tracking-[4px] text-[#a88727]">
+              Travel with confidence
             </p>
-
-            <h2 className="text-4xl md:text-5xl font-bold mb-5">
-              Explore Our Premium Fleet
+            <h2 className="max-w-2xl text-4xl font-bold leading-tight tracking-tight text-[#123522] sm:text-5xl">
+              The right vehicle makes every journey better.
             </h2>
-
-            <p className="text-gray-600 text-lg max-w-3xl mx-auto leading-8">
-              From luxury Land Cruisers to group safari vans, we provide the
-              perfect vehicle for every safari experience across Kenya.
-            </p>
-
           </div>
 
-          {filteredFleet.length === 0 ? (
-            <div className="text-center py-20">
-              <h3 className="text-2xl font-bold text-gray-700 mb-3">
-                No Vehicles Found
-              </h3>
+          <div>
+            <p className="text-base leading-8 text-gray-600">
+              Whether you are planning a private wildlife safari, a family
+              getaway or a group adventure, find a vehicle that matches your
+              journey. Explore our fleet and choose your ideal travel
+              companion.
+            </p>
+          </div>
+        </div>
 
-              <p className="text-gray-500">
-                Try another search or filter option.
+        <div className="mx-auto mt-14 grid max-w-7xl grid-cols-2 gap-4 border-t border-gray-200 pt-8 md:grid-cols-4">
+          {[
+            { icon: ShieldCheck, title: "Reliable Fleet", text: "Travel with confidence" },
+            { icon: Users, title: "Group Friendly", text: "Space for your people" },
+            { icon: Camera, title: "Safari Ready", text: "Made for game viewing" },
+            { icon: MapPin, title: "Kenya Routes", text: "Explore iconic destinations" },
+          ].map((item) => {
+            const Icon = item.icon;
+            return (
+              <div key={item.title} className="flex items-start gap-3 py-3">
+                <div className="rounded-xl bg-[#edf3ed] p-3 text-[#1b5835]">
+                  <Icon size={21} />
+                </div>
+                <div>
+                  <h3 className="font-bold text-[#173b27]">{item.title}</h3>
+                  <p className="mt-1 text-xs text-gray-500">{item.text}</p>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </section>
+
+      {/* FLEET COLLECTION */}
+      <section className="bg-[#f5f5ef] px-6 py-24 sm:px-10 lg:px-12">
+        <div className="mx-auto max-w-7xl">
+
+          <div className="mb-12 flex flex-col justify-between gap-8 lg:flex-row lg:items-end">
+            <div className="max-w-2xl">
+              <p className="mb-4 text-xs font-bold uppercase tracking-[4px] text-[#a88727]">
+                The collection
+              </p>
+              <h2 className="text-4xl font-bold tracking-tight text-[#123522] sm:text-5xl">
+                Find your perfect
+                <span className="block font-light italic text-[#a88727]">
+                  safari companion.
+                </span>
+              </h2>
+              <p className="mt-5 max-w-xl leading-8 text-gray-600">
+                Explore our range of safari vehicles, each selected to make
+                your journey comfortable and memorable.
               </p>
             </div>
+
+            <div className="flex items-center gap-3 text-sm text-gray-500">
+              <CarFront size={20} className="text-[#a88727]" />
+              <span>{filteredFleet.length} vehicles available</span>
+            </div>
+          </div>
+
+          {/* SEARCH AND FILTER */}
+    
+
+          {/* VEHICLE CARDS */}
+          {filteredFleet.length === 0 ? (
+            <div className="rounded-3xl border border-gray-200 bg-white px-6 py-20 text-center">
+              <Search size={35} className="mx-auto mb-5 text-gray-400" />
+              <h3 className="text-2xl font-bold text-[#123522]">
+                No vehicles found
+              </h3>
+              <p className="mt-3 text-gray-500">
+                Try a different search or category.
+              </p>
+              <button
+                onClick={() => {
+                  setSearch("");
+                  setFilter("all");
+                }}
+                className="mt-6 font-semibold text-[#a88727] hover:underline"
+              >
+                Clear filters
+              </button>
+            </div>
           ) : (
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-10">
-
-              {filteredFleet.map((item, index) => (
-                <div
-                  key={index}
-                  className="group bg-white rounded-3xl overflow-hidden border border-gray-100 shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2"
+            <div className="grid gap-8 md:grid-cols-2 xl:grid-cols-3">
+              {filteredFleet.map((item) => (
+                <article
+                  key={item.name}
+                  className="group overflow-hidden rounded-2xl border border-gray-200/80 bg-white shadow-sm transition duration-500 hover:-translate-y-2 hover:shadow-2xl"
                 >
-
-                  {/* image */}
-                  <div className="relative overflow-hidden h-80">
-
+                  <div className="relative h-[290px] overflow-hidden">
                     <img
                       src={item.image}
                       alt={item.name}
-                      className="w-full h-full object-cover group-hover:scale-110 transition duration-700"
+                      loading="lazy"
+                      className="h-full w-full object-cover transition duration-700 group-hover:scale-110"
                     />
 
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#071d13]/90 via-transparent to-black/10" />
 
-                    <div className="absolute top-4 left-4 bg-yellow-500 text-black text-xs font-bold px-3 py-1 rounded-full">
-                      {item.category.toUpperCase()}
+                    <div className="absolute left-5 top-5 rounded-full border border-white/20 bg-[#0c2b1b]/85 px-4 py-2 text-[10px] font-bold uppercase tracking-[2px] text-[#e8c76a] backdrop-blur-md">
+                      {item.highlight}
                     </div>
 
-                    <div className="absolute top-4 right-4 bg-black/70 text-white text-xs px-3 py-1 rounded-full">
-                      ⭐ {item.rating}
+                    <div className="absolute right-5 top-5 flex items-center gap-1 rounded-full bg-white/95 px-3 py-2 text-xs font-bold text-[#173b27]">
+                      <Star size={13} className="fill-[#d4af37] text-[#d4af37]" />
+                      {item.rating}
                     </div>
 
-                    <div className="absolute bottom-5 left-5 text-white">
-                      <h3 className="text-2xl font-bold">
-                        {item.name}
-                      </h3>
-
-                      <p className="text-sm text-gray-200">
+                    <div className="absolute bottom-5 left-6 right-6 text-white">
+                      <p className="mb-2 text-[10px] font-semibold uppercase tracking-[3px] text-[#e8c76a]">
                         {item.type}
                       </p>
+                      <h3 className="text-2xl font-bold">{item.name}</h3>
                     </div>
-
                   </div>
 
-                  {/* content */}
                   <div className="p-6">
-
-                    <div className="grid grid-cols-2 gap-4 mb-5">
-
-                      <div className="bg-gray-50 rounded-xl p-4">
-                        <p className="text-sm text-gray-500 mb-1">
-                          Seats
-                        </p>
-
-                        <h4 className="font-bold">
-                          {item.seats}
-                        </h4>
-                      </div>
-
-                      <div className="bg-gray-50 rounded-xl p-4">
-                        <p className="text-sm text-gray-500 mb-1">
-                          Transmission
-                        </p>
-
-                        <h4 className="font-bold">
-                          {item.transmission}
-                        </h4>
-                      </div>
-
+                    <div className="mb-6 grid grid-cols-2 gap-3">
+                      {[
+                        { icon: Users, label: "Capacity", value: item.seats },
+                        { icon: Settings2, label: "Transmission", value: item.transmission },
+                        { icon: Fuel, label: "Fuel type", value: item.fuel },
+                        { icon: MapPin, label: "Coverage", value: item.location },
+                      ].map((detail) => {
+                        const Icon = detail.icon;
+                        return (
+                          <div
+                            key={detail.label}
+                            className="flex items-start gap-3 rounded-xl bg-[#f6f7f3] p-3"
+                          >
+                            <Icon size={17} className="mt-0.5 shrink-0 text-[#a88727]" />
+                            <div className="min-w-0">
+                              <p className="text-[10px] uppercase tracking-wider text-gray-400">
+                                {detail.label}
+                              </p>
+                              <p className="mt-1 truncate text-xs font-bold text-[#183c28]">
+                                {detail.value}
+                              </p>
+                            </div>
+                          </div>
+                        );
+                      })}
                     </div>
 
-                    <p className="text-gray-600 leading-7 mb-6">
+                    <p className="mb-6 min-h-[72px] text-sm leading-7 text-gray-500">
                       {item.description}
                     </p>
 
-                    {/* features */}
-                    <div className="flex flex-wrap gap-2 mb-6">
-
-                      {item.features.map((feature, i) => (
+                    <div className="mb-6 flex flex-wrap gap-2">
+                      {item.features.slice(0, 3).map((feature) => (
                         <span
-                          key={i}
-                          className="text-xs bg-yellow-50 text-yellow-700 border border-yellow-100 px-3 py-1 rounded-full"
+                          key={feature}
+                          className="rounded-full border border-[#e7e8df] bg-[#fbfaf7] px-3 py-1.5 text-[10px] font-medium text-gray-600"
                         >
                           {feature}
                         </span>
                       ))}
-
                     </div>
 
-                    {/* footer */}
-                    <div className="flex items-center justify-between mb-6">
-
+                    <div className="flex items-end justify-between border-t border-gray-100 pt-5">
                       <div>
-                        <p className="text-sm text-gray-500">
-                          Starting From
+                        <p className="text-[10px] font-semibold uppercase tracking-[2px] text-gray-400">
+                          Starting from
                         </p>
-
-                        <h3 className="text-3xl font-bold text-yellow-600">
+                        <p className="mt-1 text-3xl font-bold tracking-tight text-[#123522]">
                           ${item.price}
-                          <span className="text-sm text-gray-500">
-                            {" "}
+                          <span className="ml-1 text-xs font-medium text-gray-400">
                             / day
                           </span>
-                        </h3>
+                        </p>
                       </div>
-
+                      <span className="rounded-lg bg-[#f4f0e2] px-3 py-2 text-[10px] font-bold uppercase tracking-wider text-[#98751e]">
+                        {item.category[0]}
+                      </span>
                     </div>
 
-                    {/* buttons */}
-                    <div className="flex flex-col gap-3">
-
+                    <div className="mt-6 grid grid-cols-2 gap-3">
                       <button
-                        onClick={() => setSelectedVehicle(item)}
-                        className="w-full bg-black hover:bg-yellow-500 hover:text-black text-white py-3 rounded-xl font-semibold transition"
+                        onClick={() => openVehicle(item)}
+                        className="flex items-center justify-center gap-2 rounded-xl bg-[#123522] px-3 py-3.5 text-xs font-bold text-white transition hover:bg-[#1c5033]"
                       >
-                        Explore Vehicle
+                        View Details
+                        <ArrowUpRight size={15} />
                       </button>
 
                       <a
                         href={getWhatsAppLink(item)}
                         target="_blank"
                         rel="noreferrer"
-                        className="w-full bg-green-600 hover:bg-green-700 text-white text-center py-3 rounded-xl font-semibold transition"
+                        className="flex items-center justify-center gap-2 rounded-xl bg-[#e8c76a] px-3 py-3.5 text-xs font-bold text-[#173b27] transition hover:bg-[#d4af37]"
                       >
-                        Book on WhatsApp
+                        <MessageCircle size={15} />
+                        Book Now
                       </a>
-
                     </div>
-
                   </div>
-                </div>
+                </article>
               ))}
-
             </div>
           )}
-
         </div>
       </section>
 
       {/* VEHICLE COMPARISON */}
-
-<section className="py-24 bg-gray-50">
-
-<div className="max-w-6xl mx-auto px-6">
-
-<h2 className="text-4xl font-bold text-center mb-14">
-Compare Our Safari Vehicles
-</h2>
-
-<div className="overflow-x-auto bg-white rounded-3xl shadow-lg">
-
-<table className="w-full">
-
-<thead className="bg-emerald-500 text-white">
-
-<tr>
-
-<th className="p-5">Feature</th>
-<th>Safari Van</th>
-<th>Land Cruiser</th>
-
-</tr>
-
-</thead>
-
-<tbody>
-
-<tr className="border-b">
-<td className="p-5">Seats</td>
-<td>8–10</td>
-<td>6–7</td>
-</tr>
-
-<tr className="border-b">
-<td className="p-5">4x4 Capability</td>
-<td>Moderate</td>
-<td>Full</td>
-</tr>
-
-<tr className="border-b">
-<td className="p-5">Best For</td>
-<td>Families & Groups</td>
-<td>Wildlife Safaris</td>
-</tr>
-
-<tr>
-<td className="p-5">Photography</td>
-<td>Good</td>
-<td>Excellent</td>
-</tr>
-
-</tbody>
-
-</table>
-
-</div>
-
-</div>
-
-</section>
-
-      {/* WHY CHOOSE US */}
-     <section className="relative py-28 px-4 sm:px-6 md:px-10 overflow-hidden bg-gradient-to-b from-white via-gray-50 to-white">
-
-  {/* Background Glow */}
-  <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[700px] h-[700px] bg-yellow-400/10 blur-[140px] rounded-full"></div>
-  <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-yellow-300/10 blur-[120px] rounded-full"></div>
-
-  <div className="relative max-w-7xl mx-auto text-center">
-
-    {/* Title */}
-    <p className="uppercase tracking-[8px] text-yellow-500 font-semibold mb-5">
-      Why Choose Us
-    </p>
-
-    <h2 className="text-4xl md:text-6xl font-extrabold mb-6">
-      Trusted Safari Transport Experts
-    </h2>
-
-    <p className="text-gray-600 max-w-3xl mx-auto text-lg leading-8 mb-20">
-      We deliver unforgettable safari experiences through professional drivers,
-      modern 4x4 vehicles, and deep knowledge of Kenya’s most iconic wildlife destinations.
-    </p>
-
-    {/* Cards */}
-    <div className="grid md:grid-cols-3 gap-10">
-
-      {/* CARD 1 */}
-      <div className="group relative p-10 rounded-3xl bg-white/70 backdrop-blur-xl border border-white/40 shadow-lg hover:shadow-2xl hover:-translate-y-2 transition duration-500 overflow-hidden">
-
-        <div className="absolute inset-0 bg-gradient-to-br from-yellow-100/40 to-transparent opacity-0 group-hover:opacity-100 transition"></div>
-
-        <div className="relative z-10">
-
-          <div className="text-6xl mb-6 group-hover:scale-110 transition duration-300">
-            🚙
+      <section className="bg-white px-6 py-24 sm:px-10 lg:px-12">
+        <div className="mx-auto max-w-7xl">
+          <div className="mb-12 text-center">
+            <p className="mb-4 text-xs font-bold uppercase tracking-[4px] text-[#a88727]">
+              Make the right choice
+            </p>
+            <h2 className="text-4xl font-bold tracking-tight text-[#123522] sm:text-5xl">
+              Compare Our Vehicles
+            </h2>
+            <p className="mx-auto mt-5 max-w-2xl leading-8 text-gray-500">
+              Find the right balance of space, capability and comfort for your
+              next safari.
+            </p>
           </div>
 
-          <h3 className="text-2xl font-bold mb-4">
-            Modern Safari Fleet
-          </h3>
-
-          <p className="text-gray-600 leading-8">
-            Clean, powerful 4x4 safari vehicles designed for comfort,
-            safety, and off-road adventure across Kenya’s national parks.
-          </p>
-
-        </div>
-      </div>
-
-      {/* CARD 2 */}
-      <div className="group relative p-10 rounded-3xl bg-white/70 backdrop-blur-xl border border-white/40 shadow-lg hover:shadow-2xl hover:-translate-y-2 transition duration-500 overflow-hidden">
-
-        <div className="absolute inset-0 bg-gradient-to-br from-yellow-100/40 to-transparent opacity-0 group-hover:opacity-100 transition"></div>
-
-        <div className="relative z-10">
-
-          <div className="text-6xl mb-6 group-hover:scale-110 transition duration-300">
-            🦁
+          <div className="overflow-hidden rounded-2xl border border-gray-200 shadow-sm">
+            <div className="overflow-x-auto">
+              <table className="w-full min-w-[650px] border-collapse text-left">
+                <thead>
+                  <tr className="bg-[#123522] text-white">
+                    <th className="p-6 text-xs font-bold uppercase tracking-wider text-[#e8c76a]">
+                      Vehicle Details
+                    </th>
+                    <th className="p-6 text-sm font-bold">
+                      Safari Van
+                    </th>
+                    <th className="bg-[#1b4930] p-6 text-sm font-bold">
+                      Land Cruiser
+                      <span className="ml-2 rounded-full bg-[#d4af37] px-2 py-1 text-[9px] text-[#123522]">
+                        4x4
+                      </span>
+                    </th>
+                    <th className="p-6 text-sm font-bold">
+                      Extended Van
+                    </th>
+                  </tr>
+                </thead>
+                <tbody className="text-sm">
+                  {[
+                    ["Passenger Capacity", "9 Seats", "7 Seats", "10 Seats"],
+                    ["4x4 Capability", "Moderate", "Full", "Moderate"],
+                    ["Best For", "Families & Groups", "Wildlife Safaris", "Large Groups"],
+                    ["Photography", "Good", "Excellent", "Good"],
+                    ["Transmission", "Manual", "Automatic", "Manual"],
+                    ["Starting Price", "$210/day", "$270/day", "$270/day"],
+                  ].map((row, index) => (
+                    <tr
+                      key={row[0]}
+                      className={`border-t border-gray-100 ${
+                        index % 2 === 0 ? "bg-[#fbfaf7]" : "bg-white"
+                      }`}
+                    >
+                      <td className="p-6 font-bold text-[#183c28]">
+                        {row[0]}
+                      </td>
+                      <td className="p-6 text-gray-600">{row[1]}</td>
+                      <td className="bg-[#f5f7f1] p-6 font-semibold text-[#123522]">
+                        {row[2]}
+                      </td>
+                      <td className="p-6 text-gray-600">{row[3]}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
           </div>
-
-          <h3 className="text-2xl font-bold mb-4">
-            Local Safari Experts
-          </h3>
-
-          <p className="text-gray-600 leading-8">
-            Experienced guides with deep knowledge of wildlife behavior,
-            migration routes, and hidden game-viewing spots.
+          <p className="mt-4 text-xs text-gray-400">
+            Vehicle specifications and rates are indicative. Confirm details
+            and availability when booking.
           </p>
-
-        </div>
-      </div>
-
-      {/* CARD 3 */}
-      <div className="group relative p-10 rounded-3xl bg-white/70 backdrop-blur-xl border border-white/40 shadow-lg hover:shadow-2xl hover:-translate-y-2 transition duration-500 overflow-hidden">
-
-        <div className="absolute inset-0 bg-gradient-to-br from-yellow-100/40 to-transparent opacity-0 group-hover:opacity-100 transition"></div>
-
-        <div className="relative z-10">
-
-          <div className="text-6xl mb-6 group-hover:scale-110 transition duration-300">
-            ⭐
-          </div>
-
-          <h3 className="text-2xl font-bold mb-4">
-            Premium Experience
-          </h3>
-
-          <p className="text-gray-600 leading-8">
-            Smooth booking process, reliable service, and unforgettable safari
-            journeys tailored to your travel style and budget.
-          </p>
-
-        </div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-      {/* CTA */}
-      <section className="relative py-24 px-6 bg-black text-white text-center overflow-hidden">
-
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(255,215,0,0.15),transparent_60%)]"></div>
-
-        <div className="relative max-w-4xl mx-auto">
-
-          <h2 className="text-4xl md:text-6xl font-bold mb-6">
-            Ready For Your Next Safari?
-          </h2>
-
-          <p className="text-gray-300 text-lg leading-8 mb-10">
-            Book your safari vehicle today and experience Kenya’s wildlife in
-            comfort, safety, and style.
-          </p>
-
-          <a
-            href="https://wa.me/+254112277671"
-            target="_blank"
-            rel="noreferrer"
-            className="inline-block bg-yellow-500 hover:bg-yellow-400 text-black font-bold px-10 py-4 rounded-2xl transition shadow-lg"
-          >
-            Start Booking
-          </a>
-
         </div>
       </section>
 
+      {/* WHY CHOOSE US */}
+      <section className="relative overflow-hidden bg-[#092619] px-6 py-24 text-white sm:px-10 lg:px-12">
+        <div className="absolute -right-40 -top-40 h-[550px] w-[550px] rounded-full border border-white/5" />
+        <div className="absolute -right-20 -top-20 h-[350px] w-[350px] rounded-full border border-white/5" />
 
+        <div className="relative mx-auto max-w-7xl">
+          <div className="mx-auto mb-16 max-w-3xl text-center">
+            <p className="mb-5 text-xs font-bold uppercase tracking-[4px] text-[#d4af37]">
+              The Renlen Difference
+            </p>
+            <h2 className="text-4xl font-bold leading-tight sm:text-5xl">
+              More than transport.
+              <span className="block font-light italic text-[#d4af37]">
+                A better safari experience.
+              </span>
+            </h2>
+            <p className="mt-6 leading-8 text-white/60">
+              Every great safari begins with the right journey. We focus on
+              comfort, dependable service and vehicles suited to your
+              adventure.
+            </p>
+          </div>
 
-      
+          <div className="grid gap-6 md:grid-cols-3">
+            {[
+              {
+                icon: CarFront,
+                number: "01",
+                title: "A Fleet for Every Journey",
+                description:
+                  "From capable 4x4 Land Cruisers to spacious safari vans, choose a vehicle that suits your travel plans.",
+              },
+              {
+                icon: ShieldCheck,
+                number: "02",
+                title: "Comfort & Confidence",
+                description:
+                  "Enjoy a comfortable travel experience with vehicles selected for safari journeys and group adventures.",
+              },
+              {
+                icon: Sparkles,
+                number: "03",
+                title: "Personalised Service",
+                description:
+                  "We help you find the right vehicle and make arrangements around your destination and travel needs.",
+              },
+            ].map((item) => {
+              const Icon = item.icon;
+              return (
+                <div
+                  key={item.number}
+                  className="group rounded-2xl border border-white/10 bg-white/[0.04] p-9 transition duration-500 hover:-translate-y-2 hover:border-[#d4af37]/50 hover:bg-white/[0.07]"
+                >
+                  <div className="mb-10 flex items-center justify-between">
+                    <div className="rounded-xl bg-[#d4af37]/10 p-4 text-[#d4af37] transition group-hover:bg-[#d4af37] group-hover:text-[#092619]">
+                      <Icon size={27} />
+                    </div>
+                    <span className="text-sm font-semibold tracking-[3px] text-white/25">
+                      {item.number}
+                    </span>
+                  </div>
+                  <h3 className="mb-4 text-xl font-bold">{item.title}</h3>
+                  <p className="text-sm leading-8 text-white/55">
+                    {item.description}
+                  </p>
+                  <div className="mt-8 h-px w-12 bg-[#d4af37] transition-all duration-500 group-hover:w-full" />
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
 
-      {/* MODAL */}
-      {selectedVehicle && (
-        <div className="fixed inset-0 z-50 bg-black/80 flex items-center justify-center p-4">
+      {/* BOOKING CTA */}
+      <section className="relative overflow-hidden bg-[#f2efe5] px-6 py-24 sm:px-10 lg:px-12">
+        <div className="absolute -right-24 -top-24 h-96 w-96 rounded-full border border-[#c7b77e]/30" />
+        <div className="absolute -right-10 -top-10 h-64 w-64 rounded-full border border-[#c7b77e]/30" />
 
-          <div className="bg-white max-w-5xl w-full rounded-3xl overflow-hidden relative animate-fadeIn max-h-[95vh] overflow-y-auto">
+        <div className="relative mx-auto flex max-w-7xl flex-col items-center justify-between gap-10 text-center lg:flex-row lg:text-left">
+          <div className="max-w-2xl">
+            <p className="mb-5 text-xs font-bold uppercase tracking-[4px] text-[#a88727]">
+              Your adventure awaits
+            </p>
+            <h2 className="text-4xl font-bold leading-tight text-[#123522] sm:text-5xl">
+              Ready to explore Kenya?
+            </h2>
+            <p className="mt-6 max-w-xl leading-8 text-gray-600">
+              Let us help you choose the ideal safari vehicle for your next
+              adventure. Get in touch with our team and start planning your
+              journey.
+            </p>
+          </div>
 
-            {/* close */}
-            <button
-              onClick={() => setSelectedVehicle(null)}
-              className="absolute top-5 right-5 z-20 bg-black text-white w-10 h-10 rounded-full"
+          <div className="flex w-full flex-col gap-3 sm:w-auto sm:flex-row">
+            <a
+              href="https://wa.me/254112277671"
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center justify-center gap-3 rounded-xl bg-[#123522] px-8 py-4 font-bold text-white shadow-lg transition hover:bg-[#1c5033]"
             >
-              ✕
+              <MessageCircle size={19} />
+              Start Booking
+            </a>
+            <Link
+              to="/contact"
+              className="inline-flex items-center justify-center gap-3 rounded-xl border border-[#123522]/20 px-8 py-4 font-bold text-[#123522] transition hover:bg-white"
+            >
+              Contact Us
+              <ArrowRight size={18} />
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* VEHICLE DETAILS MODAL */}
+      {selectedVehicle && (
+        <div
+          className="fixed inset-0 z-[100] flex items-center justify-center bg-[#04150c]/90 p-3 backdrop-blur-sm sm:p-6"
+          onClick={closeVehicle}
+        >
+          <div
+            className="relative max-h-[94vh] w-full max-w-6xl overflow-y-auto rounded-2xl bg-white shadow-2xl"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button
+              onClick={closeVehicle}
+              aria-label="Close vehicle details"
+              className="absolute right-4 top-4 z-20 rounded-full bg-black/70 p-3 text-white transition hover:bg-[#d4af37] hover:text-[#123522]"
+            >
+              <X size={19} />
             </button>
 
             <div className="grid lg:grid-cols-2">
-
-              {/* image */}
-              <div className="h-full">
+              {/* GALLERY */}
+              <div className="relative min-h-[320px] bg-[#092619] lg:min-h-[650px]">
                 <img
-                  src={selectedVehicle.image}
-                  alt={selectedVehicle.name}
-                  className="w-full h-full object-cover lg:min-h-[600px]"
+                  src={selectedVehicle.gallery[activeImage]}
+                  alt={`${selectedVehicle.name} gallery ${activeImage + 1}`}
+                  className="absolute inset-0 h-full w-full object-cover"
                 />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-black/10" />
+
+                <div className="absolute bottom-6 left-6 right-6 flex items-center justify-between">
+                  <span className="rounded-full border border-white/20 bg-black/40 px-4 py-2 text-xs font-semibold text-white backdrop-blur-md">
+                    <Camera size={14} className="mr-2 inline" />
+                    {activeImage + 1} / {selectedVehicle.gallery.length}
+                  </span>
+
+                  <div className="flex gap-2">
+                    <button
+                      onClick={() => changeImage(-1)}
+                      aria-label="Previous image"
+                      className="rounded-full bg-white/90 p-3 text-[#123522] transition hover:bg-[#d4af37]"
+                    >
+                      <ChevronLeft size={19} />
+                    </button>
+                    <button
+                      onClick={() => changeImage(1)}
+                      aria-label="Next image"
+                      className="rounded-full bg-white/90 p-3 text-[#123522] transition hover:bg-[#d4af37]"
+                    >
+                      <ChevronRight size={19} />
+                    </button>
+                  </div>
+                </div>
+
+                <div className="absolute bottom-24 left-6 flex gap-2">
+                  {selectedVehicle.gallery.map((image, index) => (
+                    <button
+                      key={`${image}-${index}`}
+                      onClick={() => setActiveImage(index)}
+                      aria-label={`View image ${index + 1}`}
+                      className={`h-2 rounded-full transition-all ${
+                        activeImage === index
+                          ? "w-8 bg-[#d4af37]"
+                          : "w-2 bg-white/70"
+                      }`}
+                    />
+                  ))}
+                </div>
               </div>
 
-              {/* content */}
-              <div className="p-8 md:p-10">
-
-                <p className="uppercase tracking-[4px] text-yellow-500 font-semibold mb-3">
-                  Premium Safari Vehicle
+              {/* DETAILS */}
+              <div className="p-7 sm:p-10 lg:p-12">
+                <p className="mb-4 text-xs font-bold uppercase tracking-[4px] text-[#a88727]">
+                  Vehicle Details
                 </p>
 
-                <h2 className="text-4xl font-bold mb-5">
+                <div className="mb-4 flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-[#a88727]">
+                  <Star size={14} className="fill-[#d4af37]" />
+                  {selectedVehicle.rating} Vehicle Rating
+                </div>
+
+                <h2 className="text-3xl font-bold leading-tight text-[#123522] sm:text-4xl">
                   {selectedVehicle.name}
                 </h2>
 
-                <p className="text-gray-600 leading-8 mb-8">
+                <p className="mt-2 text-sm font-medium text-gray-400">
+                  {selectedVehicle.type}
+                </p>
+
+                <p className="mt-7 text-sm leading-8 text-gray-600">
                   {selectedVehicle.description}
                 </p>
 
-                <div className="grid grid-cols-2 gap-5 mb-8">
-
-                  <div className="bg-gray-100 rounded-2xl p-5">
-                    <p className="text-gray-500 text-sm mb-1">
-                      Seats
-                    </p>
-
-                    <h3 className="font-bold text-lg">
-                      {selectedVehicle.seats}
-                    </h3>
-                  </div>
-
-                  <div className="bg-gray-100 rounded-2xl p-5">
-                    <p className="text-gray-500 text-sm mb-1">
-                      Price
-                    </p>
-
-                    <h3 className="font-bold text-lg text-yellow-600">
-                      ${selectedVehicle.price}/day
-                    </h3>
-                  </div>
-
-                  <div className="bg-gray-100 rounded-2xl p-5">
-                    <p className="text-gray-500 text-sm mb-1">
-                      Fuel
-                    </p>
-
-                    <h3 className="font-bold text-lg">
-                      {selectedVehicle.fuel}
-                    </h3>
-                  </div>
-
-                  <div className="bg-gray-100 rounded-2xl p-5">
-                    <p className="text-gray-500 text-sm mb-1">
-                      Location
-                    </p>
-
-                    <h3 className="font-bold text-lg">
-                      {selectedVehicle.location}
-                    </h3>
-                  </div>
-
+                <div className="my-8 border-y border-gray-100 py-6">
+                  <p className="text-xs font-semibold uppercase tracking-[2px] text-gray-400">
+                    Starting from
+                  </p>
+                  <p className="mt-2 text-4xl font-bold text-[#123522]">
+                    ${selectedVehicle.price}
+                    <span className="ml-2 text-sm font-medium text-gray-400">
+                      / day
+                    </span>
+                  </p>
                 </div>
 
-                <div className="mb-8">
-
-                  <h3 className="text-xl font-bold mb-4">
-                    Included Features
-                  </h3>
-
-                  <div className="flex flex-wrap gap-3">
-
-                    {selectedVehicle.features.map((f, i) => (
-                      <span
-                        key={i}
-                        className="bg-yellow-50 text-yellow-700 border border-yellow-100 px-4 py-2 rounded-full text-sm"
+                <div className="grid grid-cols-2 gap-3">
+                  {[
+                    { icon: Users, label: "Capacity", value: selectedVehicle.seats },
+                    { icon: Settings2, label: "Transmission", value: selectedVehicle.transmission },
+                    { icon: Fuel, label: "Fuel", value: selectedVehicle.fuel },
+                    { icon: MapPin, label: "Location", value: selectedVehicle.location },
+                  ].map((detail) => {
+                    const Icon = detail.icon;
+                    return (
+                      <div
+                        key={detail.label}
+                        className="rounded-xl bg-[#f6f7f3] p-4"
                       >
-                        {f}
-                      </span>
-                    ))}
-
-                  </div>
-
+                        <Icon size={18} className="mb-3 text-[#a88727]" />
+                        <p className="text-[10px] uppercase tracking-wider text-gray-400">
+                          {detail.label}
+                        </p>
+                        <p className="mt-1 text-sm font-bold text-[#123522]">
+                          {detail.value}
+                        </p>
+                      </div>
+                    );
+                  })}
                 </div>
 
-                <div className="flex flex-col sm:flex-row gap-4">
+                <div className="mt-8">
+                  <h3 className="mb-4 font-bold text-[#123522]">
+                    Vehicle Features
+                  </h3>
+                  <div className="grid grid-cols-2 gap-3">
+                    {selectedVehicle.features.map((feature) => (
+                      <div
+                        key={feature}
+                        className="flex items-center gap-2 text-xs text-gray-600"
+                      >
+                        <CircleCheck size={16} className="shrink-0 text-[#a88727]" />
+                        {feature}
+                      </div>
+                    ))}
+                  </div>
+                </div>
 
+                <div className="mt-9 flex flex-col gap-3 sm:flex-row">
                   <a
                     href={getWhatsAppLink(selectedVehicle)}
                     target="_blank"
                     rel="noreferrer"
-                    className="flex-1 bg-green-600 hover:bg-green-700 text-white text-center py-4 rounded-xl font-bold transition"
+                    className="flex flex-1 items-center justify-center gap-2 rounded-xl bg-[#123522] px-5 py-4 text-sm font-bold text-white transition hover:bg-[#1c5033]"
                   >
+                    <MessageCircle size={18} />
                     Book on WhatsApp
                   </a>
-
                   <button
-                    onClick={() => setSelectedVehicle(null)}
-                    className="flex-1 border border-gray-300 hover:bg-gray-100 py-4 rounded-xl font-semibold transition"
+                    onClick={closeVehicle}
+                    className="rounded-xl border border-gray-200 px-7 py-4 text-sm font-bold text-gray-600 transition hover:bg-gray-50"
                   >
                     Close
                   </button>
-
                 </div>
 
+                <p className="mt-5 text-center text-[11px] text-gray-400">
+                  Contact our team to confirm availability and booking details.
+                </p>
               </div>
             </div>
           </div>
@@ -690,104 +842,104 @@ Compare Our Safari Vehicles
       )}
 
       {/* FOOTER */}
-  {/* FOOTER */}
-  <footer className="relative overflow-hidden bg-black text-white py-16">
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
-  
-      {/* Brand */}
-      <div>
-        <h2 className="text-3xl font-bold text-yellow-500 mb-2">
-          Renlen Tours and safaris
-        </h2>
-  
-        <p className="text-xs text-gray-500 mb-1">
-          Website designed & developed by Dennis Musa
-        </p>
-  
-        <p className="text-gray-400 leading-8 mb-3">
-          Professional safari vehicle hire services in kenya. Safe, comfortable, and unforgettable safari experiences.
-        </p>
-  
-        <a
-          href="https://dennismusa.netlify.app/"
-          target="_blank"
-          rel="noreferrer"
-          className="text-yellow-500 hover:underline text-sm font-semibold"
-        >
-          View Developer Portfolio
-        </a>
-      </div>
-  
-      {/* Links */}
-      <div>
-        <h3 className="text-xl font-bold mb-5">Quick Links</h3>
-  
-        <ul className="space-y-4 text-gray-400">
-          <li>
-            <Link to="/" className="hover:text-yellow-500 transition">
-              Home
-            </Link>
-          </li>
-  
-          <li>
-            <Link to="/vehicles" className="hover:text-yellow-500 transition">
-              Fleet
-            </Link>
-          </li>
-  
-          <li>
-            <Link to="/gallery" className="hover:text-yellow-500 transition">
-              Gallery
-            </Link>
-          </li>
-  
-          <li>
-            <Link to="/contact" className="hover:text-yellow-500 transition">
-              Contact
-            </Link>
-          </li>
-        </ul>
-      </div>
-  
-      {/* Services */}
-      <div>
-        <h3 className="text-xl font-bold mb-5">Services</h3>
-  
-        <ul className="space-y-4 text-gray-400">
-          <li>Safari Vehicle Hire</li>
-          <li>Airport Transfers</li>
-          <li>Group Tours</li>
-          <li>Private Safari Trips</li>
-        </ul>
-      </div>
-  
-      {/* Contact */}
-      <div>
-        <h3 className="text-xl font-bold mb-5">Contact Info</h3>
-  
-        <ul className="space-y-4 text-gray-400">
-          <li>📍 Nairobi, Kenya</li>
-          <li>📞 +254112277671</li>
-          <li>✉ renlentours@gmail.com</li>
-        </ul>
-  
-        <a
-          href="https://wa.me/+254112277671"
-          target="_blank"
-          rel="noreferrer"
-          className="inline-block mt-6 bg-green-500 hover:bg-green-600 text-black font-bold px-6 py-3 rounded-lg transition"
-        >
-          WhatsApp Booking
-        </a>
-      </div>
-    </div>
-  
-    {/* Bottom */}
-    <div className="border-t border-gray-800 mt-12 pt-8 text-center text-gray-500">
-      © 2026 Renlen Tours and safaris . All Rights Reserved.
-    </div>
-  </footer>
-
+ 
+ {/* FOOTER */}
+ <footer className="relative overflow-hidden bg-black text-white py-16">
+     <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
+   
+       {/* Brand */}
+       <div>
+         <h2 className="text-3xl font-bold text-yellow-500 mb-2">
+           DenGrey Tours & Safaris
+         </h2>
+   
+         <p className="text-xs text-gray-500 mb-1">
+           Website designed & developed by Dennis Musa
+         </p>
+   
+         <p className="text-gray-400 leading-8 mb-3">
+           Professional safari vehicle hire services in Nairobi ,kenya. Safe, comfortable, and unforgettable safari experiences.
+         </p>
+   
+         <a
+           href="https://dennismusa.netlify.app/"
+           target="_blank"
+           rel="noreferrer"
+           className="text-yellow-500 hover:underline text-sm font-semibold"
+         >
+           View Developer Portfolio
+         </a>
+       </div>
+   
+       {/* Links */}
+       <div>
+         <h3 className="text-xl font-bold mb-5">Quick Links</h3>
+   
+         <ul className="space-y-4 text-gray-400">
+           <li>
+             <Link to="/" className="hover:text-yellow-500 transition">
+               Home
+             </Link>
+           </li>
+   
+           <li>
+             <Link to="/vehicles" className="hover:text-yellow-500 transition">
+               Fleet
+             </Link>
+           </li>
+   
+           <li>
+             <Link to="/gallery" className="hover:text-yellow-500 transition">
+               Gallery
+             </Link>
+           </li>
+   
+           <li>
+             <Link to="/contact" className="hover:text-yellow-500 transition">
+               Contact
+             </Link>
+           </li>
+         </ul>
+       </div>
+   
+       {/* Services */}
+       <div>
+         <h3 className="text-xl font-bold mb-5">Services</h3>
+   
+         <ul className="space-y-4 text-gray-400">
+           <li>Safari Vehicle Hire</li>
+           <li>Airport Transfers</li>
+           <li>Group Tours</li>
+           <li>Private Safari Trips</li>
+         </ul>
+       </div>
+   
+       {/* Contact */}
+       <div>
+         <h3 className="text-xl font-bold mb-5">Contact Info</h3>
+   
+         <ul className="space-y-4 text-gray-400">
+           <li>📍 Nairobi, Kenya</li>
+           <li>📞 +254112277671</li>
+           <li>✉ dengrayadventures@gmail.com</li>
+         </ul>
+   
+         <a
+           href="https://wa.me/+254112277671"
+           target="_blank"
+           rel="noreferrer"
+           className="inline-block mt-6 bg-green-500 hover:bg-green-600 text-black font-bold px-6 py-3 rounded-lg transition"
+         >
+           WhatsApp Booking
+         </a>
+       </div>
+     </div>
+   
+     {/* Bottom */}
+     <div className="border-t border-gray-800 mt-12 pt-8 text-center text-gray-500">
+       © 2026 DenGrey Tours & Safaris . All Rights Reserved.
+     </div>
+   </footer>
     </div>
   );
 }
