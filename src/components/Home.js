@@ -1,6 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-unused-vars */
 import React from "react";
+import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import useLanguageSync from "../hooks/useLanguageSync";
@@ -2410,494 +2411,490 @@ useEffect(() => {
 
 
 
-{/* ===================== GOOGLE REVIEWS ===================== */}
-<section className="relative overflow-hidden bg-gradient-to-b from-[#F8F6F1] via-white to-[#F2EEE5] py-20 lg:py-24">
-
-  {/* Background Effects */}
-  <div className="pointer-events-none absolute -left-40 -top-40 h-[420px] w-[420px] rounded-full bg-yellow-400/10 blur-[130px]" />
-  <div className="pointer-events-none absolute -bottom-40 -right-40 h-[420px] w-[420px] rounded-full bg-green-600/10 blur-[130px]" />
-
-  <div className="relative mx-auto max-w-7xl px-5 sm:px-6 lg:px-10">
-
-    {/* ===================== HEADER ===================== */}
-    <div className="mx-auto max-w-3xl text-center">
-
-      <span className="inline-flex items-center rounded-full bg-green-100 px-5 py-2 text-xs font-bold uppercase tracking-[3px] text-green-700">
-        {t("testimonialsBadge")}
-      </span>
-
-      <h2 className="mt-5 text-4xl font-black leading-tight text-gray-900 sm:text-5xl">
-        {t("testimonialsTitle1")}
-        <span className="block text-[#C8A94C]">
-          {t("testimonialsTitle2")}
-        </span>
-      </h2>
-
-      <p className="mx-auto mt-5 max-w-2xl text-base leading-7 text-gray-600 sm:text-lg">
-        {t("testimonialsDescription")}
-      </p>
-
-    </div>
-
-
-    {/* ===================== GOOGLE RATING ===================== */}
-    <div className="mt-12 flex justify-center">
-
-      <div className="flex w-full max-w-2xl flex-col items-center justify-center gap-6 rounded-[1.7rem] border border-gray-100 bg-white px-7 py-7 shadow-lg sm:flex-row sm:px-10">
-
-        {/* Rating */}
-        <div className="text-center sm:min-w-[160px]">
-
-          <div className="text-5xl font-black text-green-700">
-            5.0
-          </div>
-
-          <div className="mt-1 text-2xl tracking-wide text-yellow-400">
-            ★★★★★
-          </div>
-
-          <p className="mt-1 text-xs font-medium text-gray-500">
-            {t("googleBased")}
-          </p>
-
-        </div>
-
-        {/* Divider */}
-        <div className="hidden h-16 w-px bg-gray-200 sm:block" />
-
-        {/* Trust Message */}
-        <div className="text-center sm:text-left">
-
-          <h3 className="text-xl font-bold text-gray-900">
-            {t("trustedTitle")}
-          </h3>
-
-          <p className="mt-2 max-w-md text-sm leading-6 text-gray-600">
-            {t("trustedDescription")}
-          </p>
-
-        </div>
-
-      </div>
-
-    </div>
-
-
-    {/* ===================== HORIZONTAL REVIEWS ===================== */}
-    <div className="relative mt-14">
-
-      {/* Scroll Hint */}
-      <div className="mb-4 flex items-center justify-between px-1">
-
-        <p className="text-xs font-semibold uppercase tracking-[2px] text-gray-400">
-          Google Reviews
-        </p>
-
-        <p className="text-xs font-medium text-gray-400">
-          ← {t("viewAllReviews")} →
-        </p>
-
-      </div>
-
-
-      {/* Scroll Container */}
-      <div
-        className="
-          flex
-          gap-5
-          overflow-x-auto
-          pb-6
-          snap-x
-          snap-mandatory
-          scrollbar-thin
-          scrollbar-track-transparent
-          scrollbar-thumb-green-700/30
-        "
-      >
-
-        {/* ================= REVIEW 1 ================= */}
-        <div className="group flex w-[85vw] shrink-0 snap-start flex-col rounded-[1.7rem] border border-gray-100 bg-white p-6 shadow-lg transition-all duration-300 hover:-translate-y-1 hover:shadow-xl sm:w-[420px]">
-
-          <div className="flex items-center justify-between">
-
-            <div className="text-lg tracking-wide text-yellow-400">
-              ★★★★★
-            </div>
-
-            <span className="rounded-full bg-green-100 px-3 py-1 text-[10px] font-bold text-green-700">
-              {t("verifiedReview")}
-            </span>
-
-          </div>
-
-          <p className="mt-5 flex-1 text-sm leading-7 text-gray-600">
-            "We've just embarked from a 2 nights 3 days Masai Mara Safari.
-            Guess what, I highly recommend and appreciate DENGRAY ADVENTURES
-            for organizing this amazing and unforgettable safari for my family.
-            Denis our Safari guide and still the organizer did an amazing job,
-            from organizing, driving and communicating, he's really professional
-            the way he operates. We were able to spot the Big 5 so close."
-          </p>
-
-          <div className="mt-6 flex items-center gap-3 border-t border-gray-100 pt-5">
-
-            <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-green-700 text-sm font-bold text-white">
-              D
-            </div>
-
-            <div>
-              <h4 className="text-sm font-bold text-gray-900">
-                Dancan Omondi
-              </h4>
-
-              <p className="mt-1 text-xs text-gray-500">
-                1 review · 5 photos
-              </p>
-            </div>
-
-          </div>
-
-        </div>
-
-
-        {/* ================= REVIEW 2 ================= */}
-        <div className="group flex w-[85vw] shrink-0 snap-start flex-col rounded-[1.7rem] border border-gray-100 bg-white p-6 shadow-lg transition-all duration-300 hover:-translate-y-1 hover:shadow-xl sm:w-[420px]">
-
-          <div className="flex items-center justify-between">
-
-            <div className="text-lg tracking-wide text-yellow-400">
-              ★★★★★
-            </div>
-
-            <span className="rounded-full bg-green-100 px-3 py-1 text-[10px] font-bold text-green-700">
-              {t("verifiedReview")}
-            </span>
-
-          </div>
-
-          <p className="mt-5 flex-1 text-sm leading-7 text-gray-600">
-            "We've travelled the world and the Safari with Denis is by far
-            the most marking, beautiful, magical experience that we've ever
-            lived. Not only Denis loves what he does and shares his knowledge
-            with passion and kindness, but he also truly takes care of the
-            details and provides a genuine experience."
-          </p>
-
-          <div className="mt-6 flex items-center gap-3 border-t border-gray-100 pt-5">
-
-            <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-green-700 text-sm font-bold text-white">
-              A
-            </div>
-
-            <div>
-              <h4 className="text-sm font-bold text-gray-900">
-                Andrea Milán
-              </h4>
-
-              <p className="mt-1 text-xs text-gray-500">
-                3 reviews · 5 photos
-              </p>
-            </div>
-
-          </div>
-
-        </div>
-
-
-        {/* ================= REVIEW 3 ================= */}
-        <div className="group flex w-[85vw] shrink-0 snap-start flex-col rounded-[1.7rem] border border-gray-100 bg-white p-6 shadow-lg transition-all duration-300 hover:-translate-y-1 hover:shadow-xl sm:w-[420px]">
-
-          <div className="flex items-center justify-between">
-
-            <div className="text-lg tracking-wide text-yellow-400">
-              ★★★★★
-            </div>
-
-            <span className="rounded-full bg-green-100 px-3 py-1 text-[10px] font-bold text-green-700">
-              {t("verifiedReview")}
-            </span>
-
-          </div>
-
-          <p className="mt-5 flex-1 text-sm leading-7 text-gray-600">
-            "Denis was a fantastic guide for safari in Masai Mara.
-            He was knowledgeable, kind, and focused. I highly recommend him
-            as a guide! The guide in training, Sylvester, was awesome, too.
-            They are a dynamic duo."
-          </p>
-
-          <div className="mt-6 flex items-center gap-3 border-t border-gray-100 pt-5">
-
-            <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-green-700 text-sm font-bold text-white">
-              H
-            </div>
-
-            <div>
-              <h4 className="text-sm font-bold text-gray-900">
-                Harper Schupbach
-              </h4>
-
-              <p className="mt-1 text-xs text-gray-500">
-                2 reviews · 3 photos
-              </p>
-            </div>
-
-          </div>
-
-        </div>
-
-
-        {/* ================= REVIEW 4 ================= */}
-        <div className="group flex w-[85vw] shrink-0 snap-start flex-col rounded-[1.7rem] border border-gray-100 bg-white p-6 shadow-lg transition-all duration-300 hover:-translate-y-1 hover:shadow-xl sm:w-[420px]">
-
-          <div className="flex items-center justify-between">
-
-            <div className="text-lg tracking-wide text-yellow-400">
-              ★★★★★
-            </div>
-
-            <span className="rounded-full bg-green-100 px-3 py-1 text-[10px] font-bold text-green-700">
-              {t("verifiedReview")}
-            </span>
-
-          </div>
-
-          <p className="mt-5 flex-1 text-sm leading-7 text-gray-600">
-            "We just embarked from a 2 nights 3 days Masai Mara safari
-            with DENGRAY ADVENTURES. My family had a very amazing and
-            unforgettable experience. I highly recommend Denis who was
-            our Safari guide."
-          </p>
-
-          <div className="mt-6 flex items-center gap-3 border-t border-gray-100 pt-5">
-
-            <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-green-700 text-sm font-bold text-white">
-              A
-            </div>
-
-            <div>
-              <h4 className="text-sm font-bold text-gray-900">
-                Antoine Obunde
-              </h4>
-
-              <p className="mt-1 text-xs text-gray-500">
-                1 review
-              </p>
-            </div>
-
-          </div>
-
-        </div>
-
-
-        {/* ================= REVIEW 5 ================= */}
-        <div className="group flex w-[85vw] shrink-0 snap-start flex-col rounded-[1.7rem] border border-gray-100 bg-white p-6 shadow-lg transition-all duration-300 hover:-translate-y-1 hover:shadow-xl sm:w-[420px]">
-
-          <div className="flex items-center justify-between">
-
-            <div className="text-lg tracking-wide text-yellow-400">
-              ★★★★★
-            </div>
-
-            <span className="rounded-full bg-green-100 px-3 py-1 text-[10px] font-bold text-green-700">
-              {t("verifiedReview")}
-            </span>
-
-          </div>
-
-          <p className="mt-5 flex-1 text-sm leading-7 text-gray-600">
-            "The safari was really very interesting and beautifully organised!
-            The guide was friendly and reliable! We are happy to come back."
-          </p>
-
-          <div className="mt-6 flex items-center gap-3 border-t border-gray-100 pt-5">
-
-            <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-green-700 text-sm font-bold text-white">
-              S
-            </div>
-
-            <div>
-              <h4 className="text-sm font-bold text-gray-900">
-                Steinert Liesel
-              </h4>
-
-              <p className="mt-1 text-xs text-gray-500">
-                3 reviews
-              </p>
-            </div>
-
-          </div>
-
-        </div>
-
-
-        {/* ================= REVIEW 6 ================= */}
-        <div className="group flex w-[85vw] shrink-0 snap-start flex-col rounded-[1.7rem] border border-gray-100 bg-white p-6 shadow-lg transition-all duration-300 hover:-translate-y-1 hover:shadow-xl sm:w-[420px]">
-
-          <div className="flex items-center justify-between">
-
-            <div className="text-lg tracking-wide text-yellow-400">
-              ★★★★★
-            </div>
-
-            <span className="rounded-full bg-green-100 px-3 py-1 text-[10px] font-bold text-green-700">
-              {t("verifiedReview")}
-            </span>
-
-          </div>
-
-          <p className="mt-5 flex-1 text-sm leading-7 text-gray-600">
-            "Very jovial tour guide, helped us in explaining everything,
-            helped at taking us good pictures and videos. He was very
-            friendly, I recommend him to anyone who is after quality service."
-          </p>
-
-          <div className="mt-6 flex items-center gap-3 border-t border-gray-100 pt-5">
-
-            <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-green-700 text-sm font-bold text-white">
-              B
-            </div>
-
-            <div>
-              <h4 className="text-sm font-bold text-gray-900">
-                Beverlyne Adriano
-              </h4>
-
-              <p className="mt-1 text-xs text-gray-500">
-                2 reviews
-              </p>
-            </div>
-
-          </div>
-
-        </div>
-
-
-        {/* ================= REVIEW 7 ================= */}
-        <div className="group flex w-[85vw] shrink-0 snap-start flex-col rounded-[1.7rem] border border-gray-100 bg-white p-6 shadow-lg transition-all duration-300 hover:-translate-y-1 hover:shadow-xl sm:w-[420px]">
-
-          <div className="flex items-center justify-between">
-
-            <div className="text-lg tracking-wide text-yellow-400">
-              ★★★★★
-            </div>
-
-            <span className="rounded-full bg-green-100 px-3 py-1 text-[10px] font-bold text-green-700">
-              {t("verifiedReview")}
-            </span>
-
-          </div>
-
-          <p className="mt-5 flex-1 text-sm leading-7 text-gray-600">
-            "Amazing experience! The ranger was very friendly and went
-            out of his way to accommodate our special requests. We had
-            fantastic accommodation in Nakuru and a 7-hour stay in the
-            national park – highly recommended! An unforgettable experience."
-          </p>
-
-          <div className="mt-6 flex items-center gap-3 border-t border-gray-100 pt-5">
-
-            <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-green-700 text-sm font-bold text-white">
-              H
-            </div>
-
-            <div>
-              <h4 className="text-sm font-bold text-gray-900">
-                hermine_mtnr
-              </h4>
-
-              <p className="mt-1 text-xs text-gray-500">
-                3 reviews · 6 photos
-              </p>
-            </div>
-
-          </div>
-
-        </div>
-
-      </div>
-
-    </div>
-
-
-    {/* ===================== TRUST STATISTICS ===================== */}
-    <div className="mt-12 grid grid-cols-2 gap-4 md:grid-cols-4">
-
-      <div className="rounded-[1.5rem] border border-gray-100 bg-white p-5 text-center shadow-md">
-        <h3 className="text-3xl font-black text-green-700 sm:text-4xl">
-          5.0
-        </h3>
-
-        <div className="mt-1 text-base text-yellow-400">
-          ★★★★★
-        </div>
-
-        <p className="mt-1 text-xs text-gray-600">
-          {t("googleRating")}
-        </p>
-      </div>
-
-
-      <div className="rounded-[1.5rem] border border-gray-100 bg-white p-5 text-center shadow-md">
-        <h3 className="text-3xl font-black text-green-700 sm:text-4xl">
-          7
-        </h3>
-
-        <p className="mt-2 text-xs text-gray-600">
-          {t("verifiedReviews")}
-        </p>
-      </div>
-
-
-      <div className="rounded-[1.5rem] border border-gray-100 bg-white p-5 text-center shadow-md">
-        <h3 className="text-3xl font-black text-green-700 sm:text-4xl">
-          100%
-        </h3>
-
-        <p className="mt-2 text-xs text-gray-600">
-          {t("satisfiedGuests")}
-        </p>
-      </div>
-
-
-      <div className="rounded-[1.5rem] border border-gray-100 bg-white p-5 text-center shadow-md">
-        <h3 className="text-3xl font-black text-green-700 sm:text-4xl">
-          24/7
-        </h3>
-
-        <p className="mt-2 text-xs text-gray-600">
-          {t("travelSupport")}
-        </p>
-      </div>
-
-    </div>
-
-
-    {/* ===================== ACTION BUTTONS ===================== */}
-    <div className="mt-12 flex flex-wrap justify-center gap-4">
-
-      <a
-        href="https://search.google.com/local/writereview?placeid=ChIJoS2CGQqlKhgR63ePw3o5Wu0"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="inline-flex items-center gap-2 rounded-2xl bg-green-700 px-7 py-3.5 text-sm font-semibold text-white shadow-lg transition-all duration-300 hover:-translate-y-1 hover:bg-green-800"
-      >
-        ⭐ {t("writeReview")}
-      </a>
-
-      <a
-        href="https://search.google.com/local/reviews?placeid=ChIJoS2CGQqlKhgR63ePw3o5Wu0"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="inline-flex items-center gap-2 rounded-2xl border-2 border-green-700 px-7 py-3.5 text-sm font-semibold text-green-700 transition-all duration-300 hover:-translate-y-1 hover:bg-green-700 hover:text-white"
-      >
-        💬 {t("viewAllReviews")}
-      </a>
-
-    </div>
-
+{/* ===================== ANIMATED GOOGLE REVIEWS ===================== */}
+<section className="relative isolate overflow-hidden bg-[#f7f7f2] py-24 sm:py-28 lg:py-32">
+
+  {/* BACKGROUND ATMOSPHERE */}
+  <div className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
+    <motion.div
+      animate={{ x: [0, 35, 0], y: [0, -25, 0], scale: [1, 1.12, 1] }}
+      transition={{ duration: 16, repeat: Infinity, ease: "easeInOut" }}
+      className="absolute -left-40 -top-40 h-[450px] w-[450px] rounded-full bg-[#d4af37]/10 blur-[120px]"
+    />
+
+    <motion.div
+      animate={{ x: [0, -30, 0], y: [0, 30, 0], scale: [1, 1.15, 1] }}
+      transition={{ duration: 19, repeat: Infinity, ease: "easeInOut" }}
+      className="absolute -bottom-40 -right-40 h-[500px] w-[500px] rounded-full bg-[#0d4825]/10 blur-[130px]"
+    />
+
+    <div
+      className="absolute inset-0 opacity-[0.025]"
+      style={{
+        backgroundImage: "radial-gradient(#0d4825 0.8px, transparent 0.8px)",
+        backgroundSize: "20px 20px",
+      }}
+    />
   </div>
 
+  <div className="mx-auto max-w-7xl px-5 sm:px-8 lg:px-10">
+
+    {/* ===================== INTRODUCTION ===================== */}
+    <motion.div
+      initial={{ opacity: 0, y: 45 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.3 }}
+      transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
+      className="mx-auto max-w-3xl text-center"
+    >
+      <div className="mb-7 inline-flex items-center gap-3">
+        <motion.span
+          initial={{ width: 0 }}
+          whileInView={{ width: 38 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8, delay: 0.3 }}
+          className="h-px bg-[#c49b42]"
+        />
+
+        <span className="text-[10px] font-bold uppercase tracking-[0.32em] text-[#0d4825]">
+          {t("testimonialsBadge")}
+        </span>
+
+        <motion.span
+          initial={{ width: 0 }}
+          whileInView={{ width: 38 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8, delay: 0.3 }}
+          className="h-px bg-[#c49b42]"
+        />
+      </div>
+
+      <h2 className="font-serif text-4xl font-medium leading-[1.12] tracking-tight text-[#10251a] sm:text-5xl lg:text-6xl">
+        {t("testimonialsTitle1")}
+        <motion.span
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8, delay: 0.25 }}
+          className="mt-2 block italic text-[#b38c3e]"
+        >
+          {t("testimonialsTitle2")}
+        </motion.span>
+      </h2>
+
+      <motion.p
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.8, delay: 0.4 }}
+        className="mx-auto mt-6 max-w-2xl text-sm leading-8 text-[#667168] sm:text-base"
+      >
+        {t("testimonialsDescription")}
+      </motion.p>
+    </motion.div>
+
+    {/* ===================== RATING FEATURE ===================== */}
+    <motion.div
+      initial={{ opacity: 0, y: 55, scale: 0.97 }}
+      whileInView={{ opacity: 1, y: 0, scale: 1 }}
+      viewport={{ once: true, amount: 0.2 }}
+      transition={{ duration: 0.9, delay: 0.15 }}
+      className="mx-auto mt-16 max-w-5xl"
+    >
+      <div className="relative overflow-hidden rounded-[2rem] bg-[#092719] shadow-[0_30px_80px_rgba(8,45,25,0.18)]">
+
+        {/* Decorative circles */}
+        <motion.div
+          animate={{ rotate: 360 }}
+          transition={{ duration: 55, repeat: Infinity, ease: "linear" }}
+          className="pointer-events-none absolute -right-24 -top-48 h-[450px] w-[450px] rounded-full border border-white/10"
+        />
+
+        <motion.div
+          animate={{ rotate: -360 }}
+          transition={{ duration: 65, repeat: Infinity, ease: "linear" }}
+          className="pointer-events-none absolute -right-12 -top-36 h-[350px] w-[350px] rounded-full border border-[#d4af37]/20"
+        />
+
+        <div className="relative grid gap-9 p-8 sm:grid-cols-[0.8fr_1.5fr] sm:items-center sm:gap-12 sm:p-12 lg:p-14">
+
+          {/* Rating */}
+          <div className="text-center sm:border-r sm:border-white/15 sm:pr-12">
+            <p className="text-[10px] font-bold uppercase tracking-[0.28em] text-white/45">
+              Google rating
+            </p>
+
+            <motion.div
+              initial={{ opacity: 0, scale: 0.6 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ type: "spring", stiffness: 120, damping: 12, delay: 0.3 }}
+              className="mt-3 font-serif text-7xl font-medium tracking-tight text-white sm:text-8xl"
+            >
+              5.0
+            </motion.div>
+
+            <div className="mt-4 flex justify-center gap-1">
+              {[1, 2, 3, 4, 5].map((star, index) => (
+                <motion.span
+                  key={star}
+                  initial={{ opacity: 0, scale: 0, rotate: -45 }}
+                  whileInView={{ opacity: 1, scale: 1, rotate: 0 }}
+                  viewport={{ once: true }}
+                  transition={{
+                    delay: 0.35 + index * 0.12,
+                    type: "spring",
+                    stiffness: 180,
+                  }}
+                  className="text-xl text-[#e5bd64]"
+                >
+                  ★
+                </motion.span>
+              ))}
+            </div>
+
+            <p className="mt-3 text-[10px] uppercase tracking-[0.2em] text-white/45">
+              {t("googleBased")}
+            </p>
+          </div>
+
+          {/* Trust message */}
+          <div className="text-center sm:text-left">
+            <div className="mb-4 flex items-center justify-center gap-3 sm:justify-start">
+              <span className="flex h-9 w-9 items-center justify-center rounded-full bg-white text-lg font-bold text-[#4285F4]">
+                G
+              </span>
+              <span className="text-[10px] font-bold uppercase tracking-[0.23em] text-white/55">
+                Guest recommendations
+              </span>
+            </div>
+
+            <h3 className="font-serif text-2xl leading-tight text-white sm:text-3xl lg:text-4xl">
+              {t("trustedTitle")}
+            </h3>
+
+            <p className="mt-4 max-w-lg text-sm leading-7 text-white/60">
+              {t("trustedDescription")}
+            </p>
+
+            <div className="mt-7 flex flex-wrap items-center justify-center gap-4 sm:justify-start">
+              <a
+                href="https://search.google.com/local/reviews?placeid=ChIJoS2CGQqlKhgR63ePw3o5Wu0"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group inline-flex items-center gap-3 rounded-full border border-white/20 px-6 py-3 text-[10px] font-bold uppercase tracking-[0.15em] text-white transition-all duration-300 hover:border-[#e5bd64] hover:bg-white/5"
+              >
+                {t("viewAllReviews")}
+                <span className="transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1">
+                  ↗
+                </span>
+              </a>
+
+              <span className="text-[10px] uppercase tracking-widest text-white/40">
+                7 guest reviews
+              </span>
+            </div>
+          </div>
+        </div>
+
+        {/* Bottom accent */}
+        <motion.div
+          initial={{ scaleX: 0 }}
+          whileInView={{ scaleX: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 1.3, delay: 0.3 }}
+          className="h-1 origin-left bg-gradient-to-r from-[#0d4825] via-[#d4af37] to-transparent"
+        />
+      </div>
+    </motion.div>
+
+    {/* ===================== REVIEWS HEADING ===================== */}
+    <motion.div
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.7 }}
+      className="mt-24 flex flex-col justify-between gap-6 border-b border-[#dfe3dc] pb-7 sm:flex-row sm:items-end"
+    >
+      <div>
+        <p className="text-[10px] font-bold uppercase tracking-[0.28em] text-[#b38c3e]">
+          Genuine guest experiences
+        </p>
+
+        <h3 className="mt-3 font-serif text-3xl text-[#10251a] sm:text-4xl lg:text-5xl">
+          Stories from the wild.
+        </h3>
+
+        <p className="mt-3 text-sm text-[#778278]">
+          Moments remembered. Experiences shared.
+        </p>
+      </div>
+
+      <div className="flex items-center gap-3">
+        <span className="mr-2 hidden text-[10px] font-semibold uppercase tracking-widest text-[#89938a] sm:block">
+          Explore reviews
+        </span>
+
+        <button
+          type="button"
+          aria-label="Previous reviews"
+          onClick={() =>
+            document.getElementById("dengray-reviews-track")?.scrollBy({
+              left: -420,
+              behavior: "smooth",
+            })
+          }
+          className="flex h-11 w-11 items-center justify-center rounded-full border border-[#d5dbd2] text-[#0d4825] transition-all duration-300 hover:border-[#0d4825] hover:bg-[#0d4825] hover:text-white"
+        >
+          ←
+        </button>
+
+        <button
+          type="button"
+          aria-label="Next reviews"
+          onClick={() =>
+            document.getElementById("dengray-reviews-track")?.scrollBy({
+              left: 420,
+              behavior: "smooth",
+            })
+          }
+          className="flex h-11 w-11 items-center justify-center rounded-full border border-[#d5dbd2] text-[#0d4825] transition-all duration-300 hover:border-[#0d4825] hover:bg-[#0d4825] hover:text-white"
+        >
+          →
+        </button>
+      </div>
+    </motion.div>
+
+    {/* ===================== REVIEW CAROUSEL ===================== */}
+    <div
+      id="dengray-reviews-track"
+      className="mt-9 flex snap-x snap-mandatory gap-5 overflow-x-auto scroll-smooth pb-8 [scrollbar-width:thin] [scrollbar-color:#c5b78f_transparent]"
+    >
+      {[
+        {
+          name: "Dancan Omondi",
+          initial: "D",
+          details: "1 review · 5 photos",
+          review: "We've just embarked from a 2 nights 3 days Masai Mara Safari. Guess what, I highly recommend and appreciate DENGRAY ADVENTURES for organizing this amazing and unforgettable safari for my family. Denis our Safari guide and still the organizer did an amazing job, from organizing, driving and communicating, he's really professional the way he operates. We were able to spot the Big 5 so close.",
+        },
+        {
+          name: "Andrea Milán",
+          initial: "A",
+          details: "3 reviews · 5 photos",
+          review: "We've travelled the world and the Safari with Denis is by far the most marking, beautiful, magical experience that we've ever lived. Not only Denis loves what he does and shares his knowledge with passion and kindness, but he also truly takes care of the details and provides a genuine experience.",
+        },
+        {
+          name: "Harper Schupbach",
+          initial: "H",
+          details: "2 reviews · 3 photos",
+          review: "Denis was a fantastic guide for safari in Masai Mara. He was knowledgeable, kind, and focused. I highly recommend him as a guide! The guide in training, Sylvester, was awesome, too. They are a dynamic duo.",
+        },
+        {
+          name: "Antoine Obunde",
+          initial: "A",
+          details: "1 review",
+          review: "We just embarked from a 2 nights 3 days Masai Mara safari with DENGRAY ADVENTURES. My family had a very amazing and unforgettable experience. I highly recommend Denis who was our Safari guide.",
+        },
+        {
+          name: "Steinert Liesel",
+          initial: "S",
+          details: "3 reviews",
+          review: "The safari was really very interesting and beautifully organised! The guide was friendly and reliable! We are happy to come back.",
+        },
+        {
+          name: "Beverlyne Adriano",
+          initial: "B",
+          details: "2 reviews",
+          review: "Very jovial tour guide, helped us in explaining everything, helped at taking us good pictures and videos. He was very friendly, I recommend him to anyone who is after quality service.",
+        },
+        {
+          name: "hermine_mtnr",
+          initial: "H",
+          details: "3 reviews · 6 photos",
+          review: "Amazing experience! The ranger was very friendly and went out of his way to accommodate our special requests. We had fantastic accommodation in Nakuru and a 7-hour stay in the national park – highly recommended! An unforgettable experience.",
+        },
+      ].map((review, index) => (
+        <motion.article
+          key={review.name}
+          initial={{ opacity: 0, y: 45 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.15 }}
+          transition={{
+            duration: 0.65,
+            delay: Math.min(index * 0.09, 0.45),
+            ease: [0.22, 1, 0.36, 1],
+          }}
+          whileHover={{ y: -9, scale: 1.015 }}
+          className="group flex w-[88vw] max-w-[390px] shrink-0 snap-start flex-col overflow-hidden rounded-[1.6rem] border border-[#e5e7df] bg-white p-6 shadow-[0_8px_30px_rgba(16,37,26,0.035)] transition-shadow duration-500 hover:border-[#c9b16f]/60 hover:shadow-[0_25px_55px_rgba(16,37,26,0.11)] sm:w-[390px] sm:p-7"
+        >
+          {/* Card top */}
+          <div className="flex items-center justify-between">
+            <div className="flex gap-1 text-lg tracking-wider text-[#c49b42]">
+              {[1, 2, 3, 4, 5].map((star, i) => (
+                <motion.span
+                  key={star}
+                  initial={{ opacity: 0, scale: 0.5 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.2 + i * 0.08 }}
+                >
+                  ★
+                </motion.span>
+              ))}
+            </div>
+
+            <span className="rounded-full bg-[#edf5ed] px-3 py-1.5 text-[9px] font-bold uppercase tracking-wider text-[#23613a]">
+              {t("verifiedReview")}
+            </span>
+          </div>
+
+          {/* Quote */}
+          <div className="relative mt-7 flex-1">
+            <span className="absolute -top-5 left-0 font-serif text-6xl leading-none text-[#d9c99e]/70">
+              “
+            </span>
+
+            <p className="relative pt-5 text-[13px] leading-[1.9] text-[#58645b]">
+              {review.review}
+            </p>
+          </div>
+
+          {/* Reviewer */}
+          <div className="mt-7 flex items-center gap-3 border-t border-[#edf0e9] pt-5">
+            <motion.div
+              whileHover={{ rotate: 8, scale: 1.08 }}
+              className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-[#0d4825] font-serif text-xl text-[#e6c66f] shadow-md shadow-[#0d4825]/10"
+            >
+              {review.initial}
+            </motion.div>
+
+            <div className="min-w-0">
+              <h4 className="truncate text-sm font-bold text-[#183321]">
+                {review.name}
+              </h4>
+              <p className="mt-1 text-[10px] text-[#89938a]">
+                {review.details}
+              </p>
+            </div>
+
+            <div className="ml-auto flex h-8 w-8 items-center justify-center rounded-full bg-[#f4f6fa] text-lg font-bold text-[#4285F4]">
+              G
+            </div>
+          </div>
+
+          {/* Animated bottom accent */}
+          <motion.div
+            initial={{ scaleX: 0 }}
+            whileInView={{ scaleX: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.3 }}
+            className="absolute bottom-0 left-0 h-[3px] w-full origin-left bg-gradient-to-r from-[#0d4825] via-[#d4af37] to-transparent"
+          />
+        </motion.article>
+      ))}
+    </div>
+
+    {/* ===================== TRUST STATISTICS ===================== */}
+    <motion.div
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.2 }}
+      variants={{
+        hidden: {},
+        visible: {
+          transition: { staggerChildren: 0.13 },
+        },
+      }}
+      className="mt-12 grid grid-cols-2 gap-3 md:grid-cols-4"
+    >
+      {[
+        { value: "5.0", label: t("googleRating"), stars: true },
+        { value: "7", label: t("verifiedReviews") },
+        { value: "100%", label: t("satisfiedGuests") },
+        { value: "24/7", label: t("travelSupport") },
+      ].map((item) => (
+        <motion.div
+          key={item.label}
+          variants={{
+            hidden: { opacity: 0, y: 35 },
+            visible: { opacity: 1, y: 0 },
+          }}
+          transition={{ duration: 0.65, ease: "easeOut" }}
+          whileHover={{ y: -5 }}
+          className="rounded-[1.4rem] border border-[#e3e5dd] bg-white px-4 py-7 text-center shadow-sm transition-shadow duration-300 hover:shadow-lg sm:py-9"
+        >
+          <div className="font-serif text-3xl text-[#0d4825] sm:text-4xl">
+            {item.value}
+          </div>
+
+          {item.stars && (
+            <div className="mt-2 text-sm tracking-widest text-[#c49b42]">
+              ★★★★★
+            </div>
+          )}
+
+          <p className="mt-2 text-[9px] font-bold uppercase tracking-[0.13em] text-[#7b867c] sm:text-[10px]">
+            {item.label}
+          </p>
+        </motion.div>
+      ))}
+    </motion.div>
+
+    {/* ===================== FINAL CALL TO ACTION ===================== */}
+    <motion.div
+      initial={{ opacity: 0, y: 35 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.8 }}
+      className="relative mt-20 overflow-hidden rounded-[2rem] bg-[#eaece4] px-6 py-12 text-center sm:px-12 sm:py-14"
+    >
+      <motion.div
+        animate={{ rotate: 360 }}
+        transition={{ duration: 40, repeat: Infinity, ease: "linear" }}
+        className="pointer-events-none absolute -right-16 -top-28 h-64 w-64 rounded-full border border-[#0d4825]/10"
+      />
+
+      <div className="relative">
+        <p className="text-[10px] font-bold uppercase tracking-[0.28em] text-[#a17d35]">
+          Your journey. Your story.
+        </p>
+
+        <h3 className="mx-auto mt-4 max-w-2xl font-serif text-3xl leading-tight text-[#10251a] sm:text-4xl lg:text-5xl">
+          Your next unforgettable adventure begins here.
+        </h3>
+
+        <p className="mx-auto mt-4 max-w-xl text-sm leading-7 text-[#69756b]">
+          Travel with people who care about the details, the destination and the memories you take home.
+        </p>
+
+        <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
+          <motion.a
+            whileHover={{ y: -4, scale: 1.02 }}
+            whileTap={{ scale: 0.97 }}
+            href="https://search.google.com/local/writereview?placeid=ChIJoS2CGQqlKhgR63ePw3o5Wu0"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center justify-center gap-3 rounded-full bg-[#0d4825] px-8 py-4 text-[10px] font-bold uppercase tracking-[0.16em] text-white shadow-lg shadow-[#0d4825]/15 transition-colors hover:bg-[#082d19]"
+          >
+            {t("writeReview")}
+            <span className="text-[#e5bd64]">↗</span>
+          </motion.a>
+
+          <motion.a
+            whileHover={{ y: -4, scale: 1.02 }}
+            whileTap={{ scale: 0.97 }}
+            href="https://search.google.com/local/reviews?placeid=ChIJoS2CGQqlKhgR63ePw3o5Wu0"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center justify-center rounded-full border border-[#b8c1b6] px-8 py-4 text-[10px] font-bold uppercase tracking-[0.16em] text-[#173b25] transition-colors hover:border-[#0d4825] hover:bg-white"
+          >
+            {t("viewAllReviews")}
+          </motion.a>
+        </div>
+      </div>
+    </motion.div>
+
+  </div>
 </section>
 
 
